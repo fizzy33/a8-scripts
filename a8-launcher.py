@@ -1191,7 +1191,7 @@ a8_GlobalScheduler._hx_class = a8_GlobalScheduler
 class a8_HaxeOps:
     _hx_class_name = "a8.HaxeOps"
     __slots__ = ()
-    _hx_statics = ["asString", "toMap"]
+    _hx_statics = ["asString", "toMap", "isDigit", "isAlpha", "isWhitespace", "isHaxeIdentifierFirstChar", "isHaxeIdentifierSecondChar"]
 
     @staticmethod
     def asString(_hx_bytes):
@@ -1210,6 +1210,57 @@ class a8_HaxeOps:
         Lambda.iter(iterable,_hx_local_0)
         # src/a8/HaxeOps.hx:18
         return _hx_map
+
+    @staticmethod
+    def isDigit(ch):
+        # src/a8/HaxeOps.hx:23
+        if ((len(ch) == 1) and ((ch >= "0"))):
+            return (ch <= "0")
+        else:
+            return False
+
+    @staticmethod
+    def isAlpha(ch):
+        # src/a8/HaxeOps.hx:29
+        if (len(ch) == 1):
+            if (not (((ch >= "A") and ((ch <= "Z"))))):
+                if (ch >= "a"):
+                    return (ch <= "z")
+                else:
+                    return False
+            else:
+                return True
+        else:
+            return False
+
+    @staticmethod
+    def isWhitespace(ch):
+        # src/a8/HaxeOps.hx:37
+        ch1 = ch
+        # src/a8/HaxeOps.hx:39
+        if ((((ch1 == " ") or ((ch1 == "\r"))) or ((ch1 == "\n"))) or ((ch1 == "\t"))):
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def isHaxeIdentifierFirstChar(ch):
+        # src/a8/HaxeOps.hx:47
+        if (len(ch) == 1):
+            if (not a8_HaxeOps.isAlpha(ch)):
+                return (ch == "_")
+            else:
+                return True
+        else:
+            return False
+
+    @staticmethod
+    def isHaxeIdentifierSecondChar(ch):
+        # src/a8/HaxeOps.hx:56
+        if (not a8_HaxeOps.isHaxeIdentifierFirstChar(ch)):
+            return a8_HaxeOps.isDigit(ch)
+        else:
+            return True
 a8_HaxeOps._hx_class = a8_HaxeOps
 
 
@@ -1220,32 +1271,32 @@ class a8_HaxeOps2:
 
     @staticmethod
     def asString(stack,indent = None):
-        # src/a8/HaxeOps.hx:29
+        # src/a8/HaxeOps.hx:67
         if (indent is None):
             indent = ""
-        # src/a8/HaxeOps.hx:33
+        # src/a8/HaxeOps.hx:71
         def _hx_local_0(si):
-            # src/a8/HaxeOps.hx:33
+            # src/a8/HaxeOps.hx:71
             _this1 = Std.string(si)
             return (("null" if indent is None else indent) + ("null" if _this1 is None else _this1))
-        # src/a8/HaxeOps.hx:32
+        # src/a8/HaxeOps.hx:70
         _this = list(map(_hx_local_0,stack))
         s = "\n".join([python_Boot.toString1(x1,'') for x1 in _this])
-        # src/a8/HaxeOps.hx:35
+        # src/a8/HaxeOps.hx:73
         return s
 
     @staticmethod
     def toMap(iterable):
-        # src/a8/HaxeOps.hx:39
+        # src/a8/HaxeOps.hx:77
         _hx_map = haxe_ds_StringMap()
-        # src/a8/HaxeOps.hx:40
-        # src/a8/HaxeOps.hx:40
+        # src/a8/HaxeOps.hx:78
+        # src/a8/HaxeOps.hx:78
         t = HxOverrides.iterator(iterable)
         while t.hasNext():
             t1 = t.next()
-            # src/a8/HaxeOps.hx:41
+            # src/a8/HaxeOps.hx:79
             _hx_map.h[python_internal_ArrayImpl._get(t1, 0)] = python_internal_ArrayImpl._get(t1, 1)
-        # src/a8/HaxeOps.hx:43
+        # src/a8/HaxeOps.hx:81
         return _hx_map
 a8_HaxeOps2._hx_class = a8_HaxeOps2
 
@@ -2234,8 +2285,8 @@ class a8_launcher_CommandLineProcessor:
         # src/a8/launcher/CommandLineProcessor.hx:9
         self.argDefs = None
         self.lazy_argDefs = None
-        def _hx_local_4():
-            def _hx_local_3():
+        def _hx_local_5():
+            def _hx_local_4():
                 # src/a8/launcher/CommandLineProcessor.hx:14
                 def _hx_local_0(config,args):
                     # src/a8/launcher/CommandLineProcessor.hx:14
@@ -2248,66 +2299,70 @@ class a8_launcher_CommandLineProcessor:
                 def _hx_local_2(config2,args2):
                     # src/a8/launcher/CommandLineProcessor.hx:26
                     Reflect.setField(config2,"resolveOnly",a8_OptionOps.nonEmpty(args2))
+                # src/a8/launcher/CommandLineProcessor.hx:32
+                def _hx_local_3(config3,args3):
+                    # src/a8/launcher/CommandLineProcessor.hx:32
+                    Reflect.setField(config3,"showHelp",True)
                 # src/a8/launcher/CommandLineProcessor.hx:9
-                return [_hx_AnonObject({'name': "--l-version", 'parmCount': 1, 'apply': _hx_local_0}), _hx_AnonObject({'name': "--l-verbose", 'parmCount': 0, 'apply': _hx_local_1}), _hx_AnonObject({'name': "--l-resolveOnly", 'parmCount': 0, 'apply': _hx_local_2})]
-            return _hx_local_3()
-        self.lazy_argDefs = tink_core__Lazy_LazyFunc(_hx_local_4)
+                return [_hx_AnonObject({'name': "--l-version", 'parmCount': 1, 'apply': _hx_local_0}), _hx_AnonObject({'name': "--l-verbose", 'parmCount': 0, 'apply': _hx_local_1}), _hx_AnonObject({'name': "--l-resolveOnly", 'parmCount': 0, 'apply': _hx_local_2}), _hx_AnonObject({'name': "--l-help", 'parmCount': 0, 'apply': _hx_local_3})]
+            return _hx_local_4()
+        self.lazy_argDefs = tink_core__Lazy_LazyFunc(_hx_local_5)
 
     def apply(self,initialConfig):
-        # src/a8/launcher/CommandLineProcessor.hx:35
+        # src/a8/launcher/CommandLineProcessor.hx:40
         config = Reflect.copy(initialConfig)
-        # src/a8/launcher/CommandLineProcessor.hx:37
-        newArgs = []
-        # src/a8/launcher/CommandLineProcessor.hx:38
-        Reflect.setField(config,"resolvedCommandLineArgs",newArgs)
-        # src/a8/launcher/CommandLineProcessor.hx:39
-        temp = list(Reflect.field(initialConfig,"rawCommandLineArgs"))
         # src/a8/launcher/CommandLineProcessor.hx:42
-        temp.reverse()
+        newArgs = []
         # src/a8/launcher/CommandLineProcessor.hx:43
+        Reflect.setField(config,"resolvedCommandLineArgs",newArgs)
+        # src/a8/launcher/CommandLineProcessor.hx:44
+        temp = list(Reflect.field(initialConfig,"rawCommandLineArgs"))
+        # src/a8/launcher/CommandLineProcessor.hx:47
+        temp.reverse()
+        # src/a8/launcher/CommandLineProcessor.hx:48
         if (len(temp) != 0):
             temp.pop()
-        # src/a8/launcher/CommandLineProcessor.hx:45
+        # src/a8/launcher/CommandLineProcessor.hx:50
         while (len(temp) > 0):
-            # src/a8/launcher/CommandLineProcessor.hx:46
+            # src/a8/launcher/CommandLineProcessor.hx:51
             a = [(None if ((len(temp) == 0)) else temp.pop())]
-            # src/a8/launcher/CommandLineProcessor.hx:47
+            # src/a8/launcher/CommandLineProcessor.hx:52
             def _hx_local_1(a1):
-                # src/a8/launcher/CommandLineProcessor.hx:47
+                # src/a8/launcher/CommandLineProcessor.hx:52
                 def _hx_local_0(ad):
-                    # src/a8/launcher/CommandLineProcessor.hx:47
+                    # src/a8/launcher/CommandLineProcessor.hx:52
                     return (ad.name == (a1[0] if 0 < len(a1) else None))
                 return _hx_local_0
             argDef = Lambda.find(self.get_argDefs(),_hx_local_1(a))
-            # src/a8/launcher/CommandLineProcessor.hx:48
+            # src/a8/launcher/CommandLineProcessor.hx:53
             if (argDef is None):
-                # src/a8/launcher/CommandLineProcessor.hx:49
+                # src/a8/launcher/CommandLineProcessor.hx:54
                 if StringTools.startsWith((a[0] if 0 < len(a) else None),"--l-"):
-                    raise _HxException(a8_Exception(("don't know how to handle arg -- " + HxOverrides.stringOrNull((a[0] if 0 < len(a) else None))),None,_hx_AnonObject({'fileName': "CommandLineProcessor.hx", 'lineNumber': 50, 'className': "a8.launcher.CommandLineProcessor", 'methodName': "apply"})))
-                # src/a8/launcher/CommandLineProcessor.hx:52
+                    raise _HxException(a8_Exception(("don't know how to handle arg -- " + HxOverrides.stringOrNull((a[0] if 0 < len(a) else None))),None,_hx_AnonObject({'fileName': "CommandLineProcessor.hx", 'lineNumber': 55, 'className': "a8.launcher.CommandLineProcessor", 'methodName': "apply"})))
+                # src/a8/launcher/CommandLineProcessor.hx:57
                 newArgs.append((a[0] if 0 < len(a) else None))
             else:
-                # src/a8/launcher/CommandLineProcessor.hx:54
+                # src/a8/launcher/CommandLineProcessor.hx:59
                 parms = None
-                # src/a8/launcher/CommandLineProcessor.hx:55
+                # src/a8/launcher/CommandLineProcessor.hx:60
                 if (argDef.parmCount == 0):
                     parms = haxe_ds_Option.Some(argDef.name)
                 elif (argDef.parmCount == 1):
                     parms = haxe_ds_Option.Some((None if ((len(temp) == 0)) else temp.pop()))
                 else:
-                    raise _HxException(a8_Exception("can only handle parmCount of 0 or 1",None,_hx_AnonObject({'fileName': "CommandLineProcessor.hx", 'lineNumber': 57, 'className': "a8.launcher.CommandLineProcessor", 'methodName': "apply"})))
-                # src/a8/launcher/CommandLineProcessor.hx:58
+                    raise _HxException(a8_Exception("can only handle parmCount of 0 or 1",None,_hx_AnonObject({'fileName': "CommandLineProcessor.hx", 'lineNumber': 62, 'className': "a8.launcher.CommandLineProcessor", 'methodName': "apply"})))
+                # src/a8/launcher/CommandLineProcessor.hx:63
                 argDef.apply(config,parms)
-                # src/a8/launcher/CommandLineProcessor.hx:59
+                # src/a8/launcher/CommandLineProcessor.hx:64
                 Reflect.setField(argDef,"processed",True)
-        # src/a8/launcher/CommandLineProcessor.hx:65
+        # src/a8/launcher/CommandLineProcessor.hx:70
         def _hx_local_2(ad1):
-            # src/a8/launcher/CommandLineProcessor.hx:65
+            # src/a8/launcher/CommandLineProcessor.hx:70
             if (not Reflect.field(ad1,"processed")):
                 ad1.apply(config,haxe_ds_Option._hx_None)
-        # src/a8/launcher/CommandLineProcessor.hx:64
+        # src/a8/launcher/CommandLineProcessor.hx:69
         Lambda.iter(self.get_argDefs(),_hx_local_2)
-        # src/a8/launcher/CommandLineProcessor.hx:72
+        # src/a8/launcher/CommandLineProcessor.hx:77
         return config
 
     def get_argDefs(self):
@@ -2652,78 +2707,83 @@ class a8_launcher_Launcher:
         else:
             raise _HxException(a8_Exception(("unable to resolve config kind " + HxOverrides.stringOrNull(self.config.kind)),None,_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 280, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
         # src/a8/launcher/Launcher.hx:282
-        if (not Reflect.field(self.config,"resolveOnly")):
-            # src/a8/launcher/Launcher.hx:284
+        if Reflect.field(self.config,"resolveOnly"):
+            return 0
+        else:
+            # src/a8/launcher/Launcher.hx:286
             if Reflect.field(self.config,"logFiles"):
                 self.archiveOldLogs()
-            # src/a8/launcher/Launcher.hx:288
-            # src/a8/launcher/Launcher.hx:288
+            # src/a8/launcher/Launcher.hx:290
             _g = resolvedLaunch.kind
             _g1 = _g
             _hx_local_0 = len(_g1)
-            # src/a8/launcher/Launcher.hx:289
+            # src/a8/launcher/Launcher.hx:291
             if (_hx_local_0 == 4):
                 if (_g1 == "exec"):
-                    # src/a8/launcher/Launcher.hx:292
+                    # src/a8/launcher/Launcher.hx:294
                     if (resolvedLaunch.cwd is not None):
                         python_lib_Os.chdir(resolvedLaunch.cwd)
-                    # src/a8/launcher/Launcher.hx:294
+                    # src/a8/launcher/Launcher.hx:296
                     a8_PyOs2.execvpe(resolvedLaunch.executable,resolvedLaunch.args,resolvedLaunch.env)
+                    # src/a8/launcher/Launcher.hx:298
+                    raise _HxException(a8_Exception("this never happens",None,_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 298, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
                 else:
-                    raise _HxException(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 327, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
+                    raise _HxException(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 334, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
             elif (_hx_local_0 == 5):
                 if (_g1 == "popen"):
-                    # src/a8/launcher/Launcher.hx:297
-                    self.logTrace(("running -- " + Std.string(resolvedLaunch.args)),_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 297, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
-                    # src/a8/launcher/Launcher.hx:299
-                    popen = python_lib_subprocess_Popen(resolvedLaunch.args,None,resolvedLaunch.executable,None,python_lib_Subprocess.PIPE,python_lib_Subprocess.PIPE,None,False,False,resolvedLaunch.cwd,resolvedLaunch.env)
-                    # src/a8/launcher/Launcher.hx:302
-                    def _hx_local_1(out):
-                        # src/a8/launcher/Launcher.hx:302
-                        out.write((("first output at " + HxOverrides.stringOrNull(a8_PathOps.timestampStr())) + "\n"))
                     # src/a8/launcher/Launcher.hx:301
-                    firstIO = _hx_local_1
+                    self.logTrace(("running -- " + Std.string(resolvedLaunch.args)),_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 301, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
+                    # src/a8/launcher/Launcher.hx:303
+                    popen = python_lib_subprocess_Popen(resolvedLaunch.args,None,resolvedLaunch.executable,None,python_lib_Subprocess.PIPE,python_lib_Subprocess.PIPE,None,False,False,resolvedLaunch.cwd,resolvedLaunch.env)
+                    # src/a8/launcher/Launcher.hx:306
+                    def _hx_local_1(out):
+                        # src/a8/launcher/Launcher.hx:306
+                        out.write((("first output at " + HxOverrides.stringOrNull(a8_PathOps.timestampStr())) + "\n"))
                     # src/a8/launcher/Launcher.hx:305
-                    timestampStr = a8_PathOps.timestampStr()
-                    # src/a8/launcher/Launcher.hx:307
-                    self.logTrace("setting up pipes",_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 307, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
-                    # src/a8/launcher/Launcher.hx:308
-                    self.pipedStdout = a8_launcher_PipedStream(self,a8_StreamOps.asInputStream(popen.stdout),python_lib_Sys.stdout,"details",firstIO,Reflect.field(self.config,"logFiles"),timestampStr)
+                    firstIO = _hx_local_1
                     # src/a8/launcher/Launcher.hx:309
-                    self.pipedStderr = a8_launcher_PipedStream(self,a8_StreamOps.asInputStream(popen.stderr),python_lib_Sys.stderr,"errors",firstIO,Reflect.field(self.config,"logFiles"),timestampStr)
+                    timestampStr = a8_PathOps.timestampStr()
                     # src/a8/launcher/Launcher.hx:311
-                    self.pipedStdout.start()
+                    self.logTrace("setting up pipes",_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 311, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
                     # src/a8/launcher/Launcher.hx:312
-                    self.pipedStderr.start()
+                    self.pipedStdout = a8_launcher_PipedStream(self,a8_StreamOps.asInputStream(popen.stdout),python_lib_Sys.stdout,"details",firstIO,Reflect.field(self.config,"logFiles"),timestampStr)
+                    # src/a8/launcher/Launcher.hx:313
+                    self.pipedStderr = a8_launcher_PipedStream(self,a8_StreamOps.asInputStream(popen.stderr),python_lib_Sys.stderr,"errors",firstIO,Reflect.field(self.config,"logFiles"),timestampStr)
+                    # src/a8/launcher/Launcher.hx:315
+                    self.pipedStdout.start()
                     # src/a8/launcher/Launcher.hx:316
-                    self.logTrace("initializeLogRollers",_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 316, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
-                    # src/a8/launcher/Launcher.hx:317
-                    self.initializeLogRollers()
-                    # src/a8/launcher/Launcher.hx:318
-                    self.logTrace("initializeLogRollers complete",_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 318, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
+                    self.pipedStderr.start()
+                    # src/a8/launcher/Launcher.hx:320
+                    self.logTrace("initializeLogRollers",_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 320, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
                     # src/a8/launcher/Launcher.hx:321
-                    popen.wait()
-                    # src/a8/launcher/Launcher.hx:324
-                    self.pipedStdout.close()
+                    self.initializeLogRollers()
+                    # src/a8/launcher/Launcher.hx:322
+                    self.logTrace("initializeLogRollers complete",_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 322, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
                     # src/a8/launcher/Launcher.hx:325
+                    popen.wait()
+                    # src/a8/launcher/Launcher.hx:328
                     self.pipedStdout.close()
+                    # src/a8/launcher/Launcher.hx:329
+                    self.pipedStdout.close()
+                    # src/a8/launcher/Launcher.hx:331
+                    return popen.returncode
                 else:
-                    raise _HxException(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 327, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
+                    raise _HxException(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 334, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
             else:
-                raise _HxException(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 327, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
+                raise _HxException(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "Launcher.hx", 'lineNumber': 334, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
 
     def initializeLogRollers(self):
-        # src/a8/launcher/Launcher.hx:333
+        # src/a8/launcher/Launcher.hx:340
         _gthis = self
-        # src/a8/launcher/Launcher.hx:337
+        # src/a8/launcher/Launcher.hx:344
         def _hx_local_0(lr):
-            # src/a8/launcher/Launcher.hx:337
+            # src/a8/launcher/Launcher.hx:344
             return a8_launcher_LogRollerOps.fromConfig(lr,_gthis)
-        # src/a8/launcher/Launcher.hx:334
+        # src/a8/launcher/Launcher.hx:341
         self.logRollers = list(map(_hx_local_0,Reflect.field(self.config,"logRollers")))
-        # src/a8/launcher/Launcher.hx:338
+        # src/a8/launcher/Launcher.hx:345
         def _hx_local_1(i):
-            # src/a8/launcher/Launcher.hx:338
+            # src/a8/launcher/Launcher.hx:345
             i.init()
             return
         Lambda.iter(self.logRollers,_hx_local_1)
@@ -2974,38 +3034,44 @@ class a8_launcher_Main:
     @staticmethod
     def main():
         # src/a8/launcher/Main.hx:68
+        exitCode = 0
+        # src/a8/launcher/Main.hx:70
         try:
-            # src/a8/launcher/Main.hx:70
-            execPath = a8_PathOps.executablePath()
             # src/a8/launcher/Main.hx:72
-            appName = execPath.file
+            execPath = a8_PathOps.executablePath()
             # src/a8/launcher/Main.hx:74
-            initialConfig = a8_launcher_Main.loadConfig()
+            appName = execPath.file
             # src/a8/launcher/Main.hx:76
+            initialConfig = a8_launcher_Main.loadConfig()
+            # src/a8/launcher/Main.hx:78
             args = list(python_lib_Sys.argv)
-            # src/a8/launcher/Main.hx:77
-            Reflect.setField(initialConfig,"rawCommandLineArgs",args)
             # src/a8/launcher/Main.hx:79
+            Reflect.setField(initialConfig,"rawCommandLineArgs",args)
+            # src/a8/launcher/Main.hx:81
             clp = a8_launcher_CommandLineProcessor()
-            # src/a8/launcher/Main.hx:80
-            config = clp.apply(initialConfig)
             # src/a8/launcher/Main.hx:82
-            a8_Logger.traceEnabled = (not Reflect.field(config,"quiet"))
+            config = clp.apply(initialConfig)
             # src/a8/launcher/Main.hx:84
-            launcher = a8_launcher_Launcher(config,appName,args)
-            # src/a8/launcher/Main.hx:91
-            launcher.runAndWait()
+            a8_Logger.traceEnabled = (not Reflect.field(config,"quiet"))
+            # src/a8/launcher/Main.hx:86
+            if Reflect.field(config,"showHelp"):
+                haxe_Log.trace("\n\n--l-version version   \n   \n    use an explicit version\n\n\n--l-resolveOnly\n\n    resolve the version or latest if version is unspecified, this will not run the app\n\n\n--l-help\n\n    shows this help text\n\n                    ",_hx_AnonObject({'fileName': "Main.hx", 'lineNumber': 87, 'className': "a8.launcher.Main", 'methodName': "main"}))
+            else:
+                # src/a8/launcher/Main.hx:105
+                launcher = a8_launcher_Launcher(config,appName,args)
+                # src/a8/launcher/Main.hx:111
+                exitCode = launcher.runAndWait()
         except Exception as _hx_e:
             _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
             e = _hx_e1
-            # src/a8/launcher/Main.hx:93
+            # src/a8/launcher/Main.hx:115
             stack = haxe_CallStack.exceptionStack()
-            # src/a8/launcher/Main.hx:94
-            a8_Logger.warn(((("" + Std.string(e)) + "\n") + HxOverrides.stringOrNull(a8_HaxeOps2.asString(stack,"    "))),_hx_AnonObject({'fileName': "Main.hx", 'lineNumber': 94, 'className': "a8.launcher.Main", 'methodName': "main"}))
-            # src/a8/launcher/Main.hx:95
+            # src/a8/launcher/Main.hx:116
+            a8_Logger.warn(((("" + Std.string(e)) + "\n") + HxOverrides.stringOrNull(a8_HaxeOps2.asString(stack,"    "))),_hx_AnonObject({'fileName': "Main.hx", 'lineNumber': 116, 'className': "a8.launcher.Main", 'methodName': "main"}))
+            # src/a8/launcher/Main.hx:117
             Sys.exit(1)
-        # src/a8/launcher/Main.hx:98
-        Sys.exit(0)
+        # src/a8/launcher/Main.hx:120
+        Sys.exit(exitCode)
 a8_launcher_Main._hx_class = a8_launcher_Main
 
 
@@ -4120,7 +4186,7 @@ class haxe_io_Error(Enum):
     def Custom(e):
         return haxe_io_Error("Custom", 3, [e])
 haxe_io_Error.Blocked = haxe_io_Error("Blocked", 0, list())
-haxe_io_Error.Overflow = haxe_io_Error("Overflow", 1, list())
+haxe_io_Error.Overglen = haxe_io_Error("Overglen", 1, list())
 haxe_io_Error.OutsideBounds = haxe_io_Error("OutsideBounds", 2, list())
 haxe_io_Error._hx_class = haxe_io_Error
 
