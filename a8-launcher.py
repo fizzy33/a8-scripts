@@ -2302,7 +2302,7 @@ class a8_launcher_CommandLineProcessor:
                 # src/a8/launcher/CommandLineProcessor.hx:32
                 def _hx_local_3(config3,args3):
                     # src/a8/launcher/CommandLineProcessor.hx:32
-                    Reflect.setField(config3,"showHelp",True)
+                    Reflect.setField(config3,"showHelp",a8_OptionOps.nonEmpty(args3))
                 # src/a8/launcher/CommandLineProcessor.hx:9
                 return [_hx_AnonObject({'name': "--l-version", 'parmCount': 1, 'apply': _hx_local_0}), _hx_AnonObject({'name': "--l-verbose", 'parmCount': 0, 'apply': _hx_local_1}), _hx_AnonObject({'name': "--l-resolveOnly", 'parmCount': 0, 'apply': _hx_local_2}), _hx_AnonObject({'name': "--l-help", 'parmCount': 0, 'apply': _hx_local_3})]
             return _hx_local_4()
@@ -3034,7 +3034,7 @@ class a8_launcher_Main:
     @staticmethod
     def helpString():
         # src/a8/launcher/Main.hx:69
-        return "\nAccur8 Launcher Tool\n\n    The launchers job is to make sure the app is installed in the local cache and run the app it is configured to run.  \n\n    It will usually be installed (using Accur8 Recipes ie: a8-recipe install a8-scripts) at ~/tools-a8/packages/a8-scripts/a8-launcher.py\n\nConfiguration:\n    An app being run by the a8-launcher.py (or a copy/symbolic link of the launcher like a8-zoo) is configured by a .json file which will be alongside the command. \n    The base filename of the command needs to be the same as the json file. \n    So if you run the ‘a8-zoo’ launch command it will look for a ‘a8-zoo.json’ sitting alongside the a8-zoo command. \n    An example of a8-zoo.json will look like:\n        {\n            \"kind\": \"jvm_cli\",\n            \"mainClass\": \"a8.zoolander.Main\",\n            \"organization\": \"a8\",\n            \"artifact\": \"a8-zoolander_2.12\",\n            \"branch\": \"master\"\n        }\n\nUsage requirements:\n\n    Python 3.4+ (currently Python versions 3.7+ do not work)\n\nUsage: a8-launcher.py [--l-version <version> [<subcommands>[<args>]]] [--l-resolveOnly] [--l-help] [--l-confighelp] [<args>]\n\nSubcommands:\n    --l-version\n        Runs the app with the specific version requested.\n\n    --l-resolveOnly\n        Does not run the app.\n        Sets up the inventory file(s) in a8VersionCache (~/a8/versions/cache) which contain app installer config and classpaths to jars.\n    \n    --l-help\n        Does not run the app.\n        Shows this help text.\n\n    [<args>]\n        Run the app passing through whatever arguments are passed in\n"
+        return "\nAccur8 Launcher Tool\n\n    The launchers job is to make sure the app is installed in the local cache and run the app it is configured to run.  \n\n    It will usually be installed (using Accur8 Recipes ie: a8-recipe install a8-scripts) at ~/tools-a8/packages/a8-scripts/a8-launcher.py\n\nConfiguration:\n    An app being run by the a8-launcher.py (or a copy/symbolic link of the launcher like a8-zoo) is configured by a .json file which will be alongside the command. \n    The base filename of the command needs to be the same as the json file. \n    So if you run the ‘a8-zoo’ launch command it will look for a ‘a8-zoo.json’ sitting alongside the a8-zoo command. \n    An example of a8-zoo.json will look like:\n        {\n            \"kind\": \"jvm_cli\",\n            \"mainClass\": \"a8.zoolander.Main\",\n            \"organization\": \"a8\",\n            \"artifact\": \"a8-zoolander_2.12\",\n            \"branch\": \"master\"\n        }\n\nUsage requirements:\n\n    Python 3.4+ (currently Python versions 3.7+ do not work)\n\n\nUsage:\n    --l-version <version> [<args>]\n        Runs the app with the specific version requested.\n\n    --l-resolveOnly\n        Does not run the app.\n        Sets up the inventory file(s) in a8VersionCache (~/a8/versions/cache) which contain app installer config and classpaths to jars.\n    \n    --l-help\n        Does not run the app.\n        Shows this help text.\n\n    [<args>]\n        Run the app passing through whatever arguments are passed in\n        \n"
 
     @staticmethod
     def main():
@@ -3060,22 +3060,22 @@ class a8_launcher_Main:
             a8_Logger.traceEnabled = (not Reflect.field(config,"quiet"))
             # src/a8/launcher/Main.hx:132
             if Reflect.field(config,"showHelp"):
-                haxe_Log.trace(a8_launcher_Main.helpString(),_hx_AnonObject({'fileName': "Main.hx", 'lineNumber': 133, 'className': "a8.launcher.Main", 'methodName': "main"}))
+                Sys.print(a8_launcher_Main.helpString())
             else:
-                # src/a8/launcher/Main.hx:152
+                # src/a8/launcher/Main.hx:135
                 launcher = a8_launcher_Launcher(config,appName,args)
-                # src/a8/launcher/Main.hx:158
+                # src/a8/launcher/Main.hx:141
                 exitCode = launcher.runAndWait()
         except Exception as _hx_e:
             _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
             e = _hx_e1
-            # src/a8/launcher/Main.hx:162
+            # src/a8/launcher/Main.hx:145
             stack = haxe_CallStack.exceptionStack()
-            # src/a8/launcher/Main.hx:163
-            a8_Logger.warn(((("" + Std.string(e)) + "\n") + HxOverrides.stringOrNull(a8_HaxeOps2.asString(stack,"    "))),_hx_AnonObject({'fileName': "Main.hx", 'lineNumber': 163, 'className': "a8.launcher.Main", 'methodName': "main"}))
-            # src/a8/launcher/Main.hx:164
+            # src/a8/launcher/Main.hx:146
+            a8_Logger.warn(((("" + Std.string(e)) + "\n") + HxOverrides.stringOrNull(a8_HaxeOps2.asString(stack,"    "))),_hx_AnonObject({'fileName': "Main.hx", 'lineNumber': 146, 'className': "a8.launcher.Main", 'methodName': "main"}))
+            # src/a8/launcher/Main.hx:147
             Sys.exit(1)
-        # src/a8/launcher/Main.hx:167
+        # src/a8/launcher/Main.hx:150
         Sys.exit(exitCode)
 a8_launcher_Main._hx_class = a8_launcher_Main
 
