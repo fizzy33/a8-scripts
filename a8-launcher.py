@@ -6398,7 +6398,7 @@ class tink_core__Future_LazyTrigger(tink_core_FutureTrigger):
                         cb(tmp)
                     _gthis.handle(_hx_local_0)
                 # /usr/local/lib/haxe/lib/tink_core/1,17,0/src/tink/core/Future.hx:405
-                return tink_core__Future_Future_Impl_.async(_hx_local_1,True)
+                return tink_core__Future_Future_Impl_._async(_hx_local_1,True)
             return _hx_local_2()
 
     def flatMap(self,f):
@@ -6418,7 +6418,7 @@ class tink_core__Future_LazyTrigger(tink_core_FutureTrigger):
                         f(v).handle(cb)
                     _gthis.handle(_hx_local_0)
                 # /usr/local/lib/haxe/lib/tink_core/1,17,0/src/tink/core/Future.hx:412
-                return tink_core__Future_Future_Impl_.async(_hx_local_1,True)
+                return tink_core__Future_Future_Impl_._async(_hx_local_1,True)
             return _hx_local_2()
 
     def handle(self,cb):
@@ -7253,7 +7253,7 @@ class tink_core__Promise_Promise_Impl_:
                 next2 = next
                 # /usr/local/lib/haxe/lib/tink_core/1,17,0/src/tink/core/Promise.hx:84
                 next2()
-            return tink_core__Future_Future_Impl_.async(_hx_local_3,lazy)
+            return tink_core__Future_Future_Impl_._async(_hx_local_3,lazy)
         return _hx_local_4()
 
     @staticmethod
@@ -7290,7 +7290,7 @@ class tink_core__Promise_Promise_Impl_:
             def _hx_local_0(cb):
                 # /usr/local/lib/haxe/lib/tink_core/1,17,0/src/tink/core/Promise.hx:109
                 p.get().handle(cb)
-            return tink_core__Future_Future_Impl_.async(_hx_local_0,True)
+            return tink_core__Future_Future_Impl_._async(_hx_local_0,True)
         return _hx_local_1()
 
     @staticmethod
@@ -7379,7 +7379,7 @@ class tink_core__Promise_Promise_Impl_:
                     if sync:
                         if (links is not None):
                             links.dissolve()
-                return tink_core__Future_Future_Impl_.async(_hx_local_7,lazy)
+                return tink_core__Future_Future_Impl_._async(_hx_local_7,lazy)
             return _hx_local_8()
 
     @staticmethod
