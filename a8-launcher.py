@@ -5969,7 +5969,7 @@ class tink_core__Future_Future_Impl_:
         return tink_core__Future_SyncFuture(tink_core__Lazy_LazyConst(v))
 
     @staticmethod
-    def async(f,lazy = False):
+    def _async(f,lazy = False):
         # /usr/local/lib/haxe/lib/tink_core/1,17,0/src/tink/core/Future.hx:126
         if (lazy is None):
             lazy = False
