@@ -2542,7 +2542,7 @@ class a8_launcher_Launcher:
             # src/a8/launcher/Launcher.hx:152
             version = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.versions.h.get("versions_version",None)),"1.0.0-20180425_1229_master")
             # src/a8/launcher/Launcher.hx:154
-            repoUrl = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.versions.h.get("versions_repo_url",None)),(((("https://" + ("null" if user is None else user)) + ":") + ("null" if password is None else password)) + "@accur8.jfrog.io/accur8/all"))
+            repoUrl = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.versions.h.get("versions_repo_url",None)),(((("https://" + ("null" if user is None else user)) + ":") + ("null" if password is None else password)) + "@accur8.jfrog.io/artifactory/all"))
             # src/a8/launcher/Launcher.hx:156
             def _hx_local_0():
                 # src/a8/launcher/Launcher.hx:156
