@@ -51,19 +51,19 @@ class Enum:
     _hx_methods = ["__str__"]
 
     def __init__(self,tag,index,params):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/EnumImpl.hx:38
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/EnumImpl.hx:38
         self.tag = tag
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/EnumImpl.hx:39
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/EnumImpl.hx:39
         self.index = index
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/EnumImpl.hx:40
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/EnumImpl.hx:40
         self.params = params
 
     def __str__(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/EnumImpl.hx:45
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/EnumImpl.hx:45
         if (self.params is None):
             return self.tag
         else:
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/EnumImpl.hx:48
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/EnumImpl.hx:48
             _this = self.params
             return (((HxOverrides.stringOrNull(self.tag) + "(") + HxOverrides.stringOrNull(",".join([python_Boot.toString1(x1,'') for x1 in _this]))) + ")")
 
@@ -78,87 +78,87 @@ class Date:
     _hx_statics = ["EPOCH_UTC", "now", "fromTime", "UTC", "datetimeTimestamp", "fromString"]
 
     def __init__(self,year,month,day,hour,_hx_min,sec):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:34
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:34
         if (year < python_lib_datetime_Datetime.min.year):
             year = python_lib_datetime_Datetime.min.year
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:35
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:35
         if (day == 0):
             day = 1
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:36
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:36
         self.date = python_lib_datetime_Datetime(year,(month + 1),day,hour,_hx_min,sec,0)
 
     def toString(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:83
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:83
         m = ((self.date.month - 1) + 1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:84
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:84
         d = self.date.day
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:85
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:85
         h = self.date.hour
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:86
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:86
         mi = self.date.minute
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:87
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:87
         s = self.date.second
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:88
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:88
         return ((((((((((Std.string(self.date.year) + "-") + HxOverrides.stringOrNull(((("0" + Std.string(m)) if ((m < 10)) else ("" + Std.string(m)))))) + "-") + HxOverrides.stringOrNull(((("0" + Std.string(d)) if ((d < 10)) else ("" + Std.string(d)))))) + " ") + HxOverrides.stringOrNull(((("0" + Std.string(h)) if ((h < 10)) else ("" + Std.string(h)))))) + ":") + HxOverrides.stringOrNull(((("0" + Std.string(mi)) if ((mi < 10)) else ("" + Std.string(mi)))))) + ":") + HxOverrides.stringOrNull(((("0" + Std.string(s)) if ((s < 10)) else ("" + Std.string(s))))))
 
     @staticmethod
     def now():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:98
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:98
         d = Date(1970,0,1,0,0,0)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:99
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:99
         d.date = python_lib_datetime_Datetime.now()
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:100
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:100
         return d
 
     @staticmethod
     def fromTime(t):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:105
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:105
         d = Date(1970,0,1,0,0,0)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:106
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:106
         d.date = python_lib_datetime_Datetime.fromtimestamp((t / 1000.0))
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:107
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:107
         return d
 
     @staticmethod
     def UTC(year,month,day,hour,_hx_min,sec):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:113
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:113
         dt = python_lib_datetime_Datetime(year,(month + 1),day,hour,_hx_min,sec,0,python_lib_datetime_Timezone.utc)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:114
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:114
         return Date.datetimeTimestamp(dt,Date.EPOCH_UTC)
 
     @staticmethod
     def datetimeTimestamp(dt,epoch):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:119
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:119
         return ((dt - epoch).total_seconds() * 1000)
 
     @staticmethod
     def fromString(s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:124
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:124
         _g = len(s)
         _g1 = _g
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:126
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:126
         if (_g1 == 8):
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:127
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:127
             k = s.split(":")
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:128
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:128
             d = Date(0,0,0,Std.parseInt((k[0] if 0 < len(k) else None)),Std.parseInt((k[1] if 1 < len(k) else None)),Std.parseInt((k[2] if 2 < len(k) else None)))
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:129
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:129
             return d
         elif (_g1 == 10):
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:131
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:131
             k1 = s.split("-")
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:132
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:132
             return Date(Std.parseInt((k1[0] if 0 < len(k1) else None)),(Std.parseInt((k1[1] if 1 < len(k1) else None)) - 1),Std.parseInt((k1[2] if 2 < len(k1) else None)),0,0,0)
         elif (_g1 == 19):
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:134
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:134
             k2 = s.split(" ")
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:135
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:135
             _this = (k2[0] if 0 < len(k2) else None)
             y = _this.split("-")
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:136
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:136
             _this1 = (k2[1] if 1 < len(k2) else None)
             t = _this1.split(":")
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Date.hx:137
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Date.hx:137
             return Date(Std.parseInt((y[0] if 0 < len(y) else None)),(Std.parseInt((y[1] if 1 < len(y) else None)) - 1),Std.parseInt((y[2] if 2 < len(y) else None)),Std.parseInt((t[0] if 0 < len(t) else None)),Std.parseInt((t[1] if 1 < len(t) else None)),Std.parseInt((t[2] if 2 < len(t) else None)))
         else:
             raise _HxException(("Invalid date format : " + ("null" if s is None else s)))
@@ -178,76 +178,76 @@ class Lambda:
 
     @staticmethod
     def array(it):
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:45
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:45
         a = list()
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:46
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:46
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:46
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:46
         i = HxOverrides.iterator(it)
         while i.hasNext():
             i1 = i.next()
-            # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:47
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:47
             a.append(i1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:48
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:48
         return a
 
     @staticmethod
     def map(it,f):
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:71
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:71
         l = List()
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:72
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:72
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:72
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:72
         x = HxOverrides.iterator(it)
         while x.hasNext():
             x1 = x.next()
-            # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:73
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:73
             l.add(f(x1))
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:74
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:74
         return l
 
     @staticmethod
     def flatten(it):
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:98
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:98
         l = List()
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:99
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:99
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:99
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:99
         e = HxOverrides.iterator(it)
         while e.hasNext():
             e1 = e.next()
-            # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:100
-            # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:100
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:100
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:100
             x = HxOverrides.iterator(e1)
             while x.hasNext():
                 x1 = x.next()
-                # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:101
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:101
                 l.add(x1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:102
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:102
         return l
 
     @staticmethod
     def flatMap(it,f):
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:113
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:113
         return Lambda.flatten(Lambda.map(it,f))
 
     @staticmethod
     def iter(it,f):
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:173
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:173
         x = HxOverrides.iterator(it)
         while x.hasNext():
             x1 = x.next()
-            # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:174
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:174
             f(x1)
 
     @staticmethod
     def find(it,f):
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:264
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:264
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:264
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:264
         v = HxOverrides.iterator(it)
         while v.hasNext():
             v1 = v.next()
-            # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:265
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:265
             if f(v1):
                 return v1
-        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:267
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/Lambda.hx:267
         return None
 Lambda._hx_class = Lambda
 
@@ -259,32 +259,32 @@ class List:
     _hx_methods = ["add", "iterator"]
 
     def __init__(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:33
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:33
         self.q = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:32
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:32
         self.h = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:44
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:44
         self.length = 0
 
     def add(self,item):
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:53
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:53
         x = _List_ListNode(item,None)
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:54
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:54
         if (self.h is None):
             self.h = x
         else:
             self.q.next = x
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:58
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:58
         self.q = x
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:59
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:59
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:59
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:59
         _hx_local_0 = self
         _hx_local_1 = _hx_local_0.length
         _hx_local_0.length = (_hx_local_1 + 1)
         _hx_local_1
 
     def iterator(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:161
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:161
         return _List_ListIterator(self.h)
 
 List._hx_class = List
@@ -296,9 +296,9 @@ class _List_ListNode:
     _hx_fields = ["item", "next"]
 
     def __init__(self,item,next):
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:256
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:256
         self.item = item
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:257
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:257
         self.next = next
 
 _List_ListNode._hx_class = _List_ListNode
@@ -311,19 +311,19 @@ class _List_ListIterator:
     _hx_methods = ["hasNext", "next"]
 
     def __init__(self,head):
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:269
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:269
         self.head = head
 
     def hasNext(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:273
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:273
         return (self.head is not None)
 
     def next(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:277
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:277
         val = self.head.item
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:278
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:278
         self.head = self.head.next
-        # /Users/glen/tools-a8/packages/haxe/current/std/List.hx:279
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/List.hx:279
         return val
 
 _List_ListIterator._hx_class = _List_ListIterator
@@ -336,17 +336,17 @@ class Reflect:
 
     @staticmethod
     def field(o,field):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:44
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Reflect.hx:44
         return python_Boot.field(o,field)
 
     @staticmethod
     def setField(o,field,value):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:49
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Reflect.hx:49
         setattr(o,(("_hx_" + field) if ((field in python_Boot.keywords)) else (("_hx_" + field) if (((((len(field) > 2) and ((ord(field[0]) == 95))) and ((ord(field[1]) == 95))) and ((ord(field[(len(field) - 1)]) != 95)))) else field)),value)
 
     @staticmethod
     def isFunction(f):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:86
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Reflect.hx:86
         if (not ((python_lib_Inspect.isfunction(f) or python_lib_Inspect.ismethod(f)))):
             return hasattr(f,"func_code")
         else:
@@ -354,20 +354,20 @@ class Reflect:
 
     @staticmethod
     def copy(o):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:124
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Reflect.hx:124
         o2 = _hx_AnonObject({})
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:125
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:125
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Reflect.hx:125
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Reflect.hx:125
         _g = 0
         _g1 = python_Boot.fields(o)
         while (_g < len(_g1)):
             f = (_g1[_g] if _g >= 0 and _g < len(_g1) else None)
             _g = (_g + 1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:126
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:126
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Reflect.hx:126
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Reflect.hx:126
             value = Reflect.field(o,f)
             setattr(o2,(("_hx_" + f) if ((f in python_Boot.keywords)) else (("_hx_" + f) if (((((len(f) > 2) and ((ord(f[0]) == 95))) and ((ord(f[1]) == 95))) and ((ord(f[(len(f) - 1)]) != 95)))) else f)),value)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:127
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Reflect.hx:127
         return o2
 Reflect._hx_class = Reflect
 
@@ -379,32 +379,32 @@ class Std:
 
     @staticmethod
     def string(s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:134
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:134
         return python_Boot.toString1(s,"")
 
     @staticmethod
     def parseInt(x):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:147
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:147
         if (x is None):
             return None
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:148
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:148
         try:
             return int(x)
         except Exception as _hx_e:
             _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
             e = _hx_e1
             try:
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:152
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:152
                 prefix = HxString.substr(x,0,2).lower()
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:154
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:154
                 if (prefix == "0x"):
                     return int(x,16)
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:157
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:157
                 raise _HxException("fail")
             except Exception as _hx_e:
                 _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                 e1 = _hx_e1
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:160
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:160
                 x1 = Std.parseFloat(x)
                 r = None
                 try:
@@ -413,62 +413,62 @@ class Std:
                     _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                     e2 = _hx_e1
                     r = None
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:162
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:162
                 if (r is None):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:163
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:163
                     r1 = Std.shortenPossibleNumber(x)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:164
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:164
                     if (r1 != x):
                         return Std.parseInt(r1)
                     else:
                         return None
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:170
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:170
                 return r
 
     @staticmethod
     def shortenPossibleNumber(x):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:177
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:177
         r = ""
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:178
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:178
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:178
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:178
         _g1 = 0
         _g = len(x)
         while (_g1 < _g):
             i = _g1
             _g1 = (_g1 + 1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:179
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:179
             c = ("" if (((i < 0) or ((i >= len(x))))) else x[i])
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:180
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:180
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:180
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:180
             _g2 = HxString.charCodeAt(c,0)
             if (_g2 is None):
                 break
             else:
                 _g21 = _g2
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:191
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:191
                 if (((((((((((_g21 == 57) or ((_g21 == 56))) or ((_g21 == 55))) or ((_g21 == 54))) or ((_g21 == 53))) or ((_g21 == 52))) or ((_g21 == 51))) or ((_g21 == 50))) or ((_g21 == 49))) or ((_g21 == 48))) or ((_g21 == 46))):
                     r = (("null" if r is None else r) + ("null" if c is None else c))
                 else:
                     break
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:195
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:195
         return r
 
     @staticmethod
     def parseFloat(x):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:200
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:200
         try:
             return float(x)
         except Exception as _hx_e:
             _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
             e = _hx_e1
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:204
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:204
             if (x is not None):
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:205
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:205
                 r1 = Std.shortenPossibleNumber(x)
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:206
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:206
                 if (r1 != x):
                     return Std.parseFloat(r1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:210
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Std.hx:210
             return Math.NaN
 Std._hx_class = Std
 
@@ -479,7 +479,7 @@ class StringBuf:
     _hx_fields = ["b"]
 
     def __init__(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/StringBuf.hx:32
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/StringBuf.hx:32
         self.b = python_lib_io_StringIO()
 
 StringBuf._hx_class = StringBuf
@@ -492,7 +492,7 @@ class StringTools:
 
     @staticmethod
     def startsWith(s,start):
-        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:200
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/StringTools.hx:200
         if (len(s) >= len(start)):
             return (HxString.substr(s,0,len(start)) == start)
         else:
@@ -500,11 +500,11 @@ class StringTools:
 
     @staticmethod
     def endsWith(s,end):
-        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:230
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/StringTools.hx:230
         elen = len(end)
-        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:231
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/StringTools.hx:231
         slen = len(s)
-        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:232
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/StringTools.hx:232
         if (slen >= elen):
             return (HxString.substr(s,(slen - elen),elen) == end)
         else:
@@ -512,13 +512,13 @@ class StringTools:
 
     @staticmethod
     def lpad(s,c,l):
-        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:332
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/StringTools.hx:332
         if (len(c) <= 0):
             return s
-        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:335
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/StringTools.hx:335
         while (len(s) < l):
             s = (("null" if c is None else c) + ("null" if s is None else s))
-        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:338
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/StringTools.hx:338
         return s
 StringTools._hx_class = StringTools
 
@@ -530,32 +530,32 @@ class sys_FileSystem:
 
     @staticmethod
     def exists(path):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/FileSystem.hx:31
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/FileSystem.hx:31
         return python_lib_os_Path.exists(path)
 
     @staticmethod
     def fullPath(relPath):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/FileSystem.hx:56
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/FileSystem.hx:56
         return python_lib_os_Path.realpath(relPath)
 
     @staticmethod
     def isDirectory(path):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/FileSystem.hx:66
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/FileSystem.hx:66
         return python_lib_os_Path.isdir(path)
 
     @staticmethod
     def createDirectory(path):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/FileSystem.hx:70
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/FileSystem.hx:70
         python_lib_Os.makedirs(path,511,True)
 
     @staticmethod
     def deleteFile(path):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/FileSystem.hx:74
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/FileSystem.hx:74
         python_lib_Os.remove(path)
 
     @staticmethod
     def readDirectory(path):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/FileSystem.hx:82
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/FileSystem.hx:82
         return python_lib_Os.listdir(path)
 sys_FileSystem._hx_class = sys_FileSystem
 
@@ -574,15 +574,15 @@ class haxe_ds_StringMap:
     _hx_methods = ["get", "keys"]
 
     def __init__(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/haxe/ds/StringMap.hx:32
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/haxe/ds/StringMap.hx:32
         self.h = dict()
 
     def get(self,key):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/haxe/ds/StringMap.hx:40
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/haxe/ds/StringMap.hx:40
         return self.h.get(key,None)
 
     def keys(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/haxe/ds/StringMap.hx:54
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/haxe/ds/StringMap.hx:54
         return python_HaxeIterator(iter(self.h.keys()))
 
 haxe_ds_StringMap._hx_class = haxe_ds_StringMap
@@ -595,46 +595,46 @@ class python_HaxeIterator:
     _hx_methods = ["next", "hasNext"]
 
     def __init__(self,it):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:31
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:31
         self.checked = False
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:30
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:30
         self.has = False
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:29
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:29
         self.x = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:34
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:34
         self.it = it
 
     def next(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:38
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:38
         if (not self.checked):
             self.hasNext()
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:39
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:39
         self.checked = False
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:40
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:40
         return self.x
 
     def hasNext(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:44
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:44
         if (not self.checked):
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:45
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:45
             try:
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:46
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:46
                 self.x = self.it.__next__()
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:47
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:47
                 self.has = True
             except Exception as _hx_e:
                 _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                 if isinstance(_hx_e1, StopIteration):
                     s = _hx_e1
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:49
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:49
                     self.has = False
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:50
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:50
                     self.x = None
                 else:
                     raise _hx_e
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:52
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:52
             self.checked = True
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/HaxeIterator.hx:54
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/HaxeIterator.hx:54
         return self.has
 
 python_HaxeIterator._hx_class = python_HaxeIterator
@@ -647,82 +647,82 @@ class Sys:
 
     @staticmethod
     def time():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:42
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:42
         return python_lib_Time.time()
 
     @staticmethod
     def exit(code):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:46
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:46
         python_lib_Sys.exit(code)
 
     @staticmethod
     def print(v):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:50
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:50
         python_Lib.print(v)
 
     @staticmethod
     def println(v):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:54
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:54
         python_Lib.println(v)
 
     @staticmethod
     def args():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:58
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:58
         argv = python_lib_Sys.argv
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:59
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:59
         return argv[1:None]
 
     @staticmethod
     def getEnv(s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:63
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:63
         return Sys.environ.h.get(s,None)
 
     @staticmethod
     def putEnv(s,v):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:67
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:67
         python_lib_Os.putenv(s,v)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:68
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:68
         Sys.environ.h[s] = v
 
     @staticmethod
     def environment():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:72
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:72
         return Sys.environ
 
     @staticmethod
     def sleep(seconds):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:76
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:76
         python_lib_Time.sleep(seconds)
 
     @staticmethod
     def setTimeLocale(loc):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:80
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:80
         return False
 
     @staticmethod
     def getCwd():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:84
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:84
         return python_lib_Os.getcwd()
 
     @staticmethod
     def setCwd(s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:88
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:88
         python_lib_Os.chdir(s)
 
     @staticmethod
     def systemName():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:92
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:92
         _g = python_lib_Sys.platform
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:93
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:93
         x = _g
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:92
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:92
         if StringTools.startsWith(x,"linux"):
             return "Linux"
         else:
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:92
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:92
             _g1 = _g
             _hx_local_0 = len(_g1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:96
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:96
             if (_hx_local_0 == 5):
                 if (_g1 == "win32"):
                     return "Windows"
@@ -740,7 +740,7 @@ class Sys:
 
     @staticmethod
     def command(cmd,args = None):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:104
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:104
         if (args is None):
             return python_lib_Subprocess.call(cmd,**python__KwArgs_KwArgs_Impl_.fromT(_hx_AnonObject({'shell': True})))
         else:
@@ -748,129 +748,129 @@ class Sys:
 
     @staticmethod
     def cpuTime():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:111
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:111
         return python_lib_Timeit.default_timer()
 
     @staticmethod
     def executablePath():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:115
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:115
         return python_internal_ArrayImpl._get(python_lib_Sys.argv, 0)
 
     @staticmethod
     def programPath():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:121
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:121
         return Sys._programPath
 
     @staticmethod
     def getChar(echo):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:126
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:126
         ch = None
         _g = Sys.systemName()
         _g1 = _g
         _hx_local_0 = len(_g1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:127
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:127
         if (_hx_local_0 == 5):
             if (_g1 == "Linux"):
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:128
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:128
                 fd = python_lib_Sys.stdin.fileno()
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:129
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:129
                 old = python_lib_Termios.tcgetattr(fd)
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:131
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:131
                 a1 = fd
                 a2 = python_lib_Termios.TCSADRAIN
                 a3 = old
                 def _hx_local_1():
                     python_lib_Termios.tcsetattr(a1,a2,a3)
                 restore = _hx_local_1
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:133
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:133
                 try:
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:134
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:134
                     python_lib_Tty.setraw(fd)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:135
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:135
                     x = python_lib_Sys.stdin.read(1)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:136
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:136
                     restore()
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:126
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:126
                     ch = HxString.charCodeAt(x,0)
                 except Exception as _hx_e:
                     _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                     e = _hx_e1
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:139
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:139
                     restore()
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:140
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:140
                     raise _HxException(e)
             else:
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:145
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:145
                 x1 = _g
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:146
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:146
                 raise _HxException((("platform " + ("null" if x1 is None else x1)) + " not supported"))
         elif (_hx_local_0 == 3):
             if (_g1 == "Mac"):
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:128
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:128
                 fd = python_lib_Sys.stdin.fileno()
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:129
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:129
                 old = python_lib_Termios.tcgetattr(fd)
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:131
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:131
                 a1 = fd
                 a2 = python_lib_Termios.TCSADRAIN
                 a3 = old
                 def _hx_local_2():
                     python_lib_Termios.tcsetattr(a1,a2,a3)
                 restore = _hx_local_2
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:133
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:133
                 try:
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:134
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:134
                     python_lib_Tty.setraw(fd)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:135
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:135
                     x = python_lib_Sys.stdin.read(1)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:136
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:136
                     restore()
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:126
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:126
                     ch = HxString.charCodeAt(x,0)
                 except Exception as _hx_e:
                     _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                     e = _hx_e1
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:139
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:139
                     restore()
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:140
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:140
                     raise _HxException(e)
             else:
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:145
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:145
                 x1 = _g
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:146
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:146
                 raise _HxException((("platform " + ("null" if x1 is None else x1)) + " not supported"))
         elif (_hx_local_0 == 7):
             if (_g1 == "Windows"):
                 ch = HxString.charCodeAt(python_lib_Msvcrt.getch().decode("utf-8"),0)
             else:
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:145
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:145
                 x1 = _g
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:146
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:146
                 raise _HxException((("platform " + ("null" if x1 is None else x1)) + " not supported"))
         else:
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:145
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:145
             x1 = _g
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:146
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:146
             raise _HxException((("platform " + ("null" if x1 is None else x1)) + " not supported"))
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:148
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:148
         if echo:
             python_Lib.print("".join(map(chr,[ch])))
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:151
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:151
         return ch
 
     @staticmethod
     def stdin():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:155
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:155
         return python_io_IoTools.createFileInputFromText(python_lib_Sys.stdin)
 
     @staticmethod
     def stdout():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:159
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:159
         return python_io_IoTools.createFileOutputFromText(python_lib_Sys.stdout)
 
     @staticmethod
     def stderr():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:163
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:163
         return python_io_IoTools.createFileOutputFromText(python_lib_Sys.stderr)
 Sys._hx_class = Sys
 
@@ -902,7 +902,7 @@ class Type:
 
     @staticmethod
     def typeof(v):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Type.hx:178
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Type.hx:178
         if (v is None):
             return ValueType.TNull
         elif isinstance(v,bool):
@@ -1114,7 +1114,7 @@ class python__KwArgs_KwArgs_Impl_:
 
     @staticmethod
     def fromT(d):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/KwArgs.hx:57
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/KwArgs.hx:57
         this1 = python_Lib.anonAsDict(d)
         return this1
 python__KwArgs_KwArgs_Impl_._hx_class = python__KwArgs_KwArgs_Impl_
@@ -1127,30 +1127,30 @@ class python_Lib:
 
     @staticmethod
     def print(v):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Lib.hx:40
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Lib.hx:40
         _hx_str = Std.string(v)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Lib.hx:42
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Lib.hx:42
         python_lib_Sys.stdout.buffer.write(_hx_str.encode("utf-8", "strict"))
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Lib.hx:43
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Lib.hx:43
         python_lib_Sys.stdout.flush()
 
     @staticmethod
     def println(v):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Lib.hx:50
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Lib.hx:50
         _hx_str = Std.string(v)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Lib.hx:52
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Lib.hx:52
         python_lib_Sys.stdout.buffer.write((("" + ("null" if _hx_str is None else _hx_str)) + "\n").encode("utf-8", "strict"))
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Lib.hx:53
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Lib.hx:53
         python_lib_Sys.stdout.flush()
 
     @staticmethod
     def dictToAnon(v):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Lib.hx:60
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Lib.hx:60
         return _hx_AnonObject(v.copy())
 
     @staticmethod
     def anonToDict(o):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Lib.hx:69
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Lib.hx:69
         if isinstance(o,_hx_AnonObject):
             return o.__dict__.copy()
         else:
@@ -1158,7 +1158,7 @@ class python_Lib:
 
     @staticmethod
     def anonAsDict(o):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Lib.hx:83
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Lib.hx:83
         if isinstance(o,_hx_AnonObject):
             return o.__dict__
         else:
@@ -1166,7 +1166,7 @@ class python_Lib:
 
     @staticmethod
     def dictAsAnon(d):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Lib.hx:95
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Lib.hx:95
         return _hx_AnonObject(d)
 python_Lib._hx_class = python_Lib
 
@@ -2032,44 +2032,44 @@ class sys_io_File:
 
     @staticmethod
     def getContent(path):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:32
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:32
         f = python_lib_Builtins.open(path,"r",-1,"utf-8",None,"")
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:33
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:33
         content = f.read(-1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:34
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:34
         f.close()
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:35
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:35
         return content
 
     @staticmethod
     def saveContent(path,content):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:39
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:39
         f = python_lib_Builtins.open(path,"w",-1,"utf-8",None,"")
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:40
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:40
         f.write(content)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:41
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:41
         f.close()
 
     @staticmethod
     def getBytes(path):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:45
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:45
         f = python_lib_Builtins.open(path,"rb",-1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:46
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:46
         size = f.read(-1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:47
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:47
         b = haxe_io_Bytes.ofData(size)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:48
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:48
         f.close()
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:49
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:49
         return b
 
     @staticmethod
     def saveBytes(path,_hx_bytes):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:53
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:53
         f = python_lib_Builtins.open(path,"wb",-1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:54
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:54
         f.write(_hx_bytes.b)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/File.hx:55
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/File.hx:55
         f.close()
 sys_io_File._hx_class = sys_io_File
 
@@ -2082,85 +2082,85 @@ class haxe_io_Path:
     _hx_statics = ["isAbsolute"]
 
     def __init__(self,path):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:68
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:68
         self.backslash = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:63
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:63
         self.ext = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:53
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:53
         self.file = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:43
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:43
         self.dir = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:77
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:77
         path1 = path
         _hx_local_0 = len(path1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:78
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:78
         if (_hx_local_0 == 1):
             if (path1 == "."):
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:79
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:79
                 self.dir = path
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:80
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:80
                 self.file = ""
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:81
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:81
                 return
         elif (_hx_local_0 == 2):
             if (path1 == ".."):
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:79
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:79
                 self.dir = path
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:80
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:80
                 self.file = ""
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:81
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:81
                 return
         else:
             pass
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:83
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:83
         c1 = path.rfind("/", 0, len(path))
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:84
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:84
         c2 = path.rfind("\\", 0, len(path))
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:85
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:85
         if (c1 < c2):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:86
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:86
             self.dir = HxString.substr(path,0,c2)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:87
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:87
             path = HxString.substr(path,(c2 + 1),None)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:88
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:88
             self.backslash = True
         elif (c2 < c1):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:90
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:90
             self.dir = HxString.substr(path,0,c1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:91
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:91
             path = HxString.substr(path,(c1 + 1),None)
         else:
             self.dir = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:94
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:94
         cp = path.rfind(".", 0, len(path))
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:95
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:95
         if (cp != -1):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:96
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:96
             self.ext = HxString.substr(path,(cp + 1),None)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:97
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:97
             self.file = HxString.substr(path,0,cp)
         else:
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:99
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:99
             self.ext = None
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:100
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:100
             self.file = path
 
     def toString(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:115
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:115
         return ((HxOverrides.stringOrNull((("" if ((self.dir is None)) else (HxOverrides.stringOrNull(self.dir) + HxOverrides.stringOrNull((("\\" if (self.backslash) else "/"))))))) + HxOverrides.stringOrNull(self.file)) + HxOverrides.stringOrNull((("" if ((self.ext is None)) else ("." + HxOverrides.stringOrNull(self.ext))))))
 
     @staticmethod
     def isAbsolute(path):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:302
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:302
         if StringTools.startsWith(path,"/"):
             return True
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:303
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:303
         if ((("" if ((1 >= len(path))) else path[1])) == ":"):
             return True
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:304
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:304
         if StringTools.startsWith(path,"\\\\"):
             return True
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Path.hx:305
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Path.hx:305
         return False
 
 haxe_io_Path._hx_class = haxe_io_Path
@@ -2173,7 +2173,7 @@ class HxString:
 
     @staticmethod
     def split(s,d):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:31
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:31
         if (d == ""):
             return list(s)
         else:
@@ -2181,7 +2181,7 @@ class HxString:
 
     @staticmethod
     def charCodeAt(s,index):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:37
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:37
         if ((((s is None) or ((len(s) == 0))) or ((index < 0))) or ((index >= len(s)))):
             return None
         else:
@@ -2189,7 +2189,7 @@ class HxString:
 
     @staticmethod
     def charAt(s,index):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:43
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:43
         if ((index < 0) or ((index >= len(s)))):
             return ""
         else:
@@ -2197,17 +2197,17 @@ class HxString:
 
     @staticmethod
     def lastIndexOf(s,_hx_str,startIndex = None):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:48
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:48
         if (startIndex is None):
             return s.rfind(_hx_str, 0, len(s))
         else:
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:52
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:52
             i = s.rfind(_hx_str, 0, (startIndex + 1))
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:53
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:53
             startLeft = (max(0,((startIndex + 1) - len(_hx_str))) if ((i == -1)) else (i + 1))
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:54
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:54
             check = s.find(_hx_str, startLeft, len(s))
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:55
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:55
             if ((check > i) and ((check <= startIndex))):
                 return check
             else:
@@ -2215,17 +2215,17 @@ class HxString:
 
     @staticmethod
     def toUpperCase(s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:66
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:66
         return s.upper()
 
     @staticmethod
     def toLowerCase(s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:70
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:70
         return s.lower()
 
     @staticmethod
     def indexOf(s,_hx_str,startIndex = None):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:74
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:74
         if (startIndex is None):
             return s.find(_hx_str)
         else:
@@ -2233,22 +2233,22 @@ class HxString:
 
     @staticmethod
     def toString(s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:81
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:81
         return s
 
     @staticmethod
     def substring(s,startIndex,endIndex = None):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:97
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:97
         if (startIndex < 0):
             startIndex = 0
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:98
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:98
         if (endIndex is None):
             return s[startIndex:]
         else:
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:101
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:101
             if (endIndex < 0):
                 endIndex = 0
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:102
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:102
             if (endIndex < startIndex):
                 return s[endIndex:startIndex]
             else:
@@ -2256,14 +2256,14 @@ class HxString:
 
     @staticmethod
     def substr(s,startIndex,_hx_len = None):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:113
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:113
         if (_hx_len is None):
             return s[startIndex:]
         else:
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:116
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:116
             if (_hx_len == 0):
                 return ""
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/StringImpl.hx:117
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/StringImpl.hx:117
             return s[startIndex:(startIndex + _hx_len)]
 HxString._hx_class = HxString
 
@@ -2540,7 +2540,7 @@ class a8_launcher_Launcher:
             # src/a8/launcher/Launcher.hx:150
             password = a8_UserConfig.sbtCredentials.h.get("password",None)
             # src/a8/launcher/Launcher.hx:152
-            version = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.versions.h.get("versions_version",None)),"1.0.0-20180425_1229_master")
+            version = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.versions.h.get("versions_version",None)),"1.0.0-20200309_1447_master")
             # src/a8/launcher/Launcher.hx:154
             repoUrl = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.versions.h.get("versions_repo_url",None)),(((("https://" + ("null" if user is None else user)) + ":") + ("null" if password is None else password)) + "@accur8.jfrog.io/accur8/all"))
             # src/a8/launcher/Launcher.hx:156
@@ -3250,51 +3250,51 @@ class haxe_CallStack:
 
     @staticmethod
     def callStack():
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:122
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:122
         stack = []
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:123
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:123
         infos = python_lib_Traceback.extract_stack()
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:124
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:124
         if (len(infos) != 0):
             infos.pop()
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:125
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:125
         infos.reverse()
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:126
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:126
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:126
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:126
         _g = 0
         while (_g < len(infos)):
             elem = (infos[_g] if _g >= 0 and _g < len(infos) else None)
             _g = (_g + 1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:127
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:127
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:127
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:127
             x = haxe_StackItem.FilePos(None,elem[0],elem[1])
             stack.append(x)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:128
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:128
         return stack
 
     @staticmethod
     def exceptionStack():
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:211
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:211
         stack = []
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:212
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:212
         exc = python_lib_Sys.exc_info()
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:213
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:213
         if (exc[2] is not None):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:215
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:215
             infos = python_lib_Traceback.extract_tb(exc[2])
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:216
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:216
             infos.reverse()
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:217
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:217
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:217
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:217
             _g = 0
             while (_g < len(infos)):
                 elem = (infos[_g] if _g >= 0 and _g < len(infos) else None)
                 _g = (_g + 1)
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:218
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:218
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:218
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:218
                 x = haxe_StackItem.FilePos(None,elem[0],elem[1])
                 stack.append(x)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/CallStack.hx:220
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/CallStack.hx:220
         return stack
 haxe_CallStack._hx_class = haxe_CallStack
 
@@ -3324,36 +3324,36 @@ class haxe_EntryPoint:
 
     @staticmethod
     def processEvents():
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:93
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:93
         while True:
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:95
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:95
             _this = haxe_EntryPoint.mutex
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:96
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:96
             _this1 = haxe_EntryPoint.pending
             f = (None if ((len(_this1) == 0)) else _this1.pop(0))
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:97
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:97
             _this2 = haxe_EntryPoint.mutex
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:101
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:101
             if (f is None):
                 break
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:102
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:102
             f()
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:104
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:104
         if ((haxe_MainLoop.pending is None) and ((haxe_EntryPoint.threadCount == 0))):
             return -1
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:106
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:106
         return haxe_MainLoop.tick()
 
     @staticmethod
     def run():
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:134
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:134
         while True:
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:135
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:135
             nextTick = haxe_EntryPoint.processEvents()
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:136
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:136
             if (nextTick < 0):
                 break
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/EntryPoint.hx:138
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/EntryPoint.hx:138
             if (nextTick > 0):
                 _this = haxe_EntryPoint.sleepLock
 haxe_EntryPoint._hx_class = haxe_EntryPoint
@@ -3366,20 +3366,20 @@ class haxe_Log:
 
     @staticmethod
     def trace(v,infos = None):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Log.hx:105
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Log.hx:105
         _hx_str = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Log.hx:106
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Log.hx:106
         if (infos is not None):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Log.hx:107
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Log.hx:107
             _hx_str = ((((HxOverrides.stringOrNull(infos.fileName) + ":") + Std.string(infos.lineNumber)) + ": ") + Std.string(v))
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Log.hx:108
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Log.hx:108
             if (Reflect.field(infos,"customParams") is not None):
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Log.hx:109
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Log.hx:109
                 _this = Reflect.field(infos,"customParams")
                 _hx_str = (("null" if _hx_str is None else _hx_str) + HxOverrides.stringOrNull((("," + HxOverrides.stringOrNull(",".join([python_Boot.toString1(x1,'') for x1 in _this]))))))
         else:
             _hx_str = v
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Log.hx:114
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Log.hx:114
         python_Lib.println(_hx_str)
 haxe_Log._hx_class = haxe_Log
 
@@ -3391,35 +3391,35 @@ class haxe_MainEvent:
     _hx_methods = ["delay", "stop"]
 
     def __init__(self,f,p):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:8
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:8
         self.next = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:7
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:7
         self.prev = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:13
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:13
         self.f = f
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:14
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:14
         self.priority = p
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:15
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:15
         self.nextRun = -1
 
     def delay(self,t):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:23
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:23
         self.nextRun = (-1 if ((t is None)) else (python_lib_Timeit.default_timer() + t))
 
     def stop(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:37
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:37
         if (self.f is None):
             return
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:38
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:38
         self.f = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:39
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:39
         self.nextRun = -1
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:40
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:40
         if (self.prev is None):
             haxe_MainLoop.pending = self.next
         else:
             self.prev.next = self.next
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:44
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:44
         if (self.next is not None):
             self.next.prev = self.prev
 
@@ -3434,152 +3434,152 @@ class haxe_MainLoop:
 
     @staticmethod
     def add(f,priority = 0):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:74
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:74
         if (priority is None):
             priority = 0
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:75
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:75
         if (f is None):
             raise _HxException("Event function is null")
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:77
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:77
         e = haxe_MainEvent(f,priority)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:78
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:78
         head = haxe_MainLoop.pending
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:79
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:79
         if (head is not None):
             head.prev = e
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:80
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:80
         e.next = head
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:81
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:81
         haxe_MainLoop.pending = e
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:82
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:82
         return e
 
     @staticmethod
     def sortEvents():
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:89
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:89
         _hx_list = haxe_MainLoop.pending
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:91
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:91
         if (_hx_list is None):
             return
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:93
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:93
         insize = 1
         nmerges = None
         psize = 0
         qsize = 0
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:94
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:94
         p = None
         q = None
         e = None
         tail = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:96
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:96
         while True:
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:97
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:97
             p = _hx_list
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:98
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:98
             _hx_list = None
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:99
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:99
             tail = None
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:100
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:100
             nmerges = 0
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:101
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:101
             while (p is not None):
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:102
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:102
                 nmerges = (nmerges + 1)
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:103
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:103
                 q = p
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:104
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:104
                 psize = 0
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:105
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:105
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:105
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:105
                 _g1 = 0
                 _g = insize
                 while (_g1 < _g):
                     i = _g1
                     _g1 = (_g1 + 1)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:106
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:106
                     psize = (psize + 1)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:107
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:107
                     q = q.next
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:108
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:108
                     if (q is None):
                         break
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:110
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:110
                 qsize = insize
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:111
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:111
                 while ((psize > 0) or (((qsize > 0) and ((q is not None))))):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:112
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:112
                     if (psize == 0):
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:113
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:113
                         e = q
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:114
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:114
                         q = q.next
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:115
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:115
                         qsize = (qsize - 1)
                     elif (((qsize == 0) or ((q is None))) or (((p.priority > q.priority) or (((p.priority == q.priority) and ((p.nextRun <= q.nextRun))))))):
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:117
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:117
                         e = p
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:118
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:118
                         p = p.next
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:119
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:119
                         psize = (psize - 1)
                     else:
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:121
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:121
                         e = q
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:122
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:122
                         q = q.next
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:123
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:123
                         qsize = (qsize - 1)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:125
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:125
                     if (tail is not None):
                         tail.next = e
                     else:
                         _hx_list = e
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:129
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:129
                     e.prev = tail
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:130
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:130
                     tail = e
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:132
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:132
                 p = q
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:134
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:134
             tail.next = None
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:135
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:135
             if (nmerges <= 1):
                 break
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:137
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:137
             insize = (insize * 2)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:139
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:139
         _hx_list.prev = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:140
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:140
         haxe_MainLoop.pending = _hx_list
 
     @staticmethod
     def tick():
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:147
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:147
         haxe_MainLoop.sortEvents()
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:148
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:148
         e = haxe_MainLoop.pending
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:149
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:149
         now = python_lib_Timeit.default_timer()
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:150
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:150
         wait = 1e9
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:151
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:151
         while (e is not None):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:152
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:152
             next = e.next
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:153
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:153
             wt = (e.nextRun - now)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:154
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:154
             if ((e.nextRun < 0) or ((wt <= 0))):
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:155
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:155
                 wait = 0
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:156
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:156
                 if (e.f is not None):
                     e.f()
             elif (wait > wt):
                 wait = wt
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:159
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:159
             e = next
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/MainLoop.hx:161
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/MainLoop.hx:161
         return wait
 haxe_MainLoop._hx_class = haxe_MainLoop
 
@@ -3591,32 +3591,32 @@ class haxe_Timer:
     _hx_statics = ["delay"]
 
     def __init__(self,time_ms):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:46
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:46
         self.event = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:60
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:60
         _gthis = self
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:71
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:71
         dt = (time_ms / 1000)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:72
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:72
         def _hx_local_2():
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:73
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:73
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:73
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:73
             _hx_local_0 = _gthis.event
             _hx_local_1 = _hx_local_0.nextRun
             _hx_local_0.nextRun = (_hx_local_1 + dt)
             _hx_local_0.nextRun
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:74
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:74
             _gthis.run()
         self.event = haxe_MainLoop.add(_hx_local_2)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:76
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:76
         self.event.delay(dt)
 
     def stop(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:105
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:105
         if (self.event is not None):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:106
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:106
             self.event.stop()
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:107
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:107
             self.event = None
 
     def run(self):
@@ -3624,16 +3624,16 @@ class haxe_Timer:
 
     @staticmethod
     def delay(f,time_ms):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:137
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:137
         t = haxe_Timer(time_ms)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:138
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:138
         def _hx_local_0():
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:139
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:139
             t.stop()
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:140
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:140
             f()
         t.run = _hx_local_0
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/Timer.hx:142
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/Timer.hx:142
         return t
 
 haxe_Timer._hx_class = haxe_Timer
@@ -3659,15 +3659,15 @@ class haxe_ds_ObjectMap:
     _hx_methods = ["get", "keys"]
 
     def __init__(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/haxe/ds/ObjectMap.hx:32
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/haxe/ds/ObjectMap.hx:32
         self.h = dict()
 
     def get(self,key):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/haxe/ds/ObjectMap.hx:40
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/haxe/ds/ObjectMap.hx:40
         return self.h.get(key,None)
 
     def keys(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/haxe/ds/ObjectMap.hx:55
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/haxe/ds/ObjectMap.hx:55
         return python_HaxeIterator(iter(self.h.keys()))
 
 haxe_ds_ObjectMap._hx_class = haxe_ds_ObjectMap
@@ -3681,35 +3681,35 @@ class haxe_format_JsonPrinter:
     _hx_statics = ["print"]
 
     def __init__(self,replacer,space):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:57
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:57
         self.replacer = replacer
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:58
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:58
         self.indent = space
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:59
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:59
         self.pretty = (space is not None)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:60
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:60
         self.nind = 0
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:67
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:67
         self.buf = StringBuf()
 
     def write(self,k,v):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:80
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:80
         if (self.replacer is not None):
             v = self.replacer(k,v)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:81
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:81
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:81
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:81
         _g = Type.typeof(v)
         _g1 = _g.index
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:136
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:136
         if (_g1 == 0):
             self.buf.b.write("null")
         elif (_g1 == 1):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:87
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:87
             _this = self.buf
             s = Std.string(v)
             _this.b.write(s)
         elif (_g1 == 2):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:89
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:89
             v1 = None
             f = v
             if (((f != Math.POSITIVE_INFINITY) and ((f != Math.NEGATIVE_INFINITY))) and (not python_lib_Math.isnan(f))):
@@ -3720,7 +3720,7 @@ class haxe_format_JsonPrinter:
             s1 = Std.string(v1)
             _this1.b.write(s1)
         elif (_g1 == 3):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:134
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:134
             _this2 = self.buf
             s2 = Std.string(v)
             _this2.b.write(s2)
@@ -3729,33 +3729,33 @@ class haxe_format_JsonPrinter:
         elif (_g1 == 5):
             self.buf.b.write("\"<fun>\"")
         elif (_g1 == 6):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:92
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:92
             c = _g.params[0]
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:93
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:93
             if (c == str):
                 self.quote(v)
             elif (c == list):
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:96
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:96
                 v2 = v
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:97
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:97
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:97
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:97
                 _this3 = self.buf
                 s3 = "".join(map(chr,[91]))
                 _this3.b.write(s3)
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:99
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:99
                 _hx_len = len(v2)
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:100
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:100
                 last = (_hx_len - 1)
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:101
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:101
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:101
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:101
                 _g11 = 0
                 _g2 = _hx_len
                 while (_g11 < _g2):
                     i = _g11
                     _g11 = (_g11 + 1)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:103
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:103
                     if (i > 0):
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:103
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:103
                         _this4 = self.buf
                         s4 = "".join(map(chr,[44]))
                         _this4.b.write(s4)
@@ -3764,74 +3764,74 @@ class haxe_format_JsonPrinter:
                         _hx_local_1 = _hx_local_0.nind
                         _hx_local_0.nind = (_hx_local_1 + 1)
                         _hx_local_1
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:104
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:104
                     if self.pretty:
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:104
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:104
                         _this5 = self.buf
                         s5 = "".join(map(chr,[10]))
                         _this5.b.write(s5)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:105
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:105
                     if self.pretty:
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:105
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:105
                         v3 = StringTools.lpad("",self.indent,(self.nind * len(self.indent)))
                         _this6 = self.buf
                         s6 = Std.string(v3)
                         _this6.b.write(s6)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:106
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:106
                     self.write(i,(v2[i] if i >= 0 and i < len(v2) else None))
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:107
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:107
                     if (i == last):
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:109
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:109
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:109
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:109
                         _hx_local_2 = self
                         _hx_local_3 = _hx_local_2.nind
                         _hx_local_2.nind = (_hx_local_3 - 1)
                         _hx_local_3
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:110
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:110
                         if self.pretty:
-                            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:110
+                            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:110
                             _this7 = self.buf
                             s7 = "".join(map(chr,[10]))
                             _this7.b.write(s7)
-                        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:111
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:111
                         if self.pretty:
-                            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:111
+                            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:111
                             v4 = StringTools.lpad("",self.indent,(self.nind * len(self.indent)))
                             _this8 = self.buf
                             s8 = Std.string(v4)
                             _this8.b.write(s8)
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:114
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:114
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:114
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:114
                 _this9 = self.buf
                 s9 = "".join(map(chr,[93]))
                 _this9.b.write(s9)
             elif (c == haxe_ds_StringMap):
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:116
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:116
                 v5 = v
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:117
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:117
                 o = _hx_AnonObject({})
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:118
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:118
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:118
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:118
                 k1 = v5.keys()
                 while k1.hasNext():
                     k2 = k1.next()
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:119
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:119
                     value = v5.h.get(k2,None)
                     setattr(o,(("_hx_" + k2) if ((k2 in python_Boot.keywords)) else (("_hx_" + k2) if (((((len(k2) > 2) and ((ord(k2[0]) == 95))) and ((ord(k2[1]) == 95))) and ((ord(k2[(len(k2) - 1)]) != 95)))) else k2)),value)
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:120
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:120
                 self.fieldsString(o,python_Boot.fields(o))
             elif (c == Date):
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:122
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:122
                 v6 = v
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:123
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:123
                 self.quote(v6.toString())
             else:
                 self.fieldsString(v,python_Boot.fields(v))
         elif (_g1 == 7):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:131
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:131
             i1 = v.index
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:132
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:132
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:132
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:132
             _this10 = self.buf
             s10 = Std.string(i1)
             _this10.b.write(s10)
@@ -3841,35 +3841,35 @@ class haxe_format_JsonPrinter:
             pass
 
     def fieldsString(self,v,fields):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:168
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:168
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:168
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:168
         _this = self.buf
         s = "".join(map(chr,[123]))
         _this.b.write(s)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:169
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:169
         _hx_len = len(fields)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:170
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:170
         last = (_hx_len - 1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:171
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:171
         first = True
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:172
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:172
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:172
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:172
         _g1 = 0
         _g = _hx_len
         while (_g1 < _g):
             i = _g1
             _g1 = (_g1 + 1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:173
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:173
             f = (fields[i] if i >= 0 and i < len(fields) else None)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:174
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:174
             value = Reflect.field(v,f)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:175
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:175
             if Reflect.isFunction(value):
                 continue
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:176
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:176
             if first:
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:176
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:176
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:176
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:176
                 _hx_local_0 = self
                 _hx_local_1 = _hx_local_0.nind
                 _hx_local_0.nind = (_hx_local_1 + 1)
@@ -3879,81 +3879,81 @@ class haxe_format_JsonPrinter:
                 _this1 = self.buf
                 s1 = "".join(map(chr,[44]))
                 _this1.b.write(s1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:177
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:177
             if self.pretty:
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:177
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:177
                 _this2 = self.buf
                 s2 = "".join(map(chr,[10]))
                 _this2.b.write(s2)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:178
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:178
             if self.pretty:
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:178
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:178
                 v1 = StringTools.lpad("",self.indent,(self.nind * len(self.indent)))
                 _this3 = self.buf
                 s3 = Std.string(v1)
                 _this3.b.write(s3)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:179
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:179
             self.quote(f)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:180
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:180
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:180
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:180
             _this4 = self.buf
             s4 = "".join(map(chr,[58]))
             _this4.b.write(s4)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:181
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:181
             if self.pretty:
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:181
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:181
                 _this5 = self.buf
                 s5 = "".join(map(chr,[32]))
                 _this5.b.write(s5)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:182
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:182
             self.write(f,value)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:183
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:183
             if (i == last):
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:185
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:185
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:185
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:185
                 _hx_local_2 = self
                 _hx_local_3 = _hx_local_2.nind
                 _hx_local_2.nind = (_hx_local_3 - 1)
                 _hx_local_3
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:186
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:186
                 if self.pretty:
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:186
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:186
                     _this6 = self.buf
                     s6 = "".join(map(chr,[10]))
                     _this6.b.write(s6)
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:187
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:187
                 if self.pretty:
-                    # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:187
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:187
                     v2 = StringTools.lpad("",self.indent,(self.nind * len(self.indent)))
                     _this7 = self.buf
                     s7 = Std.string(v2)
                     _this7.b.write(s7)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:190
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:190
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:190
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:190
         _this8 = self.buf
         s8 = "".join(map(chr,[125]))
         _this8.b.write(s8)
 
     def quote(self,s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:200
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:200
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:200
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:200
         _this = self.buf
         s1 = "".join(map(chr,[34]))
         _this.b.write(s1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:201
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:201
         i = 0
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:202
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:202
         while True:
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:203
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:203
             index = i
             i = (i + 1)
             c = (-1 if ((index >= len(s))) else ord(s[index]))
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:204
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:204
             if (c == -1):
                 break
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:205
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:205
             c1 = c
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:211
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:211
             if (c1 == 8):
                 self.buf.b.write("\\b")
             elif (c1 == 9):
@@ -3969,23 +3969,23 @@ class haxe_format_JsonPrinter:
             elif (c1 == 92):
                 self.buf.b.write("\\\\")
             else:
-                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:217
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:217
                 _this1 = self.buf
                 s2 = "".join(map(chr,[c]))
                 _this1.b.write(s2)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:221
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:221
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:221
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:221
         _this2 = self.buf
         s3 = "".join(map(chr,[34]))
         _this2.b.write(s3)
 
     @staticmethod
     def print(o,replacer = None,space = None):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:45
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:45
         printer = haxe_format_JsonPrinter(replacer,space)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:46
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:46
         printer.write("",o)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/format/JsonPrinter.hx:47
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/format/JsonPrinter.hx:47
         return printer.buf.b.getvalue()
 
 haxe_format_JsonPrinter._hx_class = haxe_format_JsonPrinter
@@ -3999,28 +3999,28 @@ class haxe_io_Bytes:
     _hx_statics = ["ofString", "ofData"]
 
     def __init__(self,length,b):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:34
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Bytes.hx:34
         self.length = length
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:35
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Bytes.hx:35
         self.b = b
 
     def getString(self,pos,_hx_len):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:362
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Bytes.hx:362
         if (((pos < 0) or ((_hx_len < 0))) or (((pos + _hx_len) > self.length))):
             raise _HxException(haxe_io_Error.OutsideBounds)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:382
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Bytes.hx:382
         return self.b[pos:pos+_hx_len].decode('UTF-8','replace')
 
     @staticmethod
     def ofString(s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:516
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Bytes.hx:516
         b = bytearray(s,"UTF-8")
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:517
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Bytes.hx:517
         return haxe_io_Bytes(len(b),b)
 
     @staticmethod
     def ofData(b):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:561
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Bytes.hx:561
         return haxe_io_Bytes(len(b),b)
 
 haxe_io_Bytes._hx_class = haxe_io_Bytes
@@ -4033,17 +4033,17 @@ class haxe_io_BytesBuffer:
     _hx_methods = ["getBytes"]
 
     def __init__(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesBuffer.hx:60
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesBuffer.hx:60
         self.b = list()
 
     def getBytes(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesBuffer.hx:207
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesBuffer.hx:207
         buf = bytearray(self.b)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesBuffer.hx:208
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesBuffer.hx:208
         _hx_bytes = haxe_io_Bytes(len(buf),buf)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesBuffer.hx:214
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesBuffer.hx:214
         self.b = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesBuffer.hx:215
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesBuffer.hx:215
         return _hx_bytes
 
 haxe_io_BytesBuffer._hx_class = haxe_io_BytesBuffer
@@ -4056,9 +4056,9 @@ class haxe_io_Input:
     _hx_methods = ["set_bigEndian"]
 
     def set_bigEndian(self,b):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:96
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Input.hx:96
         self.bigEndian = b
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:97
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Input.hx:97
         return b
 
 haxe_io_Input._hx_class = haxe_io_Input
@@ -4071,26 +4071,26 @@ class haxe_io_Output:
     _hx_methods = ["writeByte", "writeBytes", "flush", "close", "set_bigEndian", "writeFullBytes", "writeString"]
 
     def writeByte(self,c):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:47
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:47
         raise _HxException("Not implemented")
 
     def writeBytes(self,s,pos,_hx_len):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:59
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:59
         if (((pos < 0) or ((_hx_len < 0))) or (((pos + _hx_len) > s.length))):
             raise _HxException(haxe_io_Error.OutsideBounds)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:62
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:62
         b = s.b
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:63
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:63
         k = _hx_len
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:64
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:64
         while (k > 0):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:74
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:74
             self.writeByte(b[pos])
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:76
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:76
             pos = (pos + 1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:77
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:77
             k = (k - 1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:79
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:79
         return _hx_len
 
     def flush(self):
@@ -4100,25 +4100,25 @@ class haxe_io_Output:
         pass
 
     def set_bigEndian(self,b):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:97
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:97
         self.bigEndian = b
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:98
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:98
         return b
 
     def writeFullBytes(self,s,pos,_hx_len):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:123
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:123
         while (_hx_len > 0):
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:124
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:124
             k = self.writeBytes(s,pos,_hx_len)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:125
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:125
             pos = (pos + k)
-            # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:126
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:126
             _hx_len = (_hx_len - k)
 
     def writeString(self,s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:282
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:282
         b = haxe_io_Bytes.ofString(s)
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:284
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Output.hx:284
         self.writeFullBytes(b,0,b.length)
 
 haxe_io_Output._hx_class = haxe_io_Output
@@ -4134,19 +4134,19 @@ class haxe_io_BytesOutput(haxe_io_Output):
 
 
     def __init__(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesOutput.hx:40
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesOutput.hx:40
         self.b = haxe_io_BytesBuffer()
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesOutput.hx:43
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesOutput.hx:43
         self.set_bigEndian(False)
 
     def writeByte(self,c):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesOutput.hx:55
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesOutput.hx:55
         _this = self.b.b
         _this.append(c)
 
     def writeBytes(self,buf,pos,_hx_len):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesOutput.hx:64
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesOutput.hx:64
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesOutput.hx:64
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesOutput.hx:64
         _this = self.b
         if (((pos < 0) or ((_hx_len < 0))) or (((pos + _hx_len) > buf.length))):
             raise _HxException(haxe_io_Error.OutsideBounds)
@@ -4159,11 +4159,11 @@ class haxe_io_BytesOutput(haxe_io_Output):
             _g1 = (_g1 + 1)
             _this1 = _this.b
             _this1.append(b2[i])
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesOutput.hx:66
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesOutput.hx:66
         return _hx_len
 
     def getBytes(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/BytesOutput.hx:137
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/BytesOutput.hx:137
         return self.b.getBytes()
 
 haxe_io_BytesOutput._hx_class = haxe_io_BytesOutput
@@ -4178,7 +4178,7 @@ class haxe_io_Eof:
         pass
 
     def toString(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Eof.hx:31
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/haxe/io/Eof.hx:31
         return "Eof"
 
 haxe_io_Eof._hx_class = haxe_io_Eof
@@ -4191,7 +4191,7 @@ class haxe_io_Error(Enum):
     def Custom(e):
         return haxe_io_Error("Custom", 3, [e])
 haxe_io_Error.Blocked = haxe_io_Error("Blocked", 0, list())
-haxe_io_Error.Overglen = haxe_io_Error("Overglen", 1, list())
+haxe_io_Error.Overflow = haxe_io_Error("Overflow", 1, list())
 haxe_io_Error.OutsideBounds = haxe_io_Error("OutsideBounds", 2, list())
 haxe_io_Error._hx_class = haxe_io_Error
 
@@ -4203,28 +4203,28 @@ class python_Boot:
 
     @staticmethod
     def toString1(o,s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:94
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:94
         if (o is None):
             return "null"
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:96
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:96
         if isinstance(o,str):
             return o
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:98
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:98
         if (s is None):
             s = ""
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:99
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:99
         if (len(s) >= 5):
             return "<...>"
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:101
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:101
         if isinstance(o,bool):
             if o:
                 return "true"
             else:
                 return "false"
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:104
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:104
         if isinstance(o,int):
             return str(o)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:108
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:108
         if isinstance(o,float):
             try:
                 if (o == int(o)):
@@ -4235,55 +4235,55 @@ class python_Boot:
                 _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                 e = _hx_e1
                 return str(o)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:120
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:120
         if isinstance(o,list):
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:122
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:122
             o1 = o
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:124
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:124
             l = len(o1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:126
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:126
             st = "["
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:127
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:127
             s = (("null" if s is None else s) + "\t")
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:128
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:128
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:128
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:128
             _g1 = 0
             _g = l
             while (_g1 < _g):
                 i = _g1
                 _g1 = (_g1 + 1)
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:129
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:129
                 prefix = ""
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:130
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:130
                 if (i > 0):
                     prefix = ","
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:133
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:133
                 st = (("null" if st is None else st) + HxOverrides.stringOrNull(((("null" if prefix is None else prefix) + HxOverrides.stringOrNull(python_Boot.toString1((o1[i] if i >= 0 and i < len(o1) else None),s))))))
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:135
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:135
             st = (("null" if st is None else st) + "]")
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:136
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:136
             return st
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:139
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:139
         try:
             if hasattr(o,"toString"):
                 return o.toString()
         except Exception as _hx_e:
             _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
             pass
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:145
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:145
         if (python_lib_Inspect.isfunction(o) or python_lib_Inspect.ismethod(o)):
             return "<function>"
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:147
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:147
         if hasattr(o,"__class__"):
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:150
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:150
             if isinstance(o,_hx_AnonObject):
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:152
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:152
                 toStr = None
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:153
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:153
                 try:
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:155
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:155
                     fields = python_Boot.fields(o)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:156
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:156
                     _g2 = []
                     _g11 = 0
                     while (_g11 < len(fields)):
@@ -4292,53 +4292,53 @@ class python_Boot:
                         x = ((("" + ("null" if f is None else f)) + " : ") + HxOverrides.stringOrNull(python_Boot.toString1(python_Boot.simpleField(o,f),(("null" if s is None else s) + "\t"))))
                         _g2.append(x)
                     fieldsStr = _g2
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:157
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:157
                     toStr = (("{ " + HxOverrides.stringOrNull(", ".join([x1 for x1 in fieldsStr]))) + " }")
                 except Exception as _hx_e:
                     _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                     e2 = _hx_e1
                     return "{ ... }"
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:163
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:163
                 if (toStr is None):
                     return "{ ... }"
                 else:
                     return toStr
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:173
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:173
             if isinstance(o,Enum):
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:175
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:175
                 o2 = o
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:177
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:177
                 l1 = len(o2.params)
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:178
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:178
                 hasParams = (l1 > 0)
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:179
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:179
                 if hasParams:
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:180
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:180
                     paramsStr = ""
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:181
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:181
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:181
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:181
                     _g12 = 0
                     _g3 = l1
                     while (_g12 < _g3):
                         i1 = _g12
                         _g12 = (_g12 + 1)
-                        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:182
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:182
                         prefix1 = ""
-                        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:183
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:183
                         if (i1 > 0):
                             prefix1 = ","
-                        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:186
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:186
                         paramsStr = (("null" if paramsStr is None else paramsStr) + HxOverrides.stringOrNull(((("null" if prefix1 is None else prefix1) + HxOverrides.stringOrNull(python_Boot.toString1((o2.params[i1] if i1 >= 0 and i1 < len(o2.params) else None),s))))))
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:188
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:188
                     return (((HxOverrides.stringOrNull(o2.tag) + "(") + ("null" if paramsStr is None else paramsStr)) + ")")
                 else:
                     return o2.tag
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:194
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:194
             if hasattr(o,"_hx_class_name"):
                 if (o.__class__.__name__ != "type"):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:196
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:196
                     fields1 = python_Boot.getInstanceFields(o)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:197
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:197
                     _g4 = []
                     _g13 = 0
                     while (_g13 < len(fields1)):
@@ -4347,14 +4347,14 @@ class python_Boot:
                         x1 = ((("" + ("null" if f1 is None else f1)) + " : ") + HxOverrides.stringOrNull(python_Boot.toString1(python_Boot.simpleField(o,f1),(("null" if s is None else s) + "\t"))))
                         _g4.append(x1)
                     fieldsStr1 = _g4
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:199
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:199
                     toStr1 = (((HxOverrides.stringOrNull(o._hx_class_name) + "( ") + HxOverrides.stringOrNull(", ".join([x1 for x1 in fieldsStr1]))) + " )")
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:200
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:200
                     return toStr1
                 else:
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:202
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:202
                     fields2 = python_Boot.getClassFields(o)
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:203
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:203
                     _g5 = []
                     _g14 = 0
                     while (_g14 < len(fields2)):
@@ -4363,81 +4363,81 @@ class python_Boot:
                         x2 = ((("" + ("null" if f2 is None else f2)) + " : ") + HxOverrides.stringOrNull(python_Boot.toString1(python_Boot.simpleField(o,f2),(("null" if s is None else s) + "\t"))))
                         _g5.append(x2)
                     fieldsStr2 = _g5
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:204
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:204
                     toStr2 = (((("#" + HxOverrides.stringOrNull(o._hx_class_name)) + "( ") + HxOverrides.stringOrNull(", ".join([x1 for x1 in fieldsStr2]))) + " )")
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:205
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:205
                     return toStr2
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:209
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:209
             if (o == str):
                 return "#String"
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:213
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:213
             if (o == list):
                 return "#Array"
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:217
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:217
             if callable(o):
                 return "function"
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:220
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:220
             try:
                 if hasattr(o,"__repr__"):
                     return o.__repr__()
             except Exception as _hx_e:
                 _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                 pass
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:226
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:226
             if hasattr(o,"__str__"):
                 return o.__str__([])
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:230
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:230
             if hasattr(o,"__name__"):
                 return o.__name__
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:233
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:233
             return "???"
         else:
             return str(o)
 
     @staticmethod
     def fields(o):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:245
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:245
         a = []
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:246
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:246
         if (o is not None):
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:247
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:247
             if hasattr(o,"_hx_fields"):
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:248
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:248
                 fields = o._hx_fields
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:249
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:249
                 return list(fields)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:251
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:251
             if isinstance(o,_hx_AnonObject):
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:253
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:253
                 d = o.__dict__
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:254
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:254
                 keys = d.keys()
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:255
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:255
                 handler = python_Boot.unhandleKeywords
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:257
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:257
                 for k in keys:
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:258
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:258
                     a.append(handler(k))
             elif hasattr(o,"__dict__"):
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:262
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:262
                 d1 = o.__dict__
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:263
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:263
                 keys1 = d1.keys()
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:264
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:264
                 for k in keys1:
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:265
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:265
                     a.append(k)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:269
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:269
         return a
 
     @staticmethod
     def simpleField(o,field):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:281
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:281
         if (field is None):
             return None
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:283
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:283
         field1 = (("_hx_" + field) if ((field in python_Boot.keywords)) else (("_hx_" + field) if (((((len(field) > 2) and ((ord(field[0]) == 95))) and ((ord(field[1]) == 95))) and ((ord(field[(len(field) - 1)]) != 95)))) else field))
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:284
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:284
         if hasattr(o,field1):
             return getattr(o,field1)
         else:
@@ -4445,17 +4445,17 @@ class python_Boot:
 
     @staticmethod
     def field(o,field):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:288
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:288
         if (field is None):
             return None
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:290
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:290
         field1 = field
         _hx_local_0 = len(field1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:295
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:295
         if (_hx_local_0 == 10):
             if (field1 == "charCodeAt"):
                 if isinstance(o,str):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:295
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:295
                     s1 = o
                     def _hx_local_1(a11):
                         return HxString.charCodeAt(s1,a11)
@@ -4463,27 +4463,27 @@ class python_Boot:
         elif (_hx_local_0 == 11):
             if (field1 == "lastIndexOf"):
                 if isinstance(o,str):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:297
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:297
                     s3 = o
                     def _hx_local_2(a15):
                         return HxString.lastIndexOf(s3,a15)
                     return _hx_local_2
                 elif isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:315
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:315
                     a4 = o
                     def _hx_local_3(x4):
                         return python_internal_ArrayImpl.lastIndexOf(a4,x4)
                     return _hx_local_3
             elif (field1 == "toLowerCase"):
                 if isinstance(o,str):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:292
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:292
                     s7 = o
                     def _hx_local_4():
                         return HxString.toLowerCase(s7)
                     return _hx_local_4
             elif (field1 == "toUpperCase"):
                 if isinstance(o,str):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:293
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:293
                     s9 = o
                     def _hx_local_5():
                         return HxString.toUpperCase(s9)
@@ -4491,7 +4491,7 @@ class python_Boot:
         elif (_hx_local_0 == 9):
             if (field1 == "substring"):
                 if isinstance(o,str):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:300
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:300
                     s6 = o
                     def _hx_local_6(a19):
                         return HxString.substring(s6,a19)
@@ -4499,28 +4499,28 @@ class python_Boot:
         elif (_hx_local_0 == 4):
             if (field1 == "copy"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:306
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:306
                     def _hx_local_7():
-                        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:306
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:306
                         return list(o)
                     return _hx_local_7
             elif (field1 == "join"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:309
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:309
                     def _hx_local_8(sep):
-                        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:309
+                        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:309
                         return sep.join([python_Boot.toString1(x1,'') for x1 in o])
                     return _hx_local_8
             elif (field1 == "push"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:312
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:312
                     x7 = o
                     def _hx_local_9(e):
                         return python_internal_ArrayImpl.push(x7,e)
                     return _hx_local_9
             elif (field1 == "sort"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:320
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:320
                     x11 = o
                     def _hx_local_10(f2):
                         python_internal_ArrayImpl.sort(x11,f2)
@@ -4528,21 +4528,21 @@ class python_Boot:
         elif (_hx_local_0 == 5):
             if (field1 == "shift"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:318
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:318
                     x9 = o
                     def _hx_local_11():
                         return python_internal_ArrayImpl.shift(x9)
                     return _hx_local_11
             elif (field1 == "slice"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:319
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:319
                     x10 = o
                     def _hx_local_12(a16):
                         return python_internal_ArrayImpl.slice(x10,a16)
                     return _hx_local_12
             elif (field1 == "split"):
                 if isinstance(o,str):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:298
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:298
                     s4 = o
                     def _hx_local_13(d):
                         return HxString.split(s4,d)
@@ -4550,27 +4550,27 @@ class python_Boot:
         elif (_hx_local_0 == 7):
             if (field1 == "indexOf"):
                 if isinstance(o,str):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:296
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:296
                     s2 = o
                     def _hx_local_14(a13):
                         return HxString.indexOf(s2,a13)
                     return _hx_local_14
                 elif isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:314
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:314
                     a = o
                     def _hx_local_15(x1):
                         return python_internal_ArrayImpl.indexOf(a,x1)
                     return _hx_local_15
             elif (field1 == "reverse"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:317
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:317
                     a5 = o
                     def _hx_local_16():
                         python_internal_ArrayImpl.reverse(a5)
                     return _hx_local_16
             elif (field1 == "unshift"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:313
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:313
                     x14 = o
                     def _hx_local_17(e2):
                         python_internal_ArrayImpl.unshift(x14,e2)
@@ -4578,14 +4578,14 @@ class python_Boot:
         elif (_hx_local_0 == 3):
             if (field1 == "map"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:303
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:303
                     x5 = o
                     def _hx_local_18(f1):
                         return python_internal_ArrayImpl.map(x5,f1)
                     return _hx_local_18
             elif (field1 == "pop"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:311
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:311
                     x6 = o
                     def _hx_local_19():
                         return python_internal_ArrayImpl.pop(x6)
@@ -4593,20 +4593,20 @@ class python_Boot:
         elif (_hx_local_0 == 8):
             if (field1 == "iterator"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:307
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:307
                     x3 = o
                     def _hx_local_20():
                         return python_internal_ArrayImpl.iterator(x3)
                     return _hx_local_20
             elif (field1 == "toString"):
                 if isinstance(o,str):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:301
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:301
                     s8 = o
                     def _hx_local_21():
                         return HxString.toString(s8)
                     return _hx_local_21
                 elif isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:310
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:310
                     x13 = o
                     def _hx_local_22():
                         return python_internal_ArrayImpl.toString(x13)
@@ -4614,28 +4614,28 @@ class python_Boot:
         elif (_hx_local_0 == 6):
             if (field1 == "charAt"):
                 if isinstance(o,str):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:294
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:294
                     s = o
                     def _hx_local_23(a1):
                         return HxString.charAt(s,a1)
                     return _hx_local_23
             elif (field1 == "concat"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:305
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:305
                     a12 = o
                     def _hx_local_24(a2):
                         return python_internal_ArrayImpl.concat(a12,a2)
                     return _hx_local_24
             elif (field1 == "filter"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:304
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:304
                     x = o
                     def _hx_local_25(f):
                         return python_internal_ArrayImpl.filter(x,f)
                     return _hx_local_25
             elif (field1 == "insert"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:308
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:308
                     a3 = o
                     def _hx_local_26(a14,x2):
                         python_internal_ArrayImpl.insert(a3,a14,x2)
@@ -4647,30 +4647,30 @@ class python_Boot:
                     return len(o)
             elif (field1 == "remove"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:316
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:316
                     x8 = o
                     def _hx_local_27(e1):
                         return python_internal_ArrayImpl.remove(x8,e1)
                     return _hx_local_27
             elif (field1 == "splice"):
                 if isinstance(o,list):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:321
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:321
                     x12 = o
                     def _hx_local_28(a17,a21):
                         return python_internal_ArrayImpl.splice(x12,a17,a21)
                     return _hx_local_28
             elif (field1 == "substr"):
                 if isinstance(o,str):
-                    # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:299
+                    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:299
                     s5 = o
                     def _hx_local_29(a18):
                         return HxString.substr(s5,a18)
                     return _hx_local_29
         else:
             pass
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:325
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:325
         field2 = (("_hx_" + field) if ((field in python_Boot.keywords)) else (("_hx_" + field) if (((((len(field) > 2) and ((ord(field[0]) == 95))) and ((ord(field[1]) == 95))) and ((ord(field[(len(field) - 1)]) != 95)))) else field))
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:326
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:326
         if hasattr(o,field2):
             return getattr(o,field2)
         else:
@@ -4678,72 +4678,72 @@ class python_Boot:
 
     @staticmethod
     def getInstanceFields(c):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:331
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:331
         f = (c._hx_fields if (hasattr(c,"_hx_fields")) else [])
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:332
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:332
         if hasattr(c,"_hx_methods"):
             f = (f + c._hx_methods)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:335
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:335
         sc = python_Boot.getSuperClass(c)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:337
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:337
         if (sc is None):
             return f
         else:
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:341
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:341
             scArr = python_Boot.getInstanceFields(sc)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:342
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:342
             scMap = set(scArr)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:345
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:345
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:345
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:345
             _g = 0
             while (_g < len(f)):
                 f1 = (f[_g] if _g >= 0 and _g < len(f) else None)
                 _g = (_g + 1)
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:346
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:346
                 if (not (f1 in scMap)):
                     scArr.append(f1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:351
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:351
             return scArr
 
     @staticmethod
     def getSuperClass(c):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:356
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:356
         if (c is None):
             return None
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:359
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:359
         try:
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:360
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:360
             if hasattr(c,"_hx_super"):
                 return c._hx_super
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:363
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:363
             return None
         except Exception as _hx_e:
             _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
             pass
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:367
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:367
         return None
 
     @staticmethod
     def getClassFields(c):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:372
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:372
         if hasattr(c,"_hx_statics"):
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:373
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:373
             x = c._hx_statics
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:374
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:374
             return list(x)
         else:
             return []
 
     @staticmethod
     def unhandleKeywords(name):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:398
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:398
         if (HxString.substr(name,0,python_Boot.prefixLength) == "_hx_"):
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:399
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:399
             real = HxString.substr(name,python_Boot.prefixLength,None)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:400
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:400
             if (real in python_Boot.keywords):
                 return real
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/Boot.hx:402
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/Boot.hx:402
         return name
 python_Boot._hx_class = python_Boot
 
@@ -4755,66 +4755,66 @@ class python_internal_ArrayImpl:
 
     @staticmethod
     def concat(a1,a2):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:35
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:35
         return (a1 + a2)
 
     @staticmethod
     def iterator(x):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:45
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:45
         return python_HaxeIterator(x.__iter__())
 
     @staticmethod
     def indexOf(a,x,fromIndex = None):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:50
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:50
         _hx_len = len(a)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:51
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:51
         l = (0 if ((fromIndex is None)) else ((_hx_len + fromIndex) if ((fromIndex < 0)) else fromIndex))
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:55
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:55
         if (l < 0):
             l = 0
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:56
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:56
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:56
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:56
         _g1 = l
         _g = _hx_len
         while (_g1 < _g):
             i = _g1
             _g1 = (_g1 + 1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:57
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:57
             if (a[i] == x):
                 return i
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:59
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:59
         return -1
 
     @staticmethod
     def lastIndexOf(a,x,fromIndex = None):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:64
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:64
         _hx_len = len(a)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:65
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:65
         l = (_hx_len if ((fromIndex is None)) else (((_hx_len + fromIndex) + 1) if ((fromIndex < 0)) else (fromIndex + 1)))
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:69
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:69
         if (l > _hx_len):
             l = _hx_len
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:70
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:70
         while True:
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:70
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:70
             l = (l - 1)
             tmp = l
             if (not ((tmp > -1))):
                 break
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:71
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:71
             if (a[l] == x):
                 return l
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:73
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:73
         return -1
 
     @staticmethod
     def toString(x):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:84
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:84
         return (("[" + HxOverrides.stringOrNull(",".join([python_Boot.toString1(x1,'') for x1 in x]))) + "]")
 
     @staticmethod
     def pop(x):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:89
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:89
         if (len(x) == 0):
             return None
         else:
@@ -4822,23 +4822,23 @@ class python_internal_ArrayImpl:
 
     @staticmethod
     def push(x,e):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:94
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:94
         x.append(e)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:95
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:95
         return len(x)
 
     @staticmethod
     def unshift(x,e):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:100
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:100
         x.insert(0, e)
 
     @staticmethod
     def remove(x,e):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:105
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:105
         try:
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:106
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:106
             x.remove(e)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:107
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:107
             return True
         except Exception as _hx_e:
             _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
@@ -4847,60 +4847,60 @@ class python_internal_ArrayImpl:
 
     @staticmethod
     def shift(x):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:115
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:115
         if (len(x) == 0):
             return None
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:116
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:116
         return x.pop(0)
 
     @staticmethod
     def slice(x,pos,end = None):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:121
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:121
         return x[pos:end]
 
     @staticmethod
     def sort(x,f):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:125
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:125
         x.sort(key= python_lib_Functools.cmp_to_key(f))
 
     @staticmethod
     def splice(x,pos,_hx_len):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:130
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:130
         if (pos < 0):
             pos = (len(x) + pos)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:131
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:131
         if (pos < 0):
             pos = 0
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:132
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:132
         res = x[pos:(pos + _hx_len)]
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:133
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:133
         del x[pos:(pos + _hx_len)]
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:134
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:134
         return res
 
     @staticmethod
     def map(x,f):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:139
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:139
         return list(map(f,x))
 
     @staticmethod
     def filter(x,f):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:144
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:144
         return list(filter(f,x))
 
     @staticmethod
     def insert(a,pos,x):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:149
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:149
         a.insert(pos, x)
 
     @staticmethod
     def reverse(a):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:153
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:153
         a.reverse()
 
     @staticmethod
     def _get(x,idx):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:158
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:158
         if ((idx > -1) and ((idx < len(x)))):
             return x[idx]
         else:
@@ -4908,20 +4908,20 @@ class python_internal_ArrayImpl:
 
     @staticmethod
     def _set(x,idx,v):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:163
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:163
         l = len(x)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:164
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:164
         while (l < idx):
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:165
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:165
             x.append(None)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:166
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:166
             l = (l + 1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:168
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:168
         if (l == idx):
             x.append(v)
         else:
             x[idx] = v
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/ArrayImpl.hx:173
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/ArrayImpl.hx:173
         return v
 python_internal_ArrayImpl._hx_class = python_internal_ArrayImpl
 
@@ -4936,13 +4936,13 @@ class _HxException(Exception):
 
 
     def __init__(self,val):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxException.hx:28
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxException.hx:28
         self.val = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxException.hx:31
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxException.hx:31
         message = str(val)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxException.hx:32
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxException.hx:32
         super().__init__(message)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxException.hx:33
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxException.hx:33
         self.val = val
 
 _HxException._hx_class = _HxException
@@ -4955,23 +4955,23 @@ class HxOverrides:
 
     @staticmethod
     def iterator(x):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:39
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:39
         if isinstance(x,list):
             return python_HaxeIterator(x.__iter__())
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:42
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:42
         return x.iterator()
 
     @staticmethod
     def eq(a,b):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:46
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:46
         if (isinstance(a,list) or isinstance(b,list)):
             return a is b
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:49
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:49
         return (a == b)
 
     @staticmethod
     def stringOrNull(s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:53
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:53
         if (s is None):
             return "null"
         else:
@@ -4979,24 +4979,24 @@ class HxOverrides:
 
     @staticmethod
     def mapKwArgs(a,v):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:156
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:156
         a1 = python_Lib.dictAsAnon(python_Lib.anonToDict(a))
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:157
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:157
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:157
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:157
         k = python_HaxeIterator(iter(v.keys()))
         while k.hasNext():
             k1 = k.next()
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:158
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:158
             val = v.get(k1)
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:159
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:159
             if hasattr(a1,k1):
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:160
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:160
                 x = getattr(a1,k1)
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:161
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:161
                 setattr(a1,val,x)
-                # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:162
+                # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:162
                 delattr(a1,k1)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/internal/HxOverrides.hx:165
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/internal/HxOverrides.hx:165
         return a1
 HxOverrides._hx_class = HxOverrides
 
@@ -5011,15 +5011,15 @@ class python_io_NativeInput(haxe_io_Input):
 
 
     def __init__(self,s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeInput.hx:33
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeInput.hx:33
         self.wasEof = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeInput.hx:36
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeInput.hx:36
         self.stream = s
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeInput.hx:37
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeInput.hx:37
         self.set_bigEndian(False)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeInput.hx:38
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeInput.hx:38
         self.wasEof = False
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeInput.hx:39
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeInput.hx:39
         if (not self.stream.readable()):
             raise _HxException("Write-only stream")
 
@@ -5049,22 +5049,22 @@ class python_io_NativeOutput(haxe_io_Output):
 
 
     def __init__(self,stream):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeOutput.hx:31
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeOutput.hx:31
         self.stream = None
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeOutput.hx:37
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeOutput.hx:37
         self.set_bigEndian(False)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeOutput.hx:38
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeOutput.hx:38
         self.stream = stream
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeOutput.hx:39
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeOutput.hx:39
         if (not stream.writable()):
             raise _HxException("Read only stream")
 
     def close(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeOutput.hx:44
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeOutput.hx:44
         self.stream.close()
 
     def flush(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeOutput.hx:54
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeOutput.hx:54
         self.stream.flush()
 
 python_io_NativeOutput._hx_class = python_io_NativeOutput
@@ -5093,7 +5093,7 @@ class python_io_NativeTextInput(python_io_NativeInput):
 
 
     def __init__(self,stream):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeTextInput.hx:39
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeTextInput.hx:39
         super().__init__(stream)
 python_io_NativeTextInput._hx_class = python_io_NativeTextInput
 
@@ -5108,7 +5108,7 @@ class python_io_FileTextInput(python_io_NativeTextInput):
 
 
     def __init__(self,stream):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/FileTextInput.hx:32
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/FileTextInput.hx:32
         super().__init__(stream)
 python_io_FileTextInput._hx_class = python_io_FileTextInput
 
@@ -5123,14 +5123,14 @@ class python_io_NativeTextOutput(python_io_NativeOutput):
 
 
     def __init__(self,stream):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeTextOutput.hx:34
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeTextOutput.hx:34
         super().__init__(stream)
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeTextOutput.hx:35
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeTextOutput.hx:35
         if (not stream.writable()):
             raise _HxException("Read only stream")
 
     def writeByte(self,c):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/NativeTextOutput.hx:45
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/NativeTextOutput.hx:45
         self.stream.write("".join(map(chr,[c])))
 
 python_io_NativeTextOutput._hx_class = python_io_NativeTextOutput
@@ -5146,7 +5146,7 @@ class python_io_FileTextOutput(python_io_NativeTextOutput):
 
 
     def __init__(self,stream):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/FileTextOutput.hx:30
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/FileTextOutput.hx:30
         super().__init__(stream)
 python_io_FileTextOutput._hx_class = python_io_FileTextOutput
 
@@ -5158,12 +5158,12 @@ class python_io_IoTools:
 
     @staticmethod
     def createFileInputFromText(t):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/IoTools.hx:39
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/IoTools.hx:39
         return sys_io_FileInput(python_io_FileTextInput(t))
 
     @staticmethod
     def createFileOutputFromText(t):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/io/IoTools.hx:47
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/io/IoTools.hx:47
         return sys_io_FileOutput(python_io_FileTextOutput(t))
 python_io_IoTools._hx_class = python_io_IoTools
 
@@ -5178,11 +5178,11 @@ class sys_io_FileInput(haxe_io_Input):
 
 
     def __init__(self,impl):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/FileInput.hx:37
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/FileInput.hx:37
         self.impl = impl
 
     def set_bigEndian(self,b):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/FileInput.hx:41
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/FileInput.hx:41
         return self.impl.set_bigEndian(b)
 
 sys_io_FileInput._hx_class = sys_io_FileInput
@@ -5198,35 +5198,35 @@ class sys_io_FileOutput(haxe_io_Output):
 
 
     def __init__(self,impl):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/FileOutput.hx:34
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/FileOutput.hx:34
         self.impl = impl
 
     def set_bigEndian(self,b):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/FileOutput.hx:46
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/FileOutput.hx:46
         return self.impl.set_bigEndian(b)
 
     def writeByte(self,c):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/FileOutput.hx:50
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/FileOutput.hx:50
         self.impl.writeByte(c)
 
     def writeBytes(self,s,pos,_hx_len):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/FileOutput.hx:54
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/FileOutput.hx:54
         return self.impl.writeBytes(s,pos,_hx_len)
 
     def flush(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/FileOutput.hx:58
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/FileOutput.hx:58
         self.impl.flush()
 
     def close(self):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/FileOutput.hx:62
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/FileOutput.hx:62
         self.impl.close()
 
     def writeFullBytes(self,s,pos,_hx_len):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/FileOutput.hx:70
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/FileOutput.hx:70
         self.impl.writeFullBytes(s,pos,_hx_len)
 
     def writeString(self,s):
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/io/FileOutput.hx:114
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/sys/io/FileOutput.hx:114
         self.impl.writeString(s)
 
 sys_io_FileOutput._hx_class = sys_io_FileOutput
@@ -5969,7 +5969,7 @@ class tink_core__Future_Future_Impl_:
         return tink_core__Future_SyncFuture(tink_core__Lazy_LazyConst(v))
 
     @staticmethod
-    def _async(f,lazy = False):
+    def async(f,lazy = False):
         # /usr/local/lib/haxe/lib/tink_core/1,17,0/src/tink/core/Future.hx:126
         if (lazy is None):
             lazy = False
@@ -6398,7 +6398,7 @@ class tink_core__Future_LazyTrigger(tink_core_FutureTrigger):
                         cb(tmp)
                     _gthis.handle(_hx_local_0)
                 # /usr/local/lib/haxe/lib/tink_core/1,17,0/src/tink/core/Future.hx:405
-                return tink_core__Future_Future_Impl_._async(_hx_local_1,True)
+                return tink_core__Future_Future_Impl_.async(_hx_local_1,True)
             return _hx_local_2()
 
     def flatMap(self,f):
@@ -6418,7 +6418,7 @@ class tink_core__Future_LazyTrigger(tink_core_FutureTrigger):
                         f(v).handle(cb)
                     _gthis.handle(_hx_local_0)
                 # /usr/local/lib/haxe/lib/tink_core/1,17,0/src/tink/core/Future.hx:412
-                return tink_core__Future_Future_Impl_._async(_hx_local_1,True)
+                return tink_core__Future_Future_Impl_.async(_hx_local_1,True)
             return _hx_local_2()
 
     def handle(self,cb):
@@ -7253,7 +7253,7 @@ class tink_core__Promise_Promise_Impl_:
                 next2 = next
                 # /usr/local/lib/haxe/lib/tink_core/1,17,0/src/tink/core/Promise.hx:84
                 next2()
-            return tink_core__Future_Future_Impl_._async(_hx_local_3,lazy)
+            return tink_core__Future_Future_Impl_.async(_hx_local_3,lazy)
         return _hx_local_4()
 
     @staticmethod
@@ -7290,7 +7290,7 @@ class tink_core__Promise_Promise_Impl_:
             def _hx_local_0(cb):
                 # /usr/local/lib/haxe/lib/tink_core/1,17,0/src/tink/core/Promise.hx:109
                 p.get().handle(cb)
-            return tink_core__Future_Future_Impl_._async(_hx_local_0,True)
+            return tink_core__Future_Future_Impl_.async(_hx_local_0,True)
         return _hx_local_1()
 
     @staticmethod
@@ -7379,7 +7379,7 @@ class tink_core__Promise_Promise_Impl_:
                     if sync:
                         if (links is not None):
                             links.dissolve()
-                return tink_core__Future_Future_Impl_._async(_hx_local_7,lazy)
+                return tink_core__Future_Future_Impl_.async(_hx_local_7,lazy)
             return _hx_local_8()
 
     @staticmethod
@@ -7888,33 +7888,33 @@ class tink_core_SignalTrigger:
 
 tink_core_SignalTrigger._hx_class = tink_core_SignalTrigger
 
-# /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Math.hx:135
+# /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Math.hx:135
 Math.NEGATIVE_INFINITY = float("-inf")
-# /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Math.hx:136
+# /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Math.hx:136
 Math.POSITIVE_INFINITY = float("inf")
-# /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Math.hx:137
+# /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Math.hx:137
 Math.NaN = float("nan")
-# /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Math.hx:138
+# /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Math.hx:138
 Math.PI = python_lib_Math.pi
 
 Date.EPOCH_UTC = python_lib_datetime_Datetime.fromtimestamp(0,python_lib_datetime_Timezone.utc)
 def _hx_init_Sys_environ():
-    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:30
+    # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:30
     def _hx_local_0():
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:31
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:31
         Sys.environ = haxe_ds_StringMap()
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:33
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:33
         env = python_lib_Os.environ
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:35
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:35
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:35
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:35
         key = python_HaxeIterator(iter(env.keys()))
         while key.hasNext():
             key1 = key.next()
-            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:36
+            # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:36
             _this = Sys.environ
             value = env.get(key1,None)
             _this.h[key1] = value
-        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Sys.hx:38
+        # /Users/glen/Downloads/haxe_20180221160843_bb7b827/std/python/_std/Sys.hx:38
         return Sys.environ
     return _hx_local_0()
 Sys.environ = _hx_init_Sys_environ()
