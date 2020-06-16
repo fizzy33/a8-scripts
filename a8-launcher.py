@@ -2140,16 +2140,16 @@ class a8_UserConfig:
     _hx_class_name = "a8.UserConfig"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_statics = ["versionsConfig", "repoConfig", "getRepoProp", "repo_url"]
+    _hx_statics = ["repoConfig", "getRepoProp", "repo_url"]
 
     @staticmethod
     def getRepoProp(name):
-        # src/a8/UserConfig.hx:31
+        # src/a8/UserConfig.hx:23
         v = a8_UserConfig.repoConfig.h.get(name,None)
-        # src/a8/UserConfig.hx:32
+        # src/a8/UserConfig.hx:24
         if (v is None):
-            raise _HxException((("no " + ("null" if name is None else name)) + " defined in ~/.a8/config.properties"))
-        # src/a8/UserConfig.hx:35
+            raise _HxException((("no " + ("null" if name is None else name)) + " defined in ~/.a8/repo.properties"))
+        # src/a8/UserConfig.hx:27
         return v
 a8_UserConfig._hx_class = a8_UserConfig
 
@@ -2408,7 +2408,7 @@ class a8_launcher_Launcher:
             # src/a8/launcher/Launcher.hx:146
             _hx_exec = a8_Exec()
             # src/a8/launcher/Launcher.hx:152
-            version = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.versionsConfig.h.get("versions_version",None)),"1.0.0-20200309_1447_master")
+            version = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.repoConfig.h.get("versions_version",None)),"1.0.0-20200615_1710_master")
             # src/a8/launcher/Launcher.hx:154
             repoUrl = a8_UserConfig.repo_url
             # src/a8/launcher/Launcher.hx:156
@@ -8393,24 +8393,23 @@ def _hx_init_a8_GlobalScheduler_scheduler():
 a8_GlobalScheduler.scheduler = _hx_init_a8_GlobalScheduler_scheduler()
 a8_Logger.traceEnabled = False
 a8_PlatformOps.instance = a8_PythonPlatform()
-a8_UserConfig.versionsConfig = a8_PathOps.readProperties(a8_PathOps.entry(a8_PathOps.userHome(),".a8/versions/config.properties"))
 a8_UserConfig.repoConfig = a8_PathOps.readProperties(a8_PathOps.entry(a8_PathOps.userHome(),".a8/repo.properties"))
 def _hx_init_a8_UserConfig_repo_url():
-    # src/a8/UserConfig.hx:38
+    # src/a8/UserConfig.hx:30
     def _hx_local_0():
-        # src/a8/UserConfig.hx:39
+        # src/a8/UserConfig.hx:31
         v = a8_UserConfig.getRepoProp("repo_url")
-        # src/a8/UserConfig.hx:41
+        # src/a8/UserConfig.hx:33
         u = a8_UserConfig.getRepoProp("repo_user")
-        # src/a8/UserConfig.hx:42
+        # src/a8/UserConfig.hx:34
         p = a8_UserConfig.getRepoProp("repo_password")
-        # src/a8/UserConfig.hx:44
+        # src/a8/UserConfig.hx:36
         separator = "://"
-        # src/a8/UserConfig.hx:45
+        # src/a8/UserConfig.hx:37
         split = (list(v) if ((separator == "")) else v.split(separator))
-        # src/a8/UserConfig.hx:46
+        # src/a8/UserConfig.hx:38
         url = ((((((HxOverrides.stringOrNull((split[0] if 0 < len(split) else None)) + ("null" if separator is None else separator)) + ("null" if u is None else u)) + ":") + ("null" if p is None else p)) + "@") + HxOverrides.stringOrNull((split[1] if 1 < len(split) else None)))
-        # src/a8/UserConfig.hx:47
+        # src/a8/UserConfig.hx:39
         return url
     return _hx_local_0()
 a8_UserConfig.repo_url = _hx_init_a8_UserConfig_repo_url()
