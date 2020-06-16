@@ -2408,7 +2408,7 @@ class a8_launcher_Launcher:
             # src/a8/launcher/Launcher.hx:146
             _hx_exec = a8_Exec()
             # src/a8/launcher/Launcher.hx:152
-            version = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.repoConfig.h.get("versions_version",None)),"1.0.0-20200615_1710_master")
+            version = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.repoConfig.h.get("versions_version",None)),"1.0.0-20200616_1516_master")
             # src/a8/launcher/Launcher.hx:154
             repoUrl = a8_UserConfig.repo_url
             # src/a8/launcher/Launcher.hx:156
