@@ -18,13 +18,20 @@ import builtins as python_lib_Builtins
 import functools as python_lib_Functools
 import io as python_lib_Io
 import json as python_lib_Json
+import random as python_lib_Random
+import re as python_lib_Re
+import socket as python_lib_Socket
+import ssl as python_lib_Ssl
 import subprocess as python_lib_Subprocess
 import timeit as python_lib_Timeit
 import traceback as python_lib_Traceback
 from datetime import datetime as python_lib_datetime_Datetime
 from datetime import timezone as python_lib_datetime_Timezone
 from io import StringIO as python_lib_io_StringIO
+from socket import socket as python_lib_socket_Socket
+from ssl import SSLContext as python_lib_ssl_SSLContext
 from subprocess import Popen as python_lib_subprocess_Popen
+import urllib.parse as python_lib_urllib_Parse
 
 
 class _hx_AnonObject:
@@ -142,11 +149,54 @@ class Date:
 Date._hx_class = Date
 
 
+class EReg:
+    _hx_class_name = "EReg"
+    _hx_is_interface = "False"
+    __slots__ = ("pattern", "matchObj", "_hx_global")
+    _hx_fields = ["pattern", "matchObj", "global"]
+
+    def __init__(self,r,opt):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:31
+        self.matchObj = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:35
+        self._hx_global = False
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:36
+        options = 0
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:37
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:37
+        _g = 0
+        _g1 = len(opt)
+        while (_g < _g1):
+            i = _g
+            _g = (_g + 1)
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:38
+            c = (-1 if ((i >= len(opt))) else ord(opt[i]))
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:39
+            if (c == 109):
+                options = (options | python_lib_Re.M)
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:41
+            if (c == 105):
+                options = (options | python_lib_Re.I)
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:43
+            if (c == 115):
+                options = (options | python_lib_Re.S)
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:45
+            if (c == 117):
+                options = (options | python_lib_Re.U)
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:47
+            if (c == 103):
+                self._hx_global = True
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/EReg.hx:50
+        self.pattern = python_lib_Re.compile(r,options)
+
+EReg._hx_class = EReg
+
+
 class Lambda:
     _hx_class_name = "Lambda"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_statics = ["array", "iter", "find"]
+    _hx_statics = ["array", "exists", "iter", "find"]
 
     @staticmethod
     def array(it):
@@ -161,6 +211,19 @@ class Lambda:
             a.append(i1)
         # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:49
         return a
+
+    @staticmethod
+    def exists(it,f):
+        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:126
+        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:126
+        x = HxOverrides.iterator(it)
+        while x.hasNext():
+            x1 = x.next()
+            # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:127
+            if f(x1):
+                return True
+        # /Users/glen/tools-a8/packages/haxe/current/std/Lambda.hx:129
+        return False
 
     @staticmethod
     def iter(it,f):
@@ -190,7 +253,7 @@ class Reflect:
     _hx_class_name = "Reflect"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_statics = ["field", "setField", "isFunction", "copy"]
+    _hx_statics = ["field", "setField", "isFunction", "compareMethods", "copy"]
 
     @staticmethod
     def field(o,field):
@@ -209,6 +272,28 @@ class Reflect:
             return python_Boot.hasField(f,"func_code")
         else:
             return True
+
+    @staticmethod
+    def compareMethods(f1,f2):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:98
+        if HxOverrides.eq(f1,f2):
+            return True
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:100
+        if (isinstance(f1,python_internal_MethodClosure) and isinstance(f2,python_internal_MethodClosure)):
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:101
+            m1 = f1
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:102
+            m2 = f2
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:103
+            if HxOverrides.eq(m1.obj,m2.obj):
+                return (m1.func == m2.func)
+            else:
+                return False
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:105
+        if ((not Reflect.isFunction(f1)) or (not Reflect.isFunction(f2))):
+            return False
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Reflect.hx:108
+        return False
 
     @staticmethod
     def copy(o):
@@ -237,7 +322,7 @@ class Std:
     _hx_class_name = "Std"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_statics = ["downcast", "is", "string"]
+    _hx_statics = ["downcast", "is", "string", "parseInt"]
 
     @staticmethod
     def downcast(value,c):
@@ -398,6 +483,100 @@ class Std:
     def string(s):
         # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:116
         return python_Boot.toString1(s,"")
+
+    @staticmethod
+    def parseInt(x):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:128
+        if (x is None):
+            return None
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:130
+        try:
+            return int(x)
+        except Exception as _hx_e:
+            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+            e = _hx_e1
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:133
+            base = 10
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:134
+            _hx_len = len(x)
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:135
+            foundCount = 0
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:136
+            sign = 0
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:137
+            firstDigitIndex = 0
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:138
+            lastDigitIndex = -1
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:139
+            previous = 0
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:141
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:141
+            _g = 0
+            _g1 = _hx_len
+            while (_g < _g1):
+                i = _g
+                _g = (_g + 1)
+                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:142
+                c = (-1 if ((i >= len(x))) else ord(x[i]))
+                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:143
+                if (((c > 8) and ((c < 14))) or ((c == 32))):
+                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:145
+                    if (foundCount > 0):
+                        return None
+                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:148
+                    continue
+                else:
+                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:143
+                    c1 = c
+                    # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:151
+                    if (c1 == 43):
+                        if (foundCount == 0):
+                            sign = 1
+                        elif (not (((48 <= c) and ((c <= 57))))):
+                            if (not (((base == 16) and ((((97 <= c) and ((c <= 122))) or (((65 <= c) and ((c <= 90))))))))):
+                                break
+                    elif (c1 == 45):
+                        if (foundCount == 0):
+                            sign = -1
+                        elif (not (((48 <= c) and ((c <= 57))))):
+                            if (not (((base == 16) and ((((97 <= c) and ((c <= 122))) or (((65 <= c) and ((c <= 90))))))))):
+                                break
+                    elif (c1 == 48):
+                        if (not (((foundCount == 0) or (((foundCount == 1) and ((sign != 0))))))):
+                            if (not (((48 <= c) and ((c <= 57))))):
+                                if (not (((base == 16) and ((((97 <= c) and ((c <= 122))) or (((65 <= c) and ((c <= 90))))))))):
+                                    break
+                    elif ((c1 == 120) or ((c1 == 88))):
+                        if ((previous == 48) and ((((foundCount == 1) and ((sign == 0))) or (((foundCount == 2) and ((sign != 0))))))):
+                            base = 16
+                        elif (not (((48 <= c) and ((c <= 57))))):
+                            if (not (((base == 16) and ((((97 <= c) and ((c <= 122))) or (((65 <= c) and ((c <= 90))))))))):
+                                break
+                    elif (not (((48 <= c) and ((c <= 57))))):
+                        if (not (((base == 16) and ((((97 <= c) and ((c <= 122))) or (((65 <= c) and ((c <= 90))))))))):
+                            break
+                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:161
+                if (((foundCount == 0) and ((sign == 0))) or (((foundCount == 1) and ((sign != 0))))):
+                    firstDigitIndex = i
+                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:164
+                foundCount = (foundCount + 1)
+                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:165
+                lastDigitIndex = i
+                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:166
+                previous = c
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:168
+            if (firstDigitIndex <= lastDigitIndex):
+                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:169
+                digits = HxString.substring(x,firstDigitIndex,(lastDigitIndex + 1))
+                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:170
+                try:
+                    return (((-1 if ((sign == -1)) else 1)) * int(digits,base))
+                except Exception as _hx_e:
+                    _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                    e1 = _hx_e1
+                    return None
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/Std.hx:176
+            return None
 Std._hx_class = Std
 
 
@@ -443,7 +622,50 @@ class StringTools:
     _hx_class_name = "StringTools"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_statics = ["lpad", "rpad"]
+    _hx_statics = ["isSpace", "ltrim", "rtrim", "lpad", "rpad"]
+
+    @staticmethod
+    def isSpace(s,pos):
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:290
+        if (((len(s) == 0) or ((pos < 0))) or ((pos >= len(s)))):
+            return False
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:293
+        c = HxString.charCodeAt(s,pos)
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:294
+        if (not (((c > 8) and ((c < 14))))):
+            return (c == 32)
+        else:
+            return True
+
+    @staticmethod
+    def ltrim(s):
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:310
+        l = len(s)
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:311
+        r = 0
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:312
+        while ((r < l) and StringTools.isSpace(s,r)):
+            r = (r + 1)
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:315
+        if (r > 0):
+            return HxString.substr(s,r,(l - r))
+        else:
+            return s
+
+    @staticmethod
+    def rtrim(s):
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:335
+        l = len(s)
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:336
+        r = 0
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:337
+        while ((r < l) and StringTools.isSpace(s,((l - r) - 1))):
+            r = (r + 1)
+        # /Users/glen/tools-a8/packages/haxe/current/std/StringTools.hx:340
+        if (r > 0):
+            return HxString.substr(s,0,(l - r))
+        else:
+            return s
 
     @staticmethod
     def lpad(s,c,l):
@@ -2140,17 +2362,38 @@ class a8_UserConfig:
     _hx_class_name = "a8.UserConfig"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_statics = ["repoConfig", "getRepoProp", "repo_url"]
+    _hx_statics = ["repoConfig", "getRepoProp", "repo_url", "versionsVersion", "versionsVersionFromRepo"]
 
     @staticmethod
     def getRepoProp(name):
-        # src/a8/UserConfig.hx:23
+        # src/a8/UserConfig.hx:26
         v = a8_UserConfig.repoConfig.h.get(name,None)
-        # src/a8/UserConfig.hx:24
+        # src/a8/UserConfig.hx:27
         if (v is None):
             raise _HxException((("no " + ("null" if name is None else name)) + " defined in ~/.a8/repo.properties"))
-        # src/a8/UserConfig.hx:27
+        # src/a8/UserConfig.hx:30
         return v
+
+    @staticmethod
+    def versionsVersion():
+        # src/a8/UserConfig.hx:47
+        version = a8_UserConfig.repoConfig.h.get("versions_version",None)
+        # src/a8/UserConfig.hx:48
+        if (version is None):
+            version = a8_UserConfig.versionsVersionFromRepo()
+        # src/a8/UserConfig.hx:51
+        return version
+
+    @staticmethod
+    def versionsVersionFromRepo():
+        # src/a8/UserConfig.hx:55
+        v = a8_UserConfig.getRepoProp("repo_url")
+        # src/a8/UserConfig.hx:56
+        startIndex = None
+        startIndex1 = (((v.find("://") if ((startIndex is None)) else v.find("://", startIndex))) + 1)
+        url = (HxOverrides.stringOrNull(HxString.substring(v,0,(v.find("/") if ((startIndex1 is None)) else v.find("/", startIndex1)))) + "/versionsVersion")
+        # src/a8/UserConfig.hx:57
+        return sys_Http.requestUrl(url)
 a8_UserConfig._hx_class = a8_UserConfig
 
 
@@ -3881,19 +4124,89 @@ class haxe_format_JsonPrinter:
 haxe_format_JsonPrinter._hx_class = haxe_format_JsonPrinter
 
 
+class haxe_http_HttpBase:
+    _hx_class_name = "haxe.http.HttpBase"
+    _hx_is_interface = "False"
+    _hx_fields = ["url", "responseBytes", "responseAsString", "postData", "postBytes", "headers", "params", "emptyOnData"]
+    _hx_methods = ["onData", "onBytes", "onError", "onStatus", "hasOnData", "success", "get_responseData"]
+
+    def __init__(self,url):
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:58
+        self.emptyOnData = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:54
+        self.postBytes = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:53
+        self.postData = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:52
+        self.responseAsString = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:50
+        self.responseBytes = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:72
+        self.url = url
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:73
+        self.headers = []
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:74
+        self.params = []
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:75
+        self.emptyOnData = self.onData
+
+    def onData(self,data):
+        pass
+
+    def onBytes(self,data):
+        pass
+
+    def onError(self,msg):
+        pass
+
+    def onStatus(self,status):
+        pass
+
+    def hasOnData(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:229
+        return (not Reflect.compareMethods(self.onData,self.emptyOnData))
+
+    def success(self,data):
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:233
+        self.responseBytes = data
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:234
+        self.responseAsString = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:235
+        if self.hasOnData():
+            self.onData(self.get_responseData())
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:238
+        self.onBytes(self.responseBytes)
+
+    def get_responseData(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:242
+        if ((self.responseAsString is None) and ((self.responseBytes is not None))):
+            self.responseAsString = self.responseBytes.getString(0,self.responseBytes.length,haxe_io_Encoding.UTF8)
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/http/HttpBase.hx:249
+        return self.responseAsString
+
+haxe_http_HttpBase._hx_class = haxe_http_HttpBase
+
+
 class haxe_io_Bytes:
     _hx_class_name = "haxe.io.Bytes"
     _hx_is_interface = "False"
     __slots__ = ("length", "b")
     _hx_fields = ["length", "b"]
-    _hx_methods = ["getString"]
-    _hx_statics = ["ofString", "ofData"]
+    _hx_methods = ["sub", "getString", "toString"]
+    _hx_statics = ["alloc", "ofString", "ofData"]
 
     def __init__(self,length,b):
         # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:35
         self.length = length
         # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:36
         self.b = b
+
+    def sub(self,pos,_hx_len):
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:157
+        if (((pos < 0) or ((_hx_len < 0))) or (((pos + _hx_len) > self.length))):
+            raise _HxException(haxe_io_Error.OutsideBounds)
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:176
+        return haxe_io_Bytes(_hx_len,self.b[pos:(pos + _hx_len)])
 
     def getString(self,pos,_hx_len,encoding = None):
         # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:416
@@ -3903,6 +4216,15 @@ class haxe_io_Bytes:
             raise _HxException(haxe_io_Error.OutsideBounds)
         # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:450
         return self.b[pos:pos+_hx_len].decode('UTF-8','replace')
+
+    def toString(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:516
+        return self.getString(0,self.length)
+
+    @staticmethod
+    def alloc(length):
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Bytes.hx:566
+        return haxe_io_Bytes(length,bytearray(length))
 
     @staticmethod
     def ofString(s,encoding = None):
@@ -3946,7 +4268,7 @@ class haxe_io_Output:
     _hx_is_interface = "False"
     __slots__ = ("bigEndian",)
     _hx_fields = ["bigEndian"]
-    _hx_methods = ["writeByte", "writeBytes", "flush", "close", "set_bigEndian", "writeFullBytes", "writeString"]
+    _hx_methods = ["writeByte", "writeBytes", "flush", "close", "set_bigEndian", "writeFullBytes", "prepare", "writeString"]
 
     def writeByte(self,c):
         # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:47
@@ -3992,6 +4314,9 @@ class haxe_io_Output:
             pos = (pos + k)
             # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:124
             _hx_len = (_hx_len - k)
+
+    def prepare(self,nbytes):
+        pass
 
     def writeString(self,s,encoding = None):
         # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Output.hx:282
@@ -4046,6 +4371,22 @@ haxe_io_Encoding.UTF8 = haxe_io_Encoding("UTF8", 0, ())
 haxe_io_Encoding.RawNative = haxe_io_Encoding("RawNative", 1, ())
 haxe_io_Encoding._hx_class = haxe_io_Encoding
 
+
+class haxe_io_Eof:
+    _hx_class_name = "haxe.io.Eof"
+    _hx_is_interface = "False"
+    __slots__ = ()
+    _hx_methods = ["toString"]
+
+    def __init__(self):
+        pass
+
+    def toString(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Eof.hx:33
+        return "Eof"
+
+haxe_io_Eof._hx_class = haxe_io_Eof
+
 class haxe_io_Error(Enum):
     __slots__ = ()
     _hx_class_name = "haxe.io.Error"
@@ -4058,6 +4399,45 @@ haxe_io_Error.Blocked = haxe_io_Error("Blocked", 0, ())
 haxe_io_Error.Overflow = haxe_io_Error("Overflow", 1, ())
 haxe_io_Error.OutsideBounds = haxe_io_Error("OutsideBounds", 2, ())
 haxe_io_Error._hx_class = haxe_io_Error
+
+
+class haxe_io_Input:
+    _hx_class_name = "haxe.io.Input"
+    _hx_is_interface = "False"
+    __slots__ = ()
+    _hx_methods = ["readByte", "readBytes"]
+
+    def readByte(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:53
+        raise _HxException("Not implemented")
+
+    def readBytes(self,s,pos,_hx_len):
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:65
+        k = _hx_len
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:66
+        b = s.b
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:67
+        if (((pos < 0) or ((_hx_len < 0))) or (((pos + _hx_len) > s.length))):
+            raise _HxException(haxe_io_Error.OutsideBounds)
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:69
+        try:
+            while (k > 0):
+                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:78
+                b[pos] = self.readByte()
+                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:80
+                pos = (pos + 1)
+                # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:81
+                k = (k - 1)
+        except Exception as _hx_e:
+            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+            if isinstance(_hx_e1, haxe_io_Eof):
+                    pass
+            else:
+                raise _hx_e
+        # /Users/glen/tools-a8/packages/haxe/current/std/haxe/io/Input.hx:84
+        return (_hx_len - k)
+
+haxe_io_Input._hx_class = haxe_io_Input
 
 
 class python_Boot:
@@ -4820,6 +5200,920 @@ class python_internal_MethodClosure:
         return self.func(self.obj,*args)
 
 python_internal_MethodClosure._hx_class = python_internal_MethodClosure
+
+
+class sys_net_Socket:
+    _hx_class_name = "sys.net.Socket"
+    _hx_is_interface = "False"
+    __slots__ = ("_hx___s", "input", "output")
+    _hx_fields = ["__s", "input", "output"]
+    _hx_methods = ["__initSocket", "close", "connect", "shutdown", "setTimeout", "fileno"]
+
+    def __init__(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:115
+        self.output = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:113
+        self.input = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:111
+        self._hx___s = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:120
+        self._hx___initSocket()
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:121
+        self.input = sys_net__Socket_SocketInput(self._hx___s)
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:122
+        self.output = sys_net__Socket_SocketOutput(self._hx___s)
+
+    def _hx___initSocket(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:126
+        self._hx___s = python_lib_socket_Socket()
+
+    def close(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:130
+        self._hx___s.close()
+
+    def connect(self,host,port):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:142
+        host_str = host.toString()
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:143
+        self._hx___s.connect((host_str, port))
+
+    def shutdown(self,read,write):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:151
+        self._hx___s.shutdown((python_lib_Socket.SHUT_RDWR if ((read and write)) else (python_lib_Socket.SHUT_RD if read else python_lib_Socket.SHUT_WR)))
+
+    def setTimeout(self,timeout):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:178
+        self._hx___s.settimeout(timeout)
+
+    def fileno(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:194
+        return self._hx___s.fileno()
+
+sys_net_Socket._hx_class = sys_net_Socket
+
+
+class python_net_SslSocket(sys_net_Socket):
+    _hx_class_name = "python.net.SslSocket"
+    _hx_is_interface = "False"
+    __slots__ = ("hostName",)
+    _hx_fields = ["hostName"]
+    _hx_methods = ["__initSocket", "connect"]
+    _hx_statics = []
+    _hx_interfaces = []
+    _hx_super = sys_net_Socket
+
+
+    def __init__(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:31
+        self.hostName = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:30
+        super().__init__()
+
+    def _hx___initSocket(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:38
+        context = python_lib_ssl_SSLContext(python_lib_Ssl.PROTOCOL_SSLv23)
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:39
+        context.verify_mode = python_lib_Ssl.CERT_REQUIRED
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:40
+        context.set_default_verify_paths()
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:41
+        context.options = (context.options | python_lib_Ssl.OP_NO_SSLv2)
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:42
+        context.options = (context.options | python_lib_Ssl.OP_NO_SSLv3)
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:43
+        context.options = (context.options | python_lib_Ssl.OP_NO_COMPRESSION)
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:45
+        context.options = (context.options | python_lib_Ssl.OP_NO_TLSv1)
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:46
+        self._hx___s = python_lib_socket_Socket()
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:47
+        self._hx___s = context.wrap_socket(self._hx___s,False,True,True,self.hostName)
+
+    def connect(self,host,port):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:51
+        self.hostName = host.host
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/net/SslSocket.hx:52
+        super().connect(host,port)
+
+python_net_SslSocket._hx_class = python_net_SslSocket
+
+
+class sys_Http(haxe_http_HttpBase):
+    _hx_class_name = "sys.Http"
+    _hx_is_interface = "False"
+    __slots__ = ("noShutdown", "cnxTimeout", "responseHeaders", "chunk_size", "chunk_buf", "file")
+    _hx_fields = ["noShutdown", "cnxTimeout", "responseHeaders", "chunk_size", "chunk_buf", "file"]
+    _hx_methods = ["request", "customRequest", "writeBody", "readHttpResponse", "readChunk"]
+    _hx_statics = ["PROXY", "requestUrl"]
+    _hx_interfaces = []
+    _hx_super = haxe_http_HttpBase
+
+
+    def __init__(self,url):
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:38
+        self.file = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:37
+        self.chunk_buf = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:36
+        self.chunk_size = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:34
+        self.responseHeaders = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:32
+        self.noShutdown = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:49
+        self.cnxTimeout = 10
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:53
+        super().__init__(url)
+
+    def request(self,post = None):
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:56
+        _gthis = self
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:57
+        output = haxe_io_BytesOutput()
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:58
+        old = self.onError
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:59
+        err = False
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:60
+        def _hx_local_0(e):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:60
+            nonlocal err
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:61
+            _gthis.responseBytes = output.getBytes()
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:62
+            err = True
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:64
+            _gthis.onError = old
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:65
+            _gthis.onError(e)
+        self.onError = _hx_local_0
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:67
+        post = ((post or ((self.postBytes is not None))) or ((self.postData is not None)))
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:68
+        self.customRequest(post,output)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:69
+        if (not err):
+            self.success(output.getBytes())
+
+    def customRequest(self,post,api,sock = None,method = None):
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:91
+        self.responseAsString = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:92
+        self.responseBytes = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:93
+        url_regexp = EReg("^(https?://)?([a-zA-Z\\.0-9_-]+)(:[0-9]+)?(.*)$","")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:94
+        url_regexp.matchObj = python_lib_Re.search(url_regexp.pattern,self.url)
+        if (url_regexp.matchObj is None):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:95
+            self.onError("Invalid URL")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:96
+            return
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:98
+        secure = (url_regexp.matchObj.group(1) == "https://")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:99
+        if (sock is None):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:100
+            if secure:
+                sock = python_net_SslSocket()
+            else:
+                sock = sys_net_Socket()
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:117
+            sock.setTimeout(self.cnxTimeout)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:119
+        host = url_regexp.matchObj.group(2)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:120
+        portString = url_regexp.matchObj.group(3)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:121
+        request = url_regexp.matchObj.group(4)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:125
+        if ((("" if ((0 >= len(request))) else request[0])) != "/"):
+            request = ("/" + ("null" if request is None else request))
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:128
+        port = ((443 if secure else 80) if (((portString is None) or ((portString == "")))) else Std.parseInt(HxString.substr(portString,1,(len(portString) - 1))))
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:130
+        multipart = (self.file is not None)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:131
+        boundary = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:132
+        uri = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:133
+        if multipart:
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:134
+            post = True
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:135
+            boundary = (((Std.string(int((python_lib_Random.random() * 1000))) + Std.string(int((python_lib_Random.random() * 1000)))) + Std.string(int((python_lib_Random.random() * 1000)))) + Std.string(int((python_lib_Random.random() * 1000))))
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:139
+            while (len(boundary) < 38):
+                boundary = ("-" + ("null" if boundary is None else boundary))
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:141
+            b_b = python_lib_io_StringIO()
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:142
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:142
+            _g = 0
+            _g1 = self.params
+            while (_g < len(_g1)):
+                p = (_g1[_g] if _g >= 0 and _g < len(_g1) else None)
+                _g = (_g + 1)
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:143
+                b_b.write("--")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:144
+                b_b.write(Std.string(boundary))
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:145
+                b_b.write("\r\n")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:146
+                b_b.write("Content-Disposition: form-data; name=\"")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:147
+                b_b.write(Std.string(p.name))
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:148
+                b_b.write("\"")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:149
+                b_b.write("\r\n")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:150
+                b_b.write("\r\n")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:151
+                b_b.write(Std.string(p.value))
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:152
+                b_b.write("\r\n")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:154
+            b_b.write("--")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:155
+            b_b.write(Std.string(boundary))
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:156
+            b_b.write("\r\n")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:157
+            b_b.write("Content-Disposition: form-data; name=\"")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:158
+            b_b.write(Std.string(self.file.param))
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:159
+            b_b.write("\"; filename=\"")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:160
+            b_b.write(Std.string(self.file.filename))
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:161
+            b_b.write("\"")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:162
+            b_b.write("\r\n")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:163
+            b_b.write(Std.string(((("Content-Type: " + HxOverrides.stringOrNull(self.file.mimeType)) + "\r\n") + "\r\n")))
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:164
+            uri = b_b.getvalue()
+        else:
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:166
+            _g2 = 0
+            _g11 = self.params
+            while (_g2 < len(_g11)):
+                p1 = (_g11[_g2] if _g2 >= 0 and _g2 < len(_g11) else None)
+                _g2 = (_g2 + 1)
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:167
+                if (uri is None):
+                    uri = ""
+                else:
+                    uri = (("null" if uri is None else uri) + "&")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:171
+                uri = (("null" if uri is None else uri) + HxOverrides.stringOrNull((((HxOverrides.stringOrNull(python_lib_urllib_Parse.quote(p1.name,"")) + "=") + HxOverrides.stringOrNull(python_lib_urllib_Parse.quote(("" + HxOverrides.stringOrNull(p1.value)),""))))))
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:175
+        b = haxe_io_BytesOutput()
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:176
+        if (method is not None):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:177
+            b.writeString(method)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:178
+            b.writeString(" ")
+        elif post:
+            b.writeString("POST ")
+        else:
+            b.writeString("GET ")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:184
+        if (sys_Http.PROXY is not None):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:185
+            b.writeString("http://")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:186
+            b.writeString(host)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:187
+            if (port != 80):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:188
+                b.writeString(":")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:189
+                b.writeString(("" + Std.string(port)))
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:192
+        b.writeString(request)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:194
+        if ((not post) and ((uri is not None))):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:195
+            if (request.find("?", 0) >= 0):
+                b.writeString("&")
+            else:
+                b.writeString("?")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:199
+            b.writeString(uri)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:201
+        b.writeString(((" HTTP/1.1\r\nHost: " + ("null" if host is None else host)) + "\r\n"))
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:202
+        if (self.postData is not None):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:203
+            self.postBytes = haxe_io_Bytes.ofString(self.postData)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:204
+            self.postData = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:206
+        if (self.postBytes is not None):
+            b.writeString((("Content-Length: " + Std.string(self.postBytes.length)) + "\r\n"))
+        elif (post and ((uri is not None))):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:209
+            def _hx_local_4(h):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:209
+                return (h.name == "Content-Type")
+            if (multipart or (not Lambda.exists(self.headers,_hx_local_4))):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:210
+                b.writeString("Content-Type: ")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:211
+                if multipart:
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:212
+                    b.writeString("multipart/form-data")
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:213
+                    b.writeString("; boundary=")
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:214
+                    b.writeString(boundary)
+                else:
+                    b.writeString("application/x-www-form-urlencoded")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:217
+                b.writeString("\r\n")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:219
+            if multipart:
+                b.writeString((("Content-Length: " + Std.string(((((len(uri) + self.file.size) + len(boundary)) + 6)))) + "\r\n"))
+            else:
+                b.writeString((("Content-Length: " + Std.string(len(uri))) + "\r\n"))
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:224
+        b.writeString("Connection: close\r\n")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:225
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:225
+        _g3 = 0
+        _g12 = self.headers
+        while (_g3 < len(_g12)):
+            h1 = (_g12[_g3] if _g3 >= 0 and _g3 < len(_g12) else None)
+            _g3 = (_g3 + 1)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:226
+            b.writeString(h1.name)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:227
+            b.writeString(": ")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:228
+            b.writeString(h1.value)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:229
+            b.writeString("\r\n")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:231
+        b.writeString("\r\n")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:232
+        if (self.postBytes is not None):
+            b.writeFullBytes(self.postBytes,0,self.postBytes.length)
+        elif (post and ((uri is not None))):
+            b.writeString(uri)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:236
+        try:
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:237
+            if (sys_Http.PROXY is not None):
+                sock.connect(sys_net_Host(sys_Http.PROXY.host),sys_Http.PROXY.port)
+            else:
+                sock.connect(sys_net_Host(host),port)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:241
+            if multipart:
+                self.writeBody(b,self.file.io,self.file.size,boundary,sock)
+            else:
+                self.writeBody(b,None,0,None,sock)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:245
+            self.readHttpResponse(api,sock)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:246
+            sock.close()
+        except Exception as _hx_e:
+            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+            e = _hx_e1
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:248
+            try:
+                sock.close()
+            except Exception as _hx_e:
+                _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                pass
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:251
+            self.onError(Std.string(e))
+
+    def writeBody(self,body,fileInput,fileSize,boundary,sock):
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:256
+        if (body is not None):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:257
+            _hx_bytes = body.getBytes()
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:258
+            sock.output.writeFullBytes(_hx_bytes,0,_hx_bytes.length)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:260
+        if (boundary is not None):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:261
+            bufsize = 4096
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:262
+            buf = haxe_io_Bytes.alloc(bufsize)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:263
+            while (fileSize > 0):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:264
+                size = (bufsize if ((fileSize > bufsize)) else fileSize)
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:265
+                _hx_len = 0
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:266
+                try:
+                    _hx_len = fileInput.readBytes(buf,0,size)
+                except Exception as _hx_e:
+                    _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                    if isinstance(_hx_e1, haxe_io_Eof):
+                        e = _hx_e1
+                        break
+                    else:
+                        raise _hx_e
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:270
+                sock.output.writeFullBytes(buf,0,_hx_len)
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:271
+                fileSize = (fileSize - _hx_len)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:273
+            sock.output.writeString("\r\n")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:274
+            sock.output.writeString("--")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:275
+            sock.output.writeString(boundary)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:276
+            sock.output.writeString("--")
+
+    def readHttpResponse(self,api,sock):
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:282
+        b = haxe_io_BytesBuffer()
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:283
+        k = 4
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:284
+        s = haxe_io_Bytes.alloc(4)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:285
+        sock.setTimeout(self.cnxTimeout)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:286
+        while True:
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:287
+            p = sock.input.readBytes(s,0,k)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:288
+            while (p != k):
+                p = (p + sock.input.readBytes(s,p,(k - p)))
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:290
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:290
+            if ((k < 0) or ((k > s.length))):
+                raise _HxException(haxe_io_Error.OutsideBounds)
+            b.b.extend(s.b[0:k])
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:291
+            k1 = k
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:292
+            if (k1 == 1):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:293
+                c = s.b[0]
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:294
+                if (c == 10):
+                    break
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:296
+                if (c == 13):
+                    k = 3
+                else:
+                    k = 4
+            elif (k1 == 2):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:301
+                c1 = s.b[1]
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:302
+                if (c1 == 10):
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:303
+                    if (s.b[0] == 13):
+                        break
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:305
+                    k = 4
+                elif (c1 == 13):
+                    k = 3
+                else:
+                    k = 4
+            elif (k1 == 3):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:311
+                c2 = s.b[2]
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:312
+                if (c2 == 10):
+                    if (s.b[1] != 13):
+                        k = 4
+                    elif (s.b[0] != 10):
+                        k = 2
+                    else:
+                        break
+                elif (c2 == 13):
+                    if ((s.b[1] != 10) or ((s.b[0] != 13))):
+                        k = 1
+                    else:
+                        k = 3
+                else:
+                    k = 4
+            elif (k1 == 4):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:327
+                c3 = s.b[3]
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:328
+                if (c3 == 10):
+                    if (s.b[2] != 13):
+                        continue
+                    elif ((s.b[1] != 10) or ((s.b[0] != 13))):
+                        k = 2
+                    else:
+                        break
+                elif (c3 == 13):
+                    if ((s.b[2] != 10) or ((s.b[1] != 13))):
+                        k = 3
+                    else:
+                        k = 1
+            else:
+                pass
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:346
+        _this = b.getBytes().toString()
+        headers = _this.split("\r\n")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:348
+        response = (None if ((len(headers) == 0)) else headers.pop(0))
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:349
+        rp = response.split(" ")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:350
+        status = Std.parseInt((rp[1] if 1 < len(rp) else None))
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:351
+        if ((status == 0) or ((status is None))):
+            raise _HxException("Response status error")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:355
+        if (len(headers) != 0):
+            headers.pop()
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:356
+        if (len(headers) != 0):
+            headers.pop()
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:357
+        self.responseHeaders = haxe_ds_StringMap()
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:358
+        size = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:359
+        chunked = False
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:360
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:360
+        _g = 0
+        while (_g < len(headers)):
+            hline = (headers[_g] if _g >= 0 and _g < len(headers) else None)
+            _g = (_g + 1)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:361
+            a = hline.split(": ")
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:362
+            hname = (None if ((len(a) == 0)) else a.pop(0))
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:363
+            hval = ((a[0] if 0 < len(a) else None) if ((len(a) == 1)) else ": ".join([python_Boot.toString1(x1,'') for x1 in a]))
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:364
+            hval = StringTools.ltrim(StringTools.rtrim(hval))
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:365
+            self.responseHeaders.h[hname] = hval
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:366
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:366
+            _g1 = hname.lower()
+            _hx_local_2 = len(_g1)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:370
+            if (_hx_local_2 == 17):
+                if (_g1 == "transfer-encoding"):
+                    chunked = (hval.lower() == "chunked")
+            elif (_hx_local_2 == 14):
+                if (_g1 == "content-length"):
+                    size = Std.parseInt(hval)
+            else:
+                pass
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:374
+        self.onStatus(status)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:376
+        chunk_re = EReg("^([0-9A-Fa-f]+)[ ]*\r\n","m")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:377
+        self.chunk_size = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:378
+        self.chunk_buf = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:380
+        bufsize = 1024
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:381
+        buf = haxe_io_Bytes.alloc(bufsize)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:382
+        if chunked:
+            try:
+                while True:
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:385
+                    _hx_len = sock.input.readBytes(buf,0,bufsize)
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:386
+                    if (not self.readChunk(chunk_re,api,buf,_hx_len)):
+                        break
+            except Exception as _hx_e:
+                _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                if isinstance(_hx_e1, haxe_io_Eof):
+                    e = _hx_e1
+                    raise _HxException("Transfer aborted")
+                else:
+                    raise _hx_e
+        elif (size is None):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:393
+            if (not self.noShutdown):
+                sock.shutdown(False,True)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:395
+            try:
+                while True:
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:397
+                    len1 = sock.input.readBytes(buf,0,bufsize)
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:398
+                    if (len1 == 0):
+                        break
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:400
+                    api.writeBytes(buf,0,len1)
+            except Exception as _hx_e:
+                _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                if isinstance(_hx_e1, haxe_io_Eof):
+                        pass
+                else:
+                    raise _hx_e
+        else:
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:404
+            api.prepare(size)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:405
+            try:
+                while (size > 0):
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:407
+                    len2 = sock.input.readBytes(buf,0,(bufsize if ((size > bufsize)) else size))
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:408
+                    api.writeBytes(buf,0,len2)
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:409
+                    size = (size - len2)
+            except Exception as _hx_e:
+                _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                if isinstance(_hx_e1, haxe_io_Eof):
+                    e2 = _hx_e1
+                    raise _HxException("Transfer aborted")
+                else:
+                    raise _hx_e
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:415
+        if (chunked and (((self.chunk_size is not None) or ((self.chunk_buf is not None))))):
+            raise _HxException("Invalid chunk")
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:417
+        if ((status < 200) or ((status >= 400))):
+            raise _HxException(("Http Error #" + Std.string(status)))
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:419
+        api.close()
+
+    def readChunk(self,chunk_re,api,buf,_hx_len):
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:423
+        if (self.chunk_size is None):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:424
+            if (self.chunk_buf is not None):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:425
+                b = haxe_io_BytesBuffer()
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:426
+                b.b.extend(self.chunk_buf.b)
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:427
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:427
+                if ((_hx_len < 0) or ((_hx_len > buf.length))):
+                    raise _HxException(haxe_io_Error.OutsideBounds)
+                b.b.extend(buf.b[0:_hx_len])
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:428
+                buf = b.getBytes()
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:429
+                _hx_len = (_hx_len + self.chunk_buf.length)
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:430
+                self.chunk_buf = None
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:435
+            s = buf.toString()
+            chunk_re.matchObj = python_lib_Re.search(chunk_re.pattern,s)
+            if (chunk_re.matchObj is not None):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:437
+                p_pos = chunk_re.matchObj.start()
+                p_len = (chunk_re.matchObj.end() - chunk_re.matchObj.start())
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:438
+                if (p_len <= _hx_len):
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:439
+                    cstr = chunk_re.matchObj.group(1)
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:440
+                    self.chunk_size = Std.parseInt(("0x" + ("null" if cstr is None else cstr)))
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:441
+                    if (self.chunk_size == 0):
+                        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:442
+                        self.chunk_size = None
+                        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:443
+                        self.chunk_buf = None
+                        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:444
+                        return False
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:446
+                    _hx_len = (_hx_len - p_len)
+                    # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:447
+                    return self.readChunk(chunk_re,api,buf.sub(p_len,_hx_len),_hx_len)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:451
+            if (_hx_len > 10):
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:452
+                self.onError("Invalid chunk")
+                # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:453
+                return False
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:455
+            self.chunk_buf = buf.sub(0,_hx_len)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:456
+            return True
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:459
+        if (self.chunk_size > _hx_len):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:460
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:460
+            _hx_local_2 = self
+            _hx_local_3 = _hx_local_2.chunk_size
+            _hx_local_2.chunk_size = (_hx_local_3 - _hx_len)
+            _hx_local_2.chunk_size
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:461
+            api.writeBytes(buf,0,_hx_len)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:462
+            return True
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:464
+        end = (self.chunk_size + 2)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:465
+        if (_hx_len >= end):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:466
+            if (self.chunk_size > 0):
+                api.writeBytes(buf,0,self.chunk_size)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:468
+            _hx_len = (_hx_len - end)
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:469
+            self.chunk_size = None
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:470
+            if (_hx_len == 0):
+                return True
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:472
+            return self.readChunk(chunk_re,api,buf.sub(end,_hx_len),_hx_len)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:474
+        if (self.chunk_size > 0):
+            api.writeBytes(buf,0,self.chunk_size)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:476
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:476
+        _hx_local_5 = self
+        _hx_local_6 = _hx_local_5.chunk_size
+        _hx_local_5.chunk_size = (_hx_local_6 - _hx_len)
+        _hx_local_5.chunk_size
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:477
+        return True
+
+    @staticmethod
+    def requestUrl(url):
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:489
+        h = sys_Http(url)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:490
+        r = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:492
+        def _hx_local_0(d):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:492
+            nonlocal r
+            r = d
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:491
+        h.onData = _hx_local_0
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:495
+        def _hx_local_1(e):
+            # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:495
+            raise _HxException(e)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:494
+        h.onError = _hx_local_1
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:497
+        h.request(False)
+        # /Users/glen/tools-a8/packages/haxe/current/std/sys/Http.hx:498
+        return r
+
+sys_Http._hx_class = sys_Http
+
+
+class sys_net_Host:
+    _hx_class_name = "sys.net.Host"
+    _hx_is_interface = "False"
+    __slots__ = ("host", "name")
+    _hx_fields = ["host", "name"]
+    _hx_methods = ["toString"]
+
+    def __init__(self,name):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Host.hx:32
+        self.host = name
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Host.hx:33
+        self.name = name
+
+    def toString(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Host.hx:37
+        return self.name
+
+sys_net_Host._hx_class = sys_net_Host
+
+
+class sys_net__Socket_SocketInput(haxe_io_Input):
+    _hx_class_name = "sys.net._Socket.SocketInput"
+    _hx_is_interface = "False"
+    __slots__ = ("_hx___s",)
+    _hx_fields = ["__s"]
+    _hx_methods = ["readByte", "readBytes"]
+    _hx_statics = []
+    _hx_interfaces = []
+    _hx_super = haxe_io_Input
+
+
+    def __init__(self,s):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:39
+        self._hx___s = s
+
+    def readByte(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:43
+        r = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:44
+        try:
+            r = self._hx___s.recv(1,0)
+        except Exception as _hx_e:
+            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+            if isinstance(_hx_e1, BlockingIOError):
+                e = _hx_e1
+                raise _HxException(haxe_io_Error.Blocked)
+            else:
+                raise _hx_e
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:49
+        if (len(r) == 0):
+            raise _HxException(haxe_io_Eof())
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:51
+        return r[0]
+
+    def readBytes(self,buf,pos,_hx_len):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:55
+        r = None
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:56
+        data = buf.b
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:57
+        try:
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:58
+            r = self._hx___s.recv(_hx_len,0)
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:59
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:59
+            _g = pos
+            _g1 = (pos + len(r))
+            while (_g < _g1):
+                i = _g
+                _g = (_g + 1)
+                # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:60
+                data.__setitem__(i,r[(i - pos)])
+        except Exception as _hx_e:
+            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+            if isinstance(_hx_e1, BlockingIOError):
+                e = _hx_e1
+                raise _HxException(haxe_io_Error.Blocked)
+            else:
+                raise _hx_e
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:65
+        if (len(r) == 0):
+            raise _HxException(haxe_io_Eof())
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:67
+        return len(r)
+
+sys_net__Socket_SocketInput._hx_class = sys_net__Socket_SocketInput
+
+
+class sys_net__Socket_SocketOutput(haxe_io_Output):
+    _hx_class_name = "sys.net._Socket.SocketOutput"
+    _hx_is_interface = "False"
+    __slots__ = ("_hx___s",)
+    _hx_fields = ["__s"]
+    _hx_methods = ["writeByte", "writeBytes", "close"]
+    _hx_statics = []
+    _hx_interfaces = []
+    _hx_super = haxe_io_Output
+
+
+    def __init__(self,s):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:81
+        self._hx___s = s
+
+    def writeByte(self,c):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:85
+        try:
+            self._hx___s.send(bytes([c]),0)
+        except Exception as _hx_e:
+            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+            if isinstance(_hx_e1, BlockingIOError):
+                e = _hx_e1
+                raise _HxException(haxe_io_Error.Blocked)
+            else:
+                raise _hx_e
+
+    def writeBytes(self,buf,pos,_hx_len):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:93
+        try:
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:94
+            data = buf.b
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:95
+            payload = data[pos:pos+_hx_len]
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:96
+            r = self._hx___s.send(payload,0)
+            # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:97
+            return r
+        except Exception as _hx_e:
+            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+            if isinstance(_hx_e1, BlockingIOError):
+                e = _hx_e1
+                raise _HxException(haxe_io_Error.Blocked)
+            else:
+                raise _hx_e
+
+    def close(self):
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:104
+        super().close()
+        # /Users/glen/tools-a8/packages/haxe/current/std/python/_std/sys/net/Socket.hx:105
+        if (self._hx___s is not None):
+            self._hx___s.close()
+
+sys_net__Socket_SocketOutput._hx_class = sys_net__Socket_SocketOutput
 
 
 class tink_core_Annex:
@@ -8395,21 +9689,21 @@ a8_Logger.traceEnabled = False
 a8_PlatformOps.instance = a8_PythonPlatform()
 a8_UserConfig.repoConfig = a8_PathOps.readProperties(a8_PathOps.entry(a8_PathOps.userHome(),".a8/repo.properties"))
 def _hx_init_a8_UserConfig_repo_url():
-    # src/a8/UserConfig.hx:30
+    # src/a8/UserConfig.hx:33
     def _hx_local_0():
-        # src/a8/UserConfig.hx:31
-        v = a8_UserConfig.getRepoProp("repo_url")
-        # src/a8/UserConfig.hx:33
-        u = a8_UserConfig.getRepoProp("repo_user")
         # src/a8/UserConfig.hx:34
-        p = a8_UserConfig.getRepoProp("repo_password")
+        v = a8_UserConfig.getRepoProp("repo_url")
         # src/a8/UserConfig.hx:36
-        separator = "://"
+        u = a8_UserConfig.getRepoProp("repo_user")
         # src/a8/UserConfig.hx:37
-        split = (list(v) if ((separator == "")) else v.split(separator))
-        # src/a8/UserConfig.hx:38
-        url = ((((((HxOverrides.stringOrNull((split[0] if 0 < len(split) else None)) + ("null" if separator is None else separator)) + ("null" if u is None else u)) + ":") + ("null" if p is None else p)) + "@") + HxOverrides.stringOrNull((split[1] if 1 < len(split) else None)))
+        p = a8_UserConfig.getRepoProp("repo_password")
         # src/a8/UserConfig.hx:39
+        separator = "://"
+        # src/a8/UserConfig.hx:40
+        split = (list(v) if ((separator == "")) else v.split(separator))
+        # src/a8/UserConfig.hx:41
+        url = ((((((HxOverrides.stringOrNull((split[0] if 0 < len(split) else None)) + ("null" if separator is None else separator)) + ("null" if u is None else u)) + ":") + ("null" if p is None else p)) + "@") + HxOverrides.stringOrNull((split[1] if 1 < len(split) else None)))
+        # src/a8/UserConfig.hx:42
         return url
     return _hx_local_0()
 a8_UserConfig.repo_url = _hx_init_a8_UserConfig_repo_url()
@@ -8417,6 +9711,7 @@ haxe_EntryPoint.pending = list()
 haxe_EntryPoint.threadCount = 0
 python_Boot.keywords = set(["and", "del", "from", "not", "with", "as", "elif", "global", "or", "yield", "assert", "else", "if", "pass", "None", "break", "except", "import", "raise", "True", "class", "exec", "in", "return", "False", "continue", "finally", "is", "try", "def", "for", "lambda", "while"])
 python_Boot.prefixLength = len("_hx_")
+sys_Http.PROXY = None
 tink_core__Callback_Callback_Impl_.depth = 0
 tink_core__Callback_Callback_Impl_.MAX_DEPTH = 200
 tink_core__Future_NeverFuture.inst = tink_core__Future_NeverFuture()
