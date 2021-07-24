@@ -23,5 +23,7 @@
 
   { "source": "honeybadger", "link": "bin/honeybadger" },
 
+  { "source": "a8-zero", "link": "bin/a8-zero" },
+
  ]
 
