@@ -11,7 +11,7 @@
 
   { 
     "source": "fish/conf.d/a8-tools.fish", 
-    "link": "conf.d/a8-tools.fish.fish",
+    "link": "conf.d/a8-tools.fish",
     "linkRoot": "fish_config"
   },
 
