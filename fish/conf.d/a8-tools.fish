@@ -1,2 +1,2 @@
 
-set -x PATH ~/tools-a8/bin $PATH 
+fish_add_path ~/tools-a8/bin
