@@ -2,6 +2,6 @@
   "kind": "jvm_cli",
   "mainClass": "a8.codegen.Codegen",
   "organization": "a8",
-  "artifact": "a8-codegen_2.12",
+  "artifact": "a8-codegen_2.13",
   "branch": "master"
 }
