@@ -1,6 +1,6 @@
 {
   "kind": "jvm_cli",
-  "mainClass": "a8.zerotier.ListPeersMain",
+  "mainClass": "a8.zerotier.ZeroTierCliMain",
   "organization": "a8",
   "artifact": "a8-nefario_2.13",
   "branch": "master"
