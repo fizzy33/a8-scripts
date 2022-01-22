@@ -31,9 +31,9 @@
       # Add runtime dependency.
       #
       # Currently breaks the launcher internal logic
-      wrapProgram $out/bin/a8-launcher.py \
-        --argv0 '$0' \
-        --prefix PATH : ${lib.makeBinPath [ nixpkgs.openjdk11_headless ]}
+      #wrapProgram $out/bin/a8-launcher.py \
+      #  --argv0 '$0' \
+      #  --prefix PATH : ${lib.makeBinPath [ nixpkgs.openjdk11_headless ]}
     '';
   };
 }
