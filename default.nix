@@ -12,7 +12,7 @@
     inherit src;
 
     nativeBuildInputs = [
-      nixpkgs.makeWrapper
+#      nixpkgs.makeWrapper
     ];
 
     buildInputs = [
