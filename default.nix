@@ -23,7 +23,7 @@
       mkdir -p $out/bin
 
       # Copy all the source into $out/bin
-      cp -r ./* $out/bin/
+      cp ./* $out/bin/
 
       # Remove unneeded Nix code
       rm $out/bin/*.{nix,lock}
