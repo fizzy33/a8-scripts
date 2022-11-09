@@ -23,10 +23,11 @@
       mkdir -p $out/bin
 
       # Copy all the source into $out/bin
-      cp ./* $out/bin/
+      cp ./a8-* $out/bin/
+      cp ./coursier $out/bin/
 
       # Remove unneeded Nix code
-      rm $out/bin/*.{nix,lock}
+#      rm $out/bin/*.{nix,lock}
 
       # Add runtime dependency.
       #
