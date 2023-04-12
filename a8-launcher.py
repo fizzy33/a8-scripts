@@ -2682,7 +2682,7 @@ class a8_launcher_DependencyDownloader:
     _hx_class_name = "a8.launcher.DependencyDownloader"
     _hx_is_interface = "True"
     __slots__ = ()
-    _hx_methods = ["download"]
+    _hx_methods = ["name", "download"]
 a8_launcher_DependencyDownloader._hx_class = a8_launcher_DependencyDownloader
 
 
@@ -2690,60 +2690,64 @@ class a8_launcher_CoursierDependencyDownloader:
     _hx_class_name = "a8.launcher.CoursierDependencyDownloader"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_methods = ["download"]
+    _hx_methods = ["name", "download"]
     _hx_interfaces = [a8_launcher_DependencyDownloader]
 
     def __init__(self):
         pass
 
+    def name(self):
+        # src/a8/launcher/DependencyDownloader.hx:26
+        return "coursier"
+
     def download(self,launcher,jvmlauncher,installInventoryFile):
-        # src/a8/launcher/DependencyDownloader.hx:24
+        # src/a8/launcher/DependencyDownloader.hx:31
         _hx_exec = a8_Exec()
-        # src/a8/launcher/DependencyDownloader.hx:30
+        # src/a8/launcher/DependencyDownloader.hx:37
         version = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.repoConfig.h.get("versions_version",None)),a8_Constants.a8VersionsVersion)
-        # src/a8/launcher/DependencyDownloader.hx:32
+        # src/a8/launcher/DependencyDownloader.hx:39
         repoPrefix = "repo"
-        # src/a8/launcher/DependencyDownloader.hx:33
+        # src/a8/launcher/DependencyDownloader.hx:40
         if (Reflect.field(jvmlauncher,"repo") is not None):
             repoPrefix = Reflect.field(jvmlauncher,"repo")
-        # src/a8/launcher/DependencyDownloader.hx:36
+        # src/a8/launcher/DependencyDownloader.hx:43
         repoUrl = a8_UserConfig.repo_url(repoPrefix)
-        # src/a8/launcher/DependencyDownloader.hx:38
+        # src/a8/launcher/DependencyDownloader.hx:45
         def _hx_local_0():
-            # src/a8/launcher/DependencyDownloader.hx:38
+            # src/a8/launcher/DependencyDownloader.hx:45
             _hx_exec.args = [(Std.string(a8_PathOps.parent(a8_PathOps.programPath())) + "/coursier"), "launch", "--repository", repoUrl, ("io.accur8:a8-versions_2.13:" + ("null" if version is None else version)), "-M", "a8.versions.apps.Main", "--", "resolve", "--organization", jvmlauncher.organization, "--artifact", jvmlauncher.artifact, "--repo", repoPrefix]
             return _hx_exec.args
         args = _hx_local_0()
-        # src/a8/launcher/DependencyDownloader.hx:39
-        # src/a8/launcher/DependencyDownloader.hx:39
+        # src/a8/launcher/DependencyDownloader.hx:46
+        # src/a8/launcher/DependencyDownloader.hx:46
         _hx_str = Std.string(("running -- " + HxOverrides.stringOrNull(" ".join([python_Boot.toString1(x1,'') for x1 in args]))))
         python_Lib.printString((("" + ("null" if _hx_str is None else _hx_str)) + HxOverrides.stringOrNull(python_Lib.lineEnd)))
-        # src/a8/launcher/DependencyDownloader.hx:40
+        # src/a8/launcher/DependencyDownloader.hx:47
         if (Reflect.field(launcher.config,"explicitVersion") is not None):
-            # src/a8/launcher/DependencyDownloader.hx:41
+            # src/a8/launcher/DependencyDownloader.hx:48
             args.append("--version")
-            # src/a8/launcher/DependencyDownloader.hx:42
-            # src/a8/launcher/DependencyDownloader.hx:42
+            # src/a8/launcher/DependencyDownloader.hx:49
+            # src/a8/launcher/DependencyDownloader.hx:49
             x = Reflect.field(launcher.config,"explicitVersion")
             args.append(x)
         elif (Reflect.field(jvmlauncher,"branch") is not None):
-            # src/a8/launcher/DependencyDownloader.hx:44
+            # src/a8/launcher/DependencyDownloader.hx:51
             args.append("--branch")
-            # src/a8/launcher/DependencyDownloader.hx:45
-            # src/a8/launcher/DependencyDownloader.hx:45
+            # src/a8/launcher/DependencyDownloader.hx:52
+            # src/a8/launcher/DependencyDownloader.hx:52
             x = Reflect.field(jvmlauncher,"branch")
             args.append(x)
         elif (Reflect.field(jvmlauncher,"version") is not None):
-            # src/a8/launcher/DependencyDownloader.hx:47
+            # src/a8/launcher/DependencyDownloader.hx:54
             args.append("--version")
-            # src/a8/launcher/DependencyDownloader.hx:48
-            # src/a8/launcher/DependencyDownloader.hx:48
+            # src/a8/launcher/DependencyDownloader.hx:55
+            # src/a8/launcher/DependencyDownloader.hx:55
             x = Reflect.field(jvmlauncher,"version")
             args.append(x)
-        # src/a8/launcher/DependencyDownloader.hx:50
+        # src/a8/launcher/DependencyDownloader.hx:57
         _hx_exec.execInline()
-        # src/a8/launcher/DependencyDownloader.hx:51
-        # src/a8/launcher/DependencyDownloader.hx:51
+        # src/a8/launcher/DependencyDownloader.hx:58
+        # src/a8/launcher/DependencyDownloader.hx:58
         _hx_str = Std.string(("completed running -- " + HxOverrides.stringOrNull(" ".join([python_Boot.toString1(x1,'') for x1 in args]))))
         python_Lib.printString((("" + ("null" if _hx_str is None else _hx_str)) + HxOverrides.stringOrNull(python_Lib.lineEnd)))
 
@@ -2754,42 +2758,46 @@ class a8_launcher_NixDependencyDownloader:
     _hx_class_name = "a8.launcher.NixDependencyDownloader"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_methods = ["download"]
+    _hx_methods = ["name", "download"]
     _hx_interfaces = [a8_launcher_DependencyDownloader]
 
     def __init__(self):
         pass
 
-    def download(self,launcher,jvmlauncher,installInventoryFile):
-        # src/a8/launcher/DependencyDownloader.hx:62
-        requestBody = jvmlauncher
-        # src/a8/launcher/DependencyDownloader.hx:64
-        launcher.logTrace(("javaLauncherInstallerDotNix -- " + HxOverrides.stringOrNull(haxe_format_JsonPrinter.print(requestBody,None,None))),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 64, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
-        # src/a8/launcher/DependencyDownloader.hx:66
-        javaLauncherInstallerDotNixContent = a8_PyHttpAssist.httpPost("https://locus.accur8.io/api/javaLauncherInstallerDotNix",requestBody)
-        # src/a8/launcher/DependencyDownloader.hx:68
-        workDir = a8_PathOps.realPath(a8_PathOps.path("launcher-work"))
-        # src/a8/launcher/DependencyDownloader.hx:69
-        launcherDir = a8_PathOps.subpath(workDir,"launcher")
-        # src/a8/launcher/DependencyDownloader.hx:70
-        a8_PathOps.makeDirectories(launcherDir)
+    def name(self):
         # src/a8/launcher/DependencyDownloader.hx:72
-        defaultDotNixPath = a8_PathOps.subpath(launcherDir,"default.nix")
-        # src/a8/launcher/DependencyDownloader.hx:73
-        a8_PathOps.writeText(defaultDotNixPath,javaLauncherInstallerDotNixContent)
-        # src/a8/launcher/DependencyDownloader.hx:75
-        javaLauncherTemplatePath = a8_PathOps.subpath(launcherDir,"java-launcher-template")
-        # src/a8/launcher/DependencyDownloader.hx:76
-        a8_PathOps.writeText(javaLauncherTemplatePath,"#!/bin/bash\n\nexec _out_/bin/_name_j -cp _out_/lib/*:. _args_ \"$@\"\n")
-        # src/a8/launcher/DependencyDownloader.hx:78
-        _hx_exec = a8_Exec()
+        return "nix"
+
+    def download(self,launcher,jvmlauncher,installInventoryFile):
+        # src/a8/launcher/DependencyDownloader.hx:77
+        requestBody = jvmlauncher
         # src/a8/launcher/DependencyDownloader.hx:79
-        _hx_exec.args = ["nix-build", "--out-link", "build", "-E", "with import <nixpkgs> {}; (callPackage ./launcher {})"]
-        # src/a8/launcher/DependencyDownloader.hx:80
-        _hx_exec.cwd = haxe_ds_Option.Some(workDir.toString())
+        launcher.logTrace(("javaLauncherInstallerDotNix -- " + HxOverrides.stringOrNull(haxe_format_JsonPrinter.print(requestBody,None,None))),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 79, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
         # src/a8/launcher/DependencyDownloader.hx:81
-        _hx_exec.execInline()
+        javaLauncherInstallerDotNixContent = a8_PyHttpAssist.httpPost("https://locus.accur8.io/api/javaLauncherInstallerDotNix",requestBody)
         # src/a8/launcher/DependencyDownloader.hx:83
+        workDir = a8_PathOps.realPath(a8_PathOps.path("launcher-work"))
+        # src/a8/launcher/DependencyDownloader.hx:84
+        launcherDir = a8_PathOps.subpath(workDir,"launcher")
+        # src/a8/launcher/DependencyDownloader.hx:85
+        a8_PathOps.makeDirectories(launcherDir)
+        # src/a8/launcher/DependencyDownloader.hx:87
+        defaultDotNixPath = a8_PathOps.subpath(launcherDir,"default.nix")
+        # src/a8/launcher/DependencyDownloader.hx:88
+        a8_PathOps.writeText(defaultDotNixPath,javaLauncherInstallerDotNixContent)
+        # src/a8/launcher/DependencyDownloader.hx:90
+        javaLauncherTemplatePath = a8_PathOps.subpath(launcherDir,"java-launcher-template")
+        # src/a8/launcher/DependencyDownloader.hx:91
+        a8_PathOps.writeText(javaLauncherTemplatePath,"#!/bin/bash\n\nexec _out_/bin/_name_j -cp _out_/lib/*:. _args_ \"$@\"\n")
+        # src/a8/launcher/DependencyDownloader.hx:93
+        _hx_exec = a8_Exec()
+        # src/a8/launcher/DependencyDownloader.hx:94
+        _hx_exec.args = ["/nix/var/nix/profiles/default/bin/nix-build", "--out-link", "build", "-E", "with import <nixpkgs> {}; (callPackage ./launcher {})"]
+        # src/a8/launcher/DependencyDownloader.hx:95
+        _hx_exec.cwd = haxe_ds_Option.Some(workDir.toString())
+        # src/a8/launcher/DependencyDownloader.hx:96
+        _hx_exec.execInline()
+        # src/a8/launcher/DependencyDownloader.hx:98
         _g = []
         _g1 = 0
         _g2 = a8_PathOps.entries(a8_PathOps.subpath(workDir,"build/lib"))
@@ -2799,11 +2807,11 @@ class a8_launcher_NixDependencyDownloader:
             x = a8_PathOps.realPathStr(p)
             _g.append(x)
         classath = _g
-        # src/a8/launcher/DependencyDownloader.hx:86
+        # src/a8/launcher/DependencyDownloader.hx:101
         a8_PathOps.deleteTree(workDir)
-        # src/a8/launcher/DependencyDownloader.hx:88
+        # src/a8/launcher/DependencyDownloader.hx:103
         inventory = _hx_AnonObject({'classpath': classath, 'appInstallerConfig': _hx_AnonObject({'groupId': jvmlauncher.organization, 'artifactId': jvmlauncher.artifact, 'version': Reflect.field(jvmlauncher,"version"), 'libDirKind': "nix", 'webappExplode': Reflect.field(jvmlauncher,"webappExplode")})})
-        # src/a8/launcher/DependencyDownloader.hx:100
+        # src/a8/launcher/DependencyDownloader.hx:115
         a8_PathOps.writeText(installInventoryFile,haxe_format_JsonPrinter.print(inventory,None,None))
 
 a8_launcher_NixDependencyDownloader._hx_class = a8_launcher_NixDependencyDownloader
@@ -2814,7 +2822,7 @@ class a8_launcher_Launcher:
     _hx_is_interface = "False"
     __slots__ = ("lazy_logArchivesDir", "lazy_logsDir", "lazy_installDir", "lazy_a8VersionsCache", "config", "appName", "initialArgs", "pipedStdout", "pipedStderr", "logRollers")
     _hx_fields = ["lazy_logArchivesDir", "lazy_logsDir", "lazy_installDir", "lazy_a8VersionsCache", "config", "appName", "initialArgs", "pipedStdout", "pipedStderr", "logRollers"]
-    _hx_methods = ["logTrace", "logWarn", "_log", "resolveAutoDependencyDownloaderName", "resolveDependencyDownloader", "archiveOldLogs", "archiveLogFiles", "resolveStandardArgs", "resolveJvmCliLaunchArgs", "resolveJvmLaunchArgs", "runAndWait", "initializeLogRollers", "get_a8VersionsCache", "get_installDir", "get_logsDir", "get_logArchivesDir"]
+    _hx_methods = ["logTrace", "logWarn", "resolveAutoDependencyDownloaderName", "resolveDependencyDownloader", "archiveOldLogs", "archiveLogFiles", "resolveStandardArgs", "resolveJvmCliLaunchArgs", "resolveJvmLaunchArgs", "runAndWait", "initializeLogRollers", "get_a8VersionsCache", "get_installDir", "get_logsDir", "get_logArchivesDir"]
     _hx_statics = ["initDirectory"]
 
     def __init__(self,config,appName,initialArgs):
@@ -2882,62 +2890,49 @@ class a8_launcher_Launcher:
         else:
             a8_Logger.warn(msg,posInfo)
 
-    def _log(self,msg,pipe):
-        pass
-
     def resolveAutoDependencyDownloaderName(self):
-        # src/a8/launcher/Launcher.hx:82
-        try:
-            # src/a8/launcher/Launcher.hx:83
-            _hx_exec = a8_Exec()
-            # src/a8/launcher/Launcher.hx:84
-            _hx_exec.args = ["nix", "--version"]
-            # src/a8/launcher/Launcher.hx:85
-            _hx_exec.execInline()
-            # src/a8/launcher/Launcher.hx:86
+        # src/a8/launcher/Launcher.hx:79
+        if a8_PathOps.exists(a8_PathOps.path("/nix/var/nix/profiles/default/bin/nix")):
             return "nix"
-        except BaseException as _g:
-            # ?:1
-            None
-            # src/a8/launcher/Launcher.hx:88
+        else:
             return "coursier"
 
     def resolveDependencyDownloader(self,dependencyDownloaderName):
-        # src/a8/launcher/Launcher.hx:93
+        # src/a8/launcher/Launcher.hx:87
         if (dependencyDownloaderName is None):
             dependencyDownloaderName = "auto"
-        # src/a8/launcher/Launcher.hx:96
+        # src/a8/launcher/Launcher.hx:90
         dependencyDownloaderName = dependencyDownloaderName.lower()
-        # src/a8/launcher/Launcher.hx:98
+        # src/a8/launcher/Launcher.hx:92
         if (dependencyDownloaderName == "auto"):
-            # src/a8/launcher/Launcher.hx:99
+            # src/a8/launcher/Launcher.hx:93
             dependencyDownloaderName = self.resolveAutoDependencyDownloaderName()
-            # src/a8/launcher/Launcher.hx:100
-            self.logTrace(("resolving auto dependencyDownloader to " + ("null" if dependencyDownloaderName is None else dependencyDownloaderName)),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 100, 'className': "a8.launcher.Launcher", 'methodName': "resolveDependencyDownloader"}))
-        # src/a8/launcher/Launcher.hx:103
+            # src/a8/launcher/Launcher.hx:94
+            self.logTrace(("resolving auto dependencyDownloader to " + ("null" if dependencyDownloaderName is None else dependencyDownloaderName)),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 94, 'className': "a8.launcher.Launcher", 'methodName': "resolveDependencyDownloader"}))
+        # src/a8/launcher/Launcher.hx:97
         dependencyDownloader = None
-        # src/a8/launcher/Launcher.hx:104
+        # src/a8/launcher/Launcher.hx:98
         if (dependencyDownloaderName == "coursier"):
             dependencyDownloader = a8_launcher_CoursierDependencyDownloader()
         elif (dependencyDownloaderName == "nix"):
             dependencyDownloader = a8_launcher_NixDependencyDownloader()
         else:
             raise haxe_Exception.thrown(("unable to resolve DependencyDownloader named " + ("null" if dependencyDownloaderName is None else dependencyDownloaderName)))
-        # src/a8/launcher/Launcher.hx:112
+        # src/a8/launcher/Launcher.hx:106
         return dependencyDownloader
 
     def archiveOldLogs(self):
-        # src/a8/launcher/Launcher.hx:117
+        # src/a8/launcher/Launcher.hx:111
         prefix = (HxOverrides.stringOrNull(self.appName) + ".")
-        # src/a8/launcher/Launcher.hx:118
+        # src/a8/launcher/Launcher.hx:112
         suffix1 = ".details"
-        # src/a8/launcher/Launcher.hx:119
+        # src/a8/launcher/Launcher.hx:113
         suffix2 = ".errors"
-        # src/a8/launcher/Launcher.hx:124
+        # src/a8/launcher/Launcher.hx:118
         def _hx_local_0(f):
-            # src/a8/launcher/Launcher.hx:125
+            # src/a8/launcher/Launcher.hx:119
             filename = a8_PathOps.basename(f)
-            # src/a8/launcher/Launcher.hx:126
+            # src/a8/launcher/Launcher.hx:120
             if filename.startswith(prefix):
                 if (not filename.endswith(suffix1)):
                     return filename.endswith(suffix2)
@@ -2945,51 +2940,51 @@ class a8_launcher_Launcher:
                     return True
             else:
                 return False
-        # src/a8/launcher/Launcher.hx:121
+        # src/a8/launcher/Launcher.hx:115
         filesToArchive = list(filter(_hx_local_0,a8_PathOps.files(self.get_logsDir())))
-        # src/a8/launcher/Launcher.hx:131
+        # src/a8/launcher/Launcher.hx:125
         self.archiveLogFiles(filesToArchive)
 
     def archiveLogFiles(self,files):
-        # src/a8/launcher/Launcher.hx:135
+        # src/a8/launcher/Launcher.hx:129
         _gthis = self
-        # src/a8/launcher/Launcher.hx:139
+        # src/a8/launcher/Launcher.hx:133
         def _hx_local_0(f):
-            # src/a8/launcher/Launcher.hx:140
+            # src/a8/launcher/Launcher.hx:134
             target = a8_PathOps.entry(_gthis.get_logArchivesDir(),a8_PathOps.basename(f))
-            # src/a8/launcher/Launcher.hx:141
+            # src/a8/launcher/Launcher.hx:135
             a8_PathOps.deleteFile(target)
-            # src/a8/launcher/Launcher.hx:142
+            # src/a8/launcher/Launcher.hx:136
             a8_PathOps.moveTo(f,target)
-            # src/a8/launcher/Launcher.hx:143
+            # src/a8/launcher/Launcher.hx:137
             return target
-        # src/a8/launcher/Launcher.hx:137
+        # src/a8/launcher/Launcher.hx:131
         archivedFiles = list(map(_hx_local_0,files))
-        # src/a8/launcher/Launcher.hx:146
-        self.logTrace(("archiving log files -- " + Std.string(archivedFiles)),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 146, 'className': "a8.launcher.Launcher", 'methodName': "archiveLogFiles"}))
-        # src/a8/launcher/Launcher.hx:149
+        # src/a8/launcher/Launcher.hx:140
+        self.logTrace(("archiving log files -- " + Std.string(archivedFiles)),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 140, 'className': "a8.launcher.Launcher", 'methodName': "archiveLogFiles"}))
+        # src/a8/launcher/Launcher.hx:143
         def _hx_local_2():
-            # src/a8/launcher/Launcher.hx:150
+            # src/a8/launcher/Launcher.hx:144
             def _hx_local_1(f):
-                # src/a8/launcher/Launcher.hx:150
+                # src/a8/launcher/Launcher.hx:144
                 python_lib_Subprocess.call(["gzip", "-f", a8_PathOps.realPathStr(f)])
-            # src/a8/launcher/Launcher.hx:149
+            # src/a8/launcher/Launcher.hx:143
             Lambda.iter(archivedFiles,_hx_local_1)
-        # src/a8/launcher/Launcher.hx:148
+        # src/a8/launcher/Launcher.hx:142
         gzipFiles = _hx_local_2
-        # src/a8/launcher/Launcher.hx:154
+        # src/a8/launcher/Launcher.hx:148
         a8_PyOps.spawn(gzipFiles)
 
     def resolveStandardArgs(self,stdlauncher):
-        # src/a8/launcher/Launcher.hx:159
+        # src/a8/launcher/Launcher.hx:153
         launchConfig = stdlauncher
-        # src/a8/launcher/Launcher.hx:160
+        # src/a8/launcher/Launcher.hx:154
         return _hx_AnonObject({'kind': "popen", 'args': stdlauncher.args, 'env': None, 'cwd': None, 'executable': None})
 
     def resolveJvmCliLaunchArgs(self,jvmlauncher):
-        # src/a8/launcher/Launcher.hx:170
+        # src/a8/launcher/Launcher.hx:164
         versionFile = None
-        # src/a8/launcher/Launcher.hx:171
+        # src/a8/launcher/Launcher.hx:165
         if (Reflect.field(self.config,"explicitVersion") is not None):
             versionFile = (HxOverrides.stringOrNull(Reflect.field(self.config,"explicitVersion")) + ".json")
         elif (Reflect.field(jvmlauncher,"branch") is not None):
@@ -2997,222 +2992,224 @@ class a8_launcher_Launcher:
         elif (Reflect.field(jvmlauncher,"version") is not None):
             versionFile = (HxOverrides.stringOrNull(Reflect.field(jvmlauncher,"version")) + ".json")
         else:
-            raise haxe_Exception.thrown(a8_Exception("must provide a config with branch or version",None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 178, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmCliLaunchArgs"})))
-        # src/a8/launcher/Launcher.hx:180
+            raise haxe_Exception.thrown(a8_Exception("must provide a config with branch or version",None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 172, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmCliLaunchArgs"})))
+        # src/a8/launcher/Launcher.hx:174
         inventoryFile = a8_PathOps.entry(self.get_a8VersionsCache(),((((HxOverrides.stringOrNull(jvmlauncher.organization) + "/") + HxOverrides.stringOrNull(jvmlauncher.artifact)) + "/") + ("null" if versionFile is None else versionFile)))
-        # src/a8/launcher/Launcher.hx:181
-        self.logTrace(("using inventory file - " + HxOverrides.stringOrNull(inventoryFile.toString())),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 181, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmCliLaunchArgs"}))
-        # src/a8/launcher/Launcher.hx:182
+        # src/a8/launcher/Launcher.hx:175
+        self.logTrace(("using inventory file - " + HxOverrides.stringOrNull(inventoryFile.toString())),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 175, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmCliLaunchArgs"}))
+        # src/a8/launcher/Launcher.hx:176
         if ((not a8_PathOps.exists(inventoryFile)) or self.config.commandLineParms.resolveOnly):
-            # src/a8/launcher/Launcher.hx:183
+            # src/a8/launcher/Launcher.hx:177
             dependencyDownloader = self.resolveDependencyDownloader(Reflect.field(jvmlauncher,"dependencyDownloader"))
-            # src/a8/launcher/Launcher.hx:184
+            # src/a8/launcher/Launcher.hx:178
+            self.logTrace("using {dependencyDownloader.name()} dependency downloader",_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 178, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmCliLaunchArgs"}))
+            # src/a8/launcher/Launcher.hx:179
             dependencyDownloader.download(self,jvmlauncher,inventoryFile)
-        # src/a8/launcher/Launcher.hx:186
+        # src/a8/launcher/Launcher.hx:181
         la = self.resolveJvmLaunchArgs(jvmlauncher,inventoryFile,False)
-        # src/a8/launcher/Launcher.hx:188
+        # src/a8/launcher/Launcher.hx:183
         la.kind = "exec"
-        # src/a8/launcher/Launcher.hx:189
+        # src/a8/launcher/Launcher.hx:184
         la.cwd = None
-        # src/a8/launcher/Launcher.hx:191
+        # src/a8/launcher/Launcher.hx:186
         return la
 
     def resolveJvmLaunchArgs(self,jvmlauncher,installInventoryFile,createAppNameSymlink):
-        # src/a8/launcher/Launcher.hx:197
+        # src/a8/launcher/Launcher.hx:192
         if (not a8_PathOps.exists(installInventoryFile)):
-            raise haxe_Exception.thrown(a8_Exception(("inventory file does not exist " + HxOverrides.stringOrNull(installInventoryFile.toString())),None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 198, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmLaunchArgs"})))
-        # src/a8/launcher/Launcher.hx:201
+            raise haxe_Exception.thrown(a8_Exception(("inventory file does not exist " + HxOverrides.stringOrNull(installInventoryFile.toString())),None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 193, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmLaunchArgs"})))
+        # src/a8/launcher/Launcher.hx:196
         launchConfig = jvmlauncher
-        # src/a8/launcher/Launcher.hx:203
+        # src/a8/launcher/Launcher.hx:198
         config = python_lib_Json.loads(a8_PathOps.readText(installInventoryFile),**python__KwArgs_KwArgs_Impl_.fromT(_hx_AnonObject({'object_hook': python_Lib.dictToAnon})))
-        # src/a8/launcher/Launcher.hx:205
+        # src/a8/launcher/Launcher.hx:200
         launcherD = jvmlauncher
-        # src/a8/launcher/Launcher.hx:207
+        # src/a8/launcher/Launcher.hx:202
         def _hx_local_0(e):
-            # src/a8/launcher/Launcher.hx:208
+            # src/a8/launcher/Launcher.hx:203
             p = a8_PathOps.realPathStr(e)
-            # src/a8/launcher/Launcher.hx:209
+            # src/a8/launcher/Launcher.hx:204
             if (p.endswith(".jar") or a8_PathOps.isDir(e)):
-                # src/a8/launcher/Launcher.hx:210
+                # src/a8/launcher/Launcher.hx:205
                 _this = config.classpath
                 _this.append(p)
         Lambda.iter(a8_PathOps.entries(a8_PathOps.entry(self.get_installDir(),"lib")),_hx_local_0)
-        # src/a8/launcher/Launcher.hx:213
+        # src/a8/launcher/Launcher.hx:208
         _this = config.classpath
         classpath = ":".join([python_Boot.toString1(x1,'') for x1 in _this])
-        # src/a8/launcher/Launcher.hx:215
+        # src/a8/launcher/Launcher.hx:210
         args = list()
-        # src/a8/launcher/Launcher.hx:217
+        # src/a8/launcher/Launcher.hx:212
         if createAppNameSymlink:
-            # src/a8/launcher/Launcher.hx:218
+            # src/a8/launcher/Launcher.hx:213
             symlinkName = ("j_" + HxOverrides.stringOrNull(self.appName))
-            # src/a8/launcher/Launcher.hx:219
+            # src/a8/launcher/Launcher.hx:214
             symlinkParent = self.get_installDir()
-            # src/a8/launcher/Launcher.hx:220
+            # src/a8/launcher/Launcher.hx:215
             javaAppNameSymLink = ((HxOverrides.stringOrNull(a8_PathOps.realPathStr(symlinkParent)) + "/") + ("null" if symlinkName is None else symlinkName))
-            # src/a8/launcher/Launcher.hx:221
+            # src/a8/launcher/Launcher.hx:216
             javaAppNameSymLinkPath = a8_PathOps.path(javaAppNameSymLink)
-            # src/a8/launcher/Launcher.hx:222
+            # src/a8/launcher/Launcher.hx:217
             cmd = None
-            # src/a8/launcher/Launcher.hx:223
+            # src/a8/launcher/Launcher.hx:218
             if (not a8_PathOps.isFile(javaAppNameSymLinkPath)):
-                # src/a8/launcher/Launcher.hx:224
+                # src/a8/launcher/Launcher.hx:219
                 javaExec = a8_PyShutil2.which("java")
-                # src/a8/launcher/Launcher.hx:225
-                self.logTrace(((("creating symlink " + ("null" if javaExec is None else javaExec)) + " --> ") + ("null" if javaAppNameSymLink is None else javaAppNameSymLink)),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 225, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmLaunchArgs"}))
-                # src/a8/launcher/Launcher.hx:226
+                # src/a8/launcher/Launcher.hx:220
+                self.logTrace(((("creating symlink " + ("null" if javaExec is None else javaExec)) + " --> ") + ("null" if javaAppNameSymLink is None else javaAppNameSymLink)),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 220, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmLaunchArgs"}))
+                # src/a8/launcher/Launcher.hx:221
                 a8_PyOs2.symlink(javaExec,javaAppNameSymLink)
-                # src/a8/launcher/Launcher.hx:222
+                # src/a8/launcher/Launcher.hx:217
                 cmd = (("./" + ("null" if symlinkName is None else symlinkName)) if (a8_PathOps.isFile(javaAppNameSymLinkPath)) else "java")
             else:
                 cmd = ("./" + ("null" if symlinkName is None else symlinkName))
-            # src/a8/launcher/Launcher.hx:235
+            # src/a8/launcher/Launcher.hx:230
             args.append(cmd)
         else:
             args.append("java")
-        # src/a8/launcher/Launcher.hx:240
-        # src/a8/launcher/Launcher.hx:240
+        # src/a8/launcher/Launcher.hx:235
+        # src/a8/launcher/Launcher.hx:235
         x = ("-DappName=" + HxOverrides.stringOrNull(self.appName))
         args.append(x)
-        # src/a8/launcher/Launcher.hx:242
+        # src/a8/launcher/Launcher.hx:237
         if (Reflect.field(launcherD,"jvmArgs") is not None):
-            # src/a8/launcher/Launcher.hx:244
+            # src/a8/launcher/Launcher.hx:239
             def _hx_local_1(jvmArg):
-                # src/a8/launcher/Launcher.hx:244
+                # src/a8/launcher/Launcher.hx:239
                 args.append(jvmArg)
-            # src/a8/launcher/Launcher.hx:243
+            # src/a8/launcher/Launcher.hx:238
             Lambda.iter(Reflect.field(jvmlauncher,"jvmArgs"),_hx_local_1)
-        # src/a8/launcher/Launcher.hx:249
-        # src/a8/launcher/Launcher.hx:249
+        # src/a8/launcher/Launcher.hx:244
+        # src/a8/launcher/Launcher.hx:244
         x = jvmlauncher.mainClass
         args.append(x)
-        # src/a8/launcher/Launcher.hx:251
+        # src/a8/launcher/Launcher.hx:246
         if (Reflect.field(launcherD,"args") is not None):
-            # src/a8/launcher/Launcher.hx:253
+            # src/a8/launcher/Launcher.hx:248
             def _hx_local_2(arg):
-                # src/a8/launcher/Launcher.hx:253
+                # src/a8/launcher/Launcher.hx:248
                 args.append(arg)
-            # src/a8/launcher/Launcher.hx:252
+            # src/a8/launcher/Launcher.hx:247
             Lambda.iter(Reflect.field(jvmlauncher,"args"),_hx_local_2)
-        # src/a8/launcher/Launcher.hx:257
+        # src/a8/launcher/Launcher.hx:252
         def _hx_local_3(arg):
-            # src/a8/launcher/Launcher.hx:257
+            # src/a8/launcher/Launcher.hx:252
             args.append(arg)
-        # src/a8/launcher/Launcher.hx:256
+        # src/a8/launcher/Launcher.hx:251
         Lambda.iter(self.config.commandLineParms.resolvedCommandLineArgs,_hx_local_3)
-        # src/a8/launcher/Launcher.hx:260
+        # src/a8/launcher/Launcher.hx:255
         env = python_lib_Os.environ
-        # src/a8/launcher/Launcher.hx:262
+        # src/a8/launcher/Launcher.hx:257
         newEnv = env.copy()
-        # src/a8/launcher/Launcher.hx:266
+        # src/a8/launcher/Launcher.hx:261
         newEnv["CLASSPATH"] = classpath
-        # src/a8/launcher/Launcher.hx:267
+        # src/a8/launcher/Launcher.hx:262
         newEnv["LAUNCHER_INSTALL_DIR"] = a8_PathOps.realPathStr(self.get_installDir())
-        # src/a8/launcher/Launcher.hx:268
+        # src/a8/launcher/Launcher.hx:263
         newEnv["LAUNCHER_WORKING_DIR"] = python_lib_Os.getcwd()
-        # src/a8/launcher/Launcher.hx:269
+        # src/a8/launcher/Launcher.hx:264
         newEnv["LAUNCHER_EXEC_PATH"] = a8_PathOps.realPathStr(a8_PathOps.executablePath())
-        # src/a8/launcher/Launcher.hx:271
+        # src/a8/launcher/Launcher.hx:266
         return _hx_AnonObject({'kind': "popen", 'args': args, 'env': newEnv, 'cwd': a8_PathOps.realPathStr(self.get_installDir()), 'executable': (args[0] if 0 < len(args) else None)})
 
     def runAndWait(self):
-        # src/a8/launcher/Launcher.hx:284
-        self.logTrace(("installDir = " + Std.string(self.get_installDir())),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 284, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
-        # src/a8/launcher/Launcher.hx:285
-        self.logTrace(("logsDir = " + Std.string(self.get_logsDir())),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 285, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
-        # src/a8/launcher/Launcher.hx:286
-        self.logTrace(("logArchivesDir = " + Std.string(self.get_logArchivesDir())),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 286, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
-        # src/a8/launcher/Launcher.hx:288
+        # src/a8/launcher/Launcher.hx:279
+        self.logTrace(("installDir = " + Std.string(self.get_installDir())),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 279, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
+        # src/a8/launcher/Launcher.hx:280
+        self.logTrace(("logsDir = " + Std.string(self.get_logsDir())),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 280, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
+        # src/a8/launcher/Launcher.hx:281
+        self.logTrace(("logArchivesDir = " + Std.string(self.get_logArchivesDir())),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 281, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
+        # src/a8/launcher/Launcher.hx:283
         resolvedLaunch = None
-        # src/a8/launcher/Launcher.hx:289
+        # src/a8/launcher/Launcher.hx:284
         if (self.config.kind == "jvm"):
-            # src/a8/launcher/Launcher.hx:290
+            # src/a8/launcher/Launcher.hx:285
             installInventoryFile = a8_PathOps.entry(self.get_installDir(),"install-inventory.json")
-            # src/a8/launcher/Launcher.hx:288
+            # src/a8/launcher/Launcher.hx:283
             resolvedLaunch = self.resolveJvmLaunchArgs(self.config,installInventoryFile,True)
         elif (self.config.kind == "jvm_cli"):
             resolvedLaunch = self.resolveJvmCliLaunchArgs(self.config)
         elif (self.config.kind == "args"):
             resolvedLaunch = self.resolveStandardArgs(self.config)
         else:
-            raise haxe_Exception.thrown(a8_Exception(("unable to resolve config kind " + HxOverrides.stringOrNull(self.config.kind)),None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 297, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
-        # src/a8/launcher/Launcher.hx:299
+            raise haxe_Exception.thrown(a8_Exception(("unable to resolve config kind " + HxOverrides.stringOrNull(self.config.kind)),None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 292, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
+        # src/a8/launcher/Launcher.hx:294
         if self.config.commandLineParms.resolveOnly:
             return 0
         else:
-            # src/a8/launcher/Launcher.hx:303
+            # src/a8/launcher/Launcher.hx:298
             if Reflect.field(self.config,"logFiles"):
                 self.archiveOldLogs()
-            # src/a8/launcher/Launcher.hx:307
+            # src/a8/launcher/Launcher.hx:302
             _g = resolvedLaunch.kind
             _hx_local_0 = len(_g)
-            # src/a8/launcher/Launcher.hx:308
+            # src/a8/launcher/Launcher.hx:303
             if (_hx_local_0 == 4):
                 if (_g == "exec"):
-                    # src/a8/launcher/Launcher.hx:311
+                    # src/a8/launcher/Launcher.hx:306
                     if (resolvedLaunch.cwd is not None):
                         python_lib_Os.chdir(resolvedLaunch.cwd)
-                    # src/a8/launcher/Launcher.hx:313
+                    # src/a8/launcher/Launcher.hx:308
                     a8_PyOs2.execvpe(resolvedLaunch.executable,resolvedLaunch.args,resolvedLaunch.env)
-                    # src/a8/launcher/Launcher.hx:315
-                    raise haxe_Exception.thrown(a8_Exception("this never happens",None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 315, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
+                    # src/a8/launcher/Launcher.hx:310
+                    raise haxe_Exception.thrown(a8_Exception("this never happens",None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 310, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
                 else:
-                    raise haxe_Exception.thrown(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 351, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
+                    raise haxe_Exception.thrown(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 346, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
             elif (_hx_local_0 == 5):
                 if (_g == "popen"):
-                    # src/a8/launcher/Launcher.hx:318
-                    self.logTrace(("running -- " + Std.string(resolvedLaunch.args)),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 318, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
-                    # src/a8/launcher/Launcher.hx:320
+                    # src/a8/launcher/Launcher.hx:313
+                    self.logTrace(("running -- " + Std.string(resolvedLaunch.args)),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 313, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
+                    # src/a8/launcher/Launcher.hx:315
                     popen = python_lib_subprocess_Popen(resolvedLaunch.args,None,resolvedLaunch.executable,None,python_lib_Subprocess.PIPE,python_lib_Subprocess.PIPE,None,False,False,resolvedLaunch.cwd,resolvedLaunch.env)
-                    # src/a8/launcher/Launcher.hx:323
+                    # src/a8/launcher/Launcher.hx:318
                     def _hx_local_1(out):
-                        # src/a8/launcher/Launcher.hx:323
+                        # src/a8/launcher/Launcher.hx:318
                         out.write((("first output at " + HxOverrides.stringOrNull(a8_PathOps.timestampStr())) + "\n"))
-                    # src/a8/launcher/Launcher.hx:322
+                    # src/a8/launcher/Launcher.hx:317
                     firstIO = _hx_local_1
-                    # src/a8/launcher/Launcher.hx:326
+                    # src/a8/launcher/Launcher.hx:321
                     timestampStr = a8_PathOps.timestampStr()
-                    # src/a8/launcher/Launcher.hx:328
-                    self.logTrace("setting up pipes",_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 328, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
-                    # src/a8/launcher/Launcher.hx:329
+                    # src/a8/launcher/Launcher.hx:323
+                    self.logTrace("setting up pipes",_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 323, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
+                    # src/a8/launcher/Launcher.hx:324
                     self.pipedStdout = a8_launcher_PipedStream(self,a8_StreamOps.asInputStream(popen.stdout),python_lib_Sys.stdout,"details",firstIO,Reflect.field(self.config,"logFiles"),timestampStr)
-                    # src/a8/launcher/Launcher.hx:330
+                    # src/a8/launcher/Launcher.hx:325
                     self.pipedStderr = a8_launcher_PipedStream(self,a8_StreamOps.asInputStream(popen.stderr),python_lib_Sys.stderr,"errors",firstIO,Reflect.field(self.config,"logFiles"),timestampStr)
-                    # src/a8/launcher/Launcher.hx:332
+                    # src/a8/launcher/Launcher.hx:327
                     self.pipedStdout.start()
-                    # src/a8/launcher/Launcher.hx:333
+                    # src/a8/launcher/Launcher.hx:328
                     self.pipedStderr.start()
-                    # src/a8/launcher/Launcher.hx:337
-                    self.logTrace("initializeLogRollers",_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 337, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
-                    # src/a8/launcher/Launcher.hx:338
+                    # src/a8/launcher/Launcher.hx:332
+                    self.logTrace("initializeLogRollers",_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 332, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
+                    # src/a8/launcher/Launcher.hx:333
                     self.initializeLogRollers()
-                    # src/a8/launcher/Launcher.hx:339
-                    self.logTrace("initializeLogRollers complete",_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 339, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
-                    # src/a8/launcher/Launcher.hx:342
+                    # src/a8/launcher/Launcher.hx:334
+                    self.logTrace("initializeLogRollers complete",_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 334, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"}))
+                    # src/a8/launcher/Launcher.hx:337
                     popen.wait()
-                    # src/a8/launcher/Launcher.hx:345
+                    # src/a8/launcher/Launcher.hx:340
                     self.pipedStdout.close()
-                    # src/a8/launcher/Launcher.hx:346
+                    # src/a8/launcher/Launcher.hx:341
                     self.pipedStdout.close()
-                    # src/a8/launcher/Launcher.hx:348
+                    # src/a8/launcher/Launcher.hx:343
                     return popen.returncode
                 else:
-                    raise haxe_Exception.thrown(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 351, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
+                    raise haxe_Exception.thrown(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 346, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
             else:
-                raise haxe_Exception.thrown(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 351, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
+                raise haxe_Exception.thrown(a8_Exception("don't know how to handle ResolvedLaunch.kind = ${resolvedLaunch.kind}",None,_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 346, 'className': "a8.launcher.Launcher", 'methodName': "runAndWait"})))
 
     def initializeLogRollers(self):
-        # src/a8/launcher/Launcher.hx:357
+        # src/a8/launcher/Launcher.hx:352
         _gthis = self
-        # src/a8/launcher/Launcher.hx:361
+        # src/a8/launcher/Launcher.hx:356
         def _hx_local_0(lr):
-            # src/a8/launcher/Launcher.hx:361
+            # src/a8/launcher/Launcher.hx:356
             return a8_launcher_LogRollerOps.fromConfig(lr,_gthis)
-        # src/a8/launcher/Launcher.hx:358
+        # src/a8/launcher/Launcher.hx:353
         self.logRollers = list(map(_hx_local_0,Reflect.field(self.config,"logRollers")))
-        # src/a8/launcher/Launcher.hx:362
+        # src/a8/launcher/Launcher.hx:357
         def _hx_local_1(i):
-            # src/a8/launcher/Launcher.hx:362
+            # src/a8/launcher/Launcher.hx:357
             i.init()
         Lambda.iter(self.logRollers,_hx_local_1)
 
