@@ -1396,7 +1396,7 @@ class a8_PathOps:
     _hx_class_name = "a8.PathOps"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_statics = ["timestampStr", "path", "symlinkChain", "executablePath", "userHome", "absPath", "name", "programPath", "readText", "readLines", "makeDirectories", "readBytes", "exists", "isAbsolute", "files", "basename", "moveTo", "deleteFile", "entries", "isFile", "isLink", "isDir", "realPath", "realPathStr", "writeBytes", "writeText", "parent", "entry", "subpath", "outputStream", "readProperties", "deleteTree"]
+    _hx_statics = ["timestampStr", "path", "symlinkChain", "executablePath", "userHome", "absPath", "name", "programPath", "readText", "readLines", "makeDirectories", "readBytes", "exists", "isAbsolute", "files", "basename", "moveTo", "deleteFile", "entries", "isFile", "isLink", "isDir", "realPath", "realPathStr", "writeBytes", "writeText", "parent", "entry", "subpath", "outputStream", "readProperties", "deleteIfExists", "delete", "deleteTree"]
 
     @staticmethod
     def timestampStr():
@@ -1666,25 +1666,40 @@ class a8_PathOps:
             return a8_HaxeOps2.toMap(_g1)
 
     @staticmethod
-    def deleteTree(path):
+    def deleteIfExists(path):
         # src/a8/PathOps.hx:222
+        if a8_PathOps.exists(path):
+            a8_PathOps.delete(path)
+
+    @staticmethod
+    def delete(path):
+        # src/a8/PathOps.hx:228
+        a8_Logger.trace((("delete(" + Std.string(path)) + ")"),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 228, 'className': "a8.PathOps", 'methodName': "delete"}))
+        # src/a8/PathOps.hx:229
+        sys_FileSystem.deleteFile(path.toString())
+
+    @staticmethod
+    def deleteTree(path):
+        # src/a8/PathOps.hx:233
+        a8_Logger.trace((("deleteTree(" + Std.string(path)) + ")"),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 233, 'className': "a8.PathOps", 'methodName': "deleteTree"}))
+        # src/a8/PathOps.hx:234
         if (a8_PathOps.exists(path) and a8_PathOps.isDir(path)):
-            # src/a8/PathOps.hx:223
+            # src/a8/PathOps.hx:235
             entries = a8_PathOps.entries(path)
-            # src/a8/PathOps.hx:224
-            # src/a8/PathOps.hx:224
+            # src/a8/PathOps.hx:236
+            # src/a8/PathOps.hx:236
             _g = 0
             while (_g < len(entries)):
                 entry = (entries[_g] if _g >= 0 and _g < len(entries) else None)
                 _g = (_g + 1)
-                # src/a8/PathOps.hx:225
+                # src/a8/PathOps.hx:237
                 if (a8_PathOps.isLink(entry) or a8_PathOps.isFile(entry)):
                     sys_FileSystem.deleteFile(entry.toString())
                 elif a8_PathOps.isDir(entry):
                     a8_PathOps.deleteTree(entry)
                 else:
                     sys_FileSystem.deleteFile(entry.toString())
-            # src/a8/PathOps.hx:233
+            # src/a8/PathOps.hx:245
             sys_FileSystem.deleteDirectory(path.toString())
 a8_PathOps._hx_class = a8_PathOps
 
@@ -2784,7 +2799,7 @@ class a8_launcher_NixDependencyDownloader:
         # src/a8/launcher/DependencyDownloader.hx:81
         javaLauncherInstallerDotNixContent = a8_PyHttpAssist.httpPost("https://locus.accur8.io/api/javaLauncherInstallerDotNix",requestBody)
         # src/a8/launcher/DependencyDownloader.hx:83
-        workDir = a8_PathOps.realPath(a8_PathOps.path("launcher-work"))
+        workDir = a8_PathOps.realPath(a8_PathOps.subpath(a8_PathOps.parent(installInventoryFile),(HxOverrides.stringOrNull(a8_PathOps.basename(installInventoryFile)) + "-work")))
         # src/a8/launcher/DependencyDownloader.hx:84
         launcherDir = a8_PathOps.subpath(workDir,"launcher")
         # src/a8/launcher/DependencyDownloader.hx:85
@@ -2821,6 +2836,16 @@ class a8_launcher_NixDependencyDownloader:
         inventory = _hx_AnonObject({'classpath': classath, 'appInstallerConfig': _hx_AnonObject({'groupId': jvmlauncher.organization, 'artifactId': jvmlauncher.artifact, 'version': Reflect.field(jvmlauncher,"version"), 'libDirKind': "nix", 'webappExplode': Reflect.field(jvmlauncher,"webappExplode")})})
         # src/a8/launcher/DependencyDownloader.hx:115
         a8_PathOps.writeText(installInventoryFile,haxe_format_JsonPrinter.print(inventory,None,None))
+        # src/a8/launcher/DependencyDownloader.hx:117
+        login = python_lib_Os.environ.get("USER")
+        # src/a8/launcher/DependencyDownloader.hx:118
+        gcRootName = ((((((("/nix/var/nix/gcroots/per-user/" + ("null" if login is None else login)) + "/") + HxOverrides.stringOrNull(jvmlauncher.organization)) + "-") + HxOverrides.stringOrNull(jvmlauncher.artifact)) + "-") + HxOverrides.stringOrNull(a8_PathOps.basename(installInventoryFile)))
+        # src/a8/launcher/DependencyDownloader.hx:120
+        a8_PathOps.deleteIfExists(a8_PathOps.path(gcRootName))
+        # src/a8/launcher/DependencyDownloader.hx:121
+        a8_Logger.trace(((("creating nix gc root " + ("null" if gcRootName is None else gcRootName)) + " --> ") + Std.string(installInventoryFile)),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 121, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
+        # src/a8/launcher/DependencyDownloader.hx:122
+        a8_PyOs2.symlink(installInventoryFile.toString(),gcRootName)
 
 a8_launcher_NixDependencyDownloader._hx_class = a8_launcher_NixDependencyDownloader
 
