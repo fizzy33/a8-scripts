@@ -1583,69 +1583,77 @@ class a8_PathOps:
     @staticmethod
     def writeText(path,text):
         # src/a8/PathOps.hx:165
+        a8_Logger.trace(("writing " + Std.string(path)),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 165, 'className': "a8.PathOps", 'methodName': "writeText"}))
+        # src/a8/PathOps.hx:166
+        if (not a8_PathOps.exists(a8_PathOps.parent(path))):
+            # src/a8/PathOps.hx:167
+            a8_Logger.trace(("creating intermediate directories " + Std.string(a8_PathOps.parent(path))),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 167, 'className': "a8.PathOps", 'methodName': "writeText"}))
+            # src/a8/PathOps.hx:168
+            a8_PathOps.makeDirectories(a8_PathOps.parent(path))
+        # src/a8/PathOps.hx:170
         sys_io_File.saveContent(path.toString(),text)
 
     @staticmethod
     def parent(path):
-        # src/a8/PathOps.hx:169
+        # src/a8/PathOps.hx:174
         _g = path.dir
-        # src/a8/PathOps.hx:170
+        # src/a8/PathOps.hx:175
         if (_g is None):
             if a8_PathOps.isAbsolute(path):
                 return None
             else:
                 return haxe_io_Path(sys_FileSystem.fullPath("."))
         else:
-            # src/a8/PathOps.hx:176
+            # src/a8/PathOps.hx:181
             d = _g
-            # src/a8/PathOps.hx:177
+            # src/a8/PathOps.hx:182
             return haxe_io_Path(d)
 
     @staticmethod
     def entry(dir,name):
-        # src/a8/PathOps.hx:182
+        # src/a8/PathOps.hx:187
         return a8_PathOps.subpath(dir,name)
 
     @staticmethod
     def subpath(dir,name):
-        # src/a8/PathOps.hx:186
+        # src/a8/PathOps.hx:191
         separator = ("" if (dir.backslash) else "/")
-        # src/a8/PathOps.hx:187
+        # src/a8/PathOps.hx:192
         return haxe_io_Path(((HxOverrides.stringOrNull(dir.toString()) + ("null" if separator is None else separator)) + ("null" if name is None else name)))
 
     @staticmethod
     def outputStream(p):
-        # src/a8/PathOps.hx:192
+        # src/a8/PathOps.hx:197
         return a8_StreamOps.fileOutputStream(a8_PathOps.realPathStr(p))
 
     @staticmethod
     def readProperties(p,failOnNotFound = None):
-        # src/a8/PathOps.hx:196
+        # src/a8/PathOps.hx:201
         rf = a8_OptionOps.getOrElse(a8_OptionOps.toOption(failOnNotFound),False)
-        # src/a8/PathOps.hx:197
+        # src/a8/PathOps.hx:202
         exists = a8_PathOps.exists(p)
-        # src/a8/PathOps.hx:199
+        # src/a8/PathOps.hx:204
         if ((not exists) and (not rf)):
             return haxe_ds_StringMap()
         else:
-            # src/a8/PathOps.hx:202
+            # src/a8/PathOps.hx:207
             _g = []
             x = HxOverrides.iterator(a8_PathOps.readLines(p))
             while x.hasNext():
                 x1 = x.next()
-                # src/a8/PathOps.hx:204
+                # src/a8/PathOps.hx:209
                 a = x1.split("=")
-                # src/a8/PathOps.hx:202
+                # src/a8/PathOps.hx:207
                 x2 = None
-                # src/a8/PathOps.hx:206
+                # src/a8/PathOps.hx:211
                 if (len(a) == 2):
-                    # src/a8/PathOps.hx:207
+                    # src/a8/PathOps.hx:212
                     this1 = [(a[0] if 0 < len(a) else None), (a[1] if 1 < len(a) else None)]
-                    # src/a8/PathOps.hx:202
+                    # src/a8/PathOps.hx:207
                     x2 = [this1]
                 else:
                     x2 = []
-                # src/a8/PathOps.hx:202
+                # src/a8/PathOps.hx:207
                 _g.append(x2)
             _g1 = []
             e = HxOverrides.iterator(_g)
@@ -1659,24 +1667,24 @@ class a8_PathOps:
 
     @staticmethod
     def deleteTree(path):
-        # src/a8/PathOps.hx:217
+        # src/a8/PathOps.hx:222
         if (a8_PathOps.exists(path) and a8_PathOps.isDir(path)):
-            # src/a8/PathOps.hx:218
+            # src/a8/PathOps.hx:223
             entries = a8_PathOps.entries(path)
-            # src/a8/PathOps.hx:219
-            # src/a8/PathOps.hx:219
+            # src/a8/PathOps.hx:224
+            # src/a8/PathOps.hx:224
             _g = 0
             while (_g < len(entries)):
                 entry = (entries[_g] if _g >= 0 and _g < len(entries) else None)
                 _g = (_g + 1)
-                # src/a8/PathOps.hx:220
+                # src/a8/PathOps.hx:225
                 if (a8_PathOps.isLink(entry) or a8_PathOps.isFile(entry)):
                     sys_FileSystem.deleteFile(entry.toString())
                 elif a8_PathOps.isDir(entry):
                     a8_PathOps.deleteTree(entry)
                 else:
                     sys_FileSystem.deleteFile(entry.toString())
-            # src/a8/PathOps.hx:228
+            # src/a8/PathOps.hx:233
             sys_FileSystem.deleteDirectory(path.toString())
 a8_PathOps._hx_class = a8_PathOps
 
@@ -3396,34 +3404,35 @@ class a8_launcher_Main:
     _hx_class_name = "a8.launcher.Main"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_statics = ["loadConfig", "helpString", "main"]
+    _hx_statics = ["traceLog", "loadConfig", "helpString", "main"]
+    traceLog = None
 
     @staticmethod
     def loadConfig(commandLineParms):
-        # src/a8/launcher/Main.hx:19
+        # src/a8/launcher/Main.hx:21
         execPath = a8_PathOps.executablePath()
-        # src/a8/launcher/Main.hx:20
-        appName = execPath.file
         # src/a8/launcher/Main.hx:22
-        configExtensions = [".json", ".launcher.json"]
+        appName = execPath.file
         # src/a8/launcher/Main.hx:24
+        configExtensions = [".json", ".launcher.json"]
+        # src/a8/launcher/Main.hx:26
         configFile = None
-        # src/a8/launcher/Main.hx:25
+        # src/a8/launcher/Main.hx:27
         if (Reflect.field(commandLineParms,"launcherJson") is not None):
             configFile = a8_PathOps.path(Reflect.field(commandLineParms,"launcherJson"))
         else:
-            # src/a8/launcher/Main.hx:29
+            # src/a8/launcher/Main.hx:31
             _g = []
             x = HxOverrides.iterator(a8_PathOps.symlinkChain(execPath))
             while x.hasNext():
                 x1 = x.next()
-                # src/a8/launcher/Main.hx:31
+                # src/a8/launcher/Main.hx:33
                 l = [x1]
                 def _hx_local_1(l):
                     def _hx_local_0(e):
                         return a8_PathOps.entry(a8_PathOps.parent((l[0] if 0 < len(l) else None)),(HxOverrides.stringOrNull(a8_PathOps.name((l[0] if 0 < len(l) else None))) + ("null" if e is None else e)))
                     return _hx_local_0
-                # src/a8/launcher/Main.hx:29
+                # src/a8/launcher/Main.hx:31
                 x2 = list(map(_hx_local_1(l),configExtensions))
                 _g.append(x2)
             _g1 = []
@@ -3434,100 +3443,100 @@ class a8_launcher_Main:
                 while x.hasNext():
                     x1 = x.next()
                     _g1.append(x1)
-            # src/a8/launcher/Main.hx:28
+            # src/a8/launcher/Main.hx:30
             possibleConfigFiles = Lambda.array(_g1)
-            # src/a8/launcher/Main.hx:36
+            # src/a8/launcher/Main.hx:38
             def _hx_local_2(f):
-                # src/a8/launcher/Main.hx:36
+                # src/a8/launcher/Main.hx:38
                 return a8_PathOps.exists(f)
-            # src/a8/launcher/Main.hx:24
+            # src/a8/launcher/Main.hx:26
             configFile = Lambda.find(possibleConfigFiles,_hx_local_2)
-        # src/a8/launcher/Main.hx:40
-        config = python_lib_Json.loads(a8_PathOps.readText(configFile),**python__KwArgs_KwArgs_Impl_.fromT(_hx_AnonObject({'object_hook': python_Lib.dictToAnon})))
         # src/a8/launcher/Main.hx:42
-        config.commandLineParms = commandLineParms
+        config = python_lib_Json.loads(a8_PathOps.readText(configFile),**python__KwArgs_KwArgs_Impl_.fromT(_hx_AnonObject({'object_hook': python_Lib.dictToAnon})))
         # src/a8/launcher/Main.hx:44
+        config.commandLineParms = commandLineParms
+        # src/a8/launcher/Main.hx:46
         if (Reflect.field(commandLineParms,"quiet") is not None):
             config.quiet = Reflect.field(commandLineParms,"quiet")
-        # src/a8/launcher/Main.hx:47
+        # src/a8/launcher/Main.hx:49
         if (Reflect.field(config,"logRollers") is None):
             Reflect.setField(config,"logRollers",[])
-        # src/a8/launcher/Main.hx:50
+        # src/a8/launcher/Main.hx:52
         if (Reflect.field(config,"logFiles") is None):
             Reflect.setField(config,"logFiles",True)
-        # src/a8/launcher/Main.hx:53
+        # src/a8/launcher/Main.hx:55
         if (config.kind == "jvm_cli"):
-            # src/a8/launcher/Main.hx:54
-            jvmLaunchConfig = config
-            # src/a8/launcher/Main.hx:55
-            Reflect.setField(config,"installDir",None)
             # src/a8/launcher/Main.hx:56
-            Reflect.setField(config,"logFiles",False)
-            # src/a8/launcher/Main.hx:57
-            Reflect.setField(config,"logRollers",[])
-        # src/a8/launcher/Main.hx:59
-        if ((config.kind == "jvm") or ((config.kind == "jvm_cli"))):
-            # src/a8/launcher/Main.hx:60
             jvmLaunchConfig = config
-            # src/a8/launcher/Main.hx:61
+            # src/a8/launcher/Main.hx:57
+            Reflect.setField(config,"installDir",None)
+            # src/a8/launcher/Main.hx:58
+            Reflect.setField(config,"logFiles",False)
+            # src/a8/launcher/Main.hx:59
+            Reflect.setField(config,"logRollers",[])
+        # src/a8/launcher/Main.hx:61
+        if ((config.kind == "jvm") or ((config.kind == "jvm_cli"))):
+            # src/a8/launcher/Main.hx:62
+            jvmLaunchConfig = config
+            # src/a8/launcher/Main.hx:63
             if (Reflect.field(jvmLaunchConfig,"jvmArgs") is None):
                 Reflect.setField(jvmLaunchConfig,"jvmArgs",[])
-            # src/a8/launcher/Main.hx:63
+            # src/a8/launcher/Main.hx:65
             if (Reflect.field(jvmLaunchConfig,"args") is None):
                 Reflect.setField(jvmLaunchConfig,"args",[])
-        # src/a8/launcher/Main.hx:68
+        # src/a8/launcher/Main.hx:70
         if (Reflect.field(commandLineParms,"explicitVersion") is not None):
             Reflect.setField(config,"explicitVersion",Reflect.field(commandLineParms,"explicitVersion"))
-        # src/a8/launcher/Main.hx:72
+        # src/a8/launcher/Main.hx:74
         return config
 
     @staticmethod
     def helpString():
-        # src/a8/launcher/Main.hx:79
+        # src/a8/launcher/Main.hx:81
         return "\nAccur8 Launcher Tool\n\n    The launchers job is to make sure the app is installed in the local cache and run the app it is configured to run.  \n\n    It will usually be installed (using Accur8 Recipes ie: a8-recipe install a8-scripts) at ~/tools-a8/packages/a8-scripts/a8-launcher.py\n\nConfiguration:\n    An app being run by the a8-launcher.py (or a copy/symbolic link of the launcher like a8-zoo) is configured by a .json file which will be alongside the command. \n    The base filename of the command needs to be the same as the json file. \n    So if you run the ‘a8-zoo’ launch command it will look for a ‘a8-zoo.json’ sitting alongside the a8-zoo command. \n    An example of a8-zoo.json will look like:\n        {\n            \"kind\": \"jvm_cli\",\n            \"mainClass\": \"a8.zoolander.Main\",\n            \"organization\": \"a8\",\n            \"artifact\": \"a8-zoolander_2.12\",\n            \"branch\": \"master\",\n            \"repo\": \"maven\"\n        }\n\nUsage requirements:\n\n    Python 3.4+ (currently Python versions 3.7 does not work)\n\n\nUsage:\n\n    --l-launcherJson <launcher.json>\n        override the default launcher json lookup with a specific launcher json file to use\n\n    --l-version <version> [<args>]\n        Runs the app with the specific version requested.\n\n    --l-verbose\n        turn on more verbose logging\n\n    --l-resolveOnly\n        Does not run the app.\n        Sets up the inventory file(s) in a8VersionCache (~/a8/versions/cache) which contain app installer config and classpaths to jars.\n    \n    --l-help\n        Does not run the app.\n        Shows this help text.\n\n    [<args>]\n        Run the app passing through whatever arguments are passed in\n        \n"
 
     @staticmethod
     def main():
-        # src/a8/launcher/Main.hx:132
-        exitCode = 0
         # src/a8/launcher/Main.hx:134
+        exitCode = 0
+        # src/a8/launcher/Main.hx:136
         try:
-            # src/a8/launcher/Main.hx:136
-            commandLineParms = a8_launcher_CommandLineProcessor.parse()
             # src/a8/launcher/Main.hx:138
-            execPath = a8_PathOps.executablePath()
+            commandLineParms = a8_launcher_CommandLineProcessor.parse()
             # src/a8/launcher/Main.hx:140
-            appName = execPath.file
+            execPath = a8_PathOps.executablePath()
             # src/a8/launcher/Main.hx:142
-            config = a8_launcher_Main.loadConfig(commandLineParms)
-            # src/a8/launcher/Main.hx:143
-            configD = config
+            appName = execPath.file
             # src/a8/launcher/Main.hx:144
-            Reflect.setField(configD,"name",appName)
+            config = a8_launcher_Main.loadConfig(commandLineParms)
+            # src/a8/launcher/Main.hx:145
+            configD = config
             # src/a8/launcher/Main.hx:146
-            args = list(python_lib_Sys.argv)
+            Reflect.setField(configD,"name",appName)
             # src/a8/launcher/Main.hx:148
-            a8_Logger.traceEnabled = (not config.quiet)
+            args = list(python_lib_Sys.argv)
             # src/a8/launcher/Main.hx:150
+            a8_Logger.traceEnabled = (not config.quiet)
+            # src/a8/launcher/Main.hx:152
             if Reflect.field(commandLineParms,"showHelp"):
                 python_Lib.printString(Std.string(a8_launcher_Main.helpString()))
             else:
-                # src/a8/launcher/Main.hx:153
+                # src/a8/launcher/Main.hx:155
                 launcher = a8_launcher_Launcher(config,appName,args)
-                # src/a8/launcher/Main.hx:159
+                # src/a8/launcher/Main.hx:161
                 exitCode = launcher.runAndWait()
         except BaseException as _g:
             # ?:1
             None
             e = haxe_Exception.caught(_g).unwrap()
-            # src/a8/launcher/Main.hx:162
-            # src/a8/launcher/Main.hx:163
-            stack = haxe__CallStack_CallStack_Impl_.exceptionStack()
             # src/a8/launcher/Main.hx:164
-            a8_Logger.warn(((("" + Std.string(e)) + "\n") + HxOverrides.stringOrNull(a8_HaxeOps2.asString(stack,"    "))),_hx_AnonObject({'fileName': "src/a8/launcher/Main.hx", 'lineNumber': 164, 'className': "a8.launcher.Main", 'methodName': "main"}))
             # src/a8/launcher/Main.hx:165
+            stack = haxe__CallStack_CallStack_Impl_.exceptionStack()
+            # src/a8/launcher/Main.hx:166
+            a8_Logger.warn(((("" + Std.string(e)) + "\n") + HxOverrides.stringOrNull(a8_HaxeOps2.asString(stack,"    "))),_hx_AnonObject({'fileName': "src/a8/launcher/Main.hx", 'lineNumber': 166, 'className': "a8.launcher.Main", 'methodName': "main"}))
+            # src/a8/launcher/Main.hx:167
             Sys.exit(1)
-        # src/a8/launcher/Main.hx:168
+        # src/a8/launcher/Main.hx:170
         Sys.exit(exitCode)
 a8_launcher_Main._hx_class = a8_launcher_Main
 
