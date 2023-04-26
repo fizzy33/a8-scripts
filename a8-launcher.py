@@ -12,6 +12,7 @@ import time as python_lib_Time
 import urllib.request as a8_PyUrllibRequest
 import shutil as a8_PyShutil2
 import os as a8_PyOs2
+import os.path as a8_PyPath
 import builtins as python_lib_Builtins
 import os as python_lib_Os
 import functools as python_lib_Functools
@@ -1067,27 +1068,27 @@ class a8_PyOps:
 
     @staticmethod
     def toDict(_hx_map):
-        # src/a8/PyOps.hx:79
+        # src/a8/PyOps.hx:86
         _hx_dict = dict()
-        # src/a8/PyOps.hx:80
-        # src/a8/PyOps.hx:80
+        # src/a8/PyOps.hx:87
+        # src/a8/PyOps.hx:87
         k = _hx_map.keys()
         while k.hasNext():
             k1 = k.next()
-            # src/a8/PyOps.hx:81
+            # src/a8/PyOps.hx:88
             _hx_dict[k1] = _hx_map.get(k1)
-        # src/a8/PyOps.hx:83
+        # src/a8/PyOps.hx:90
         return _hx_dict
 
     @staticmethod
     def spawn(fn):
-        # src/a8/PyOps.hx:88
+        # src/a8/PyOps.hx:95
         th = python_lib_threading_Thread(**python__KwArgs_KwArgs_Impl_.fromT(_hx_AnonObject({'target': fn})))
-        # src/a8/PyOps.hx:89
+        # src/a8/PyOps.hx:96
         th.daemon = True
-        # src/a8/PyOps.hx:90
+        # src/a8/PyOps.hx:97
         th.start()
-        # src/a8/PyOps.hx:92
+        # src/a8/PyOps.hx:99
         return th
 a8_PyOps._hx_class = a8_PyOps
 
@@ -1573,87 +1574,87 @@ class a8_PathOps:
     @staticmethod
     def realPathStr(path):
         # src/a8/PathOps.hx:157
-        return sys_FileSystem.fullPath(path.toString())
+        return a8_PyPath.realpath(path.toString())
 
     @staticmethod
     def writeBytes(path,_hx_bytes):
-        # src/a8/PathOps.hx:161
+        # src/a8/PathOps.hx:162
         sys_io_File.saveBytes(path.toString(),_hx_bytes)
 
     @staticmethod
     def writeText(path,text):
-        # src/a8/PathOps.hx:165
-        a8_Logger.trace(("writing " + Std.string(path)),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 165, 'className': "a8.PathOps", 'methodName': "writeText"}))
         # src/a8/PathOps.hx:166
+        a8_Logger.trace(("writing " + Std.string(path)),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 166, 'className': "a8.PathOps", 'methodName': "writeText"}))
+        # src/a8/PathOps.hx:167
         if (not a8_PathOps.exists(a8_PathOps.parent(path))):
-            # src/a8/PathOps.hx:167
-            a8_Logger.trace(("creating intermediate directories " + Std.string(a8_PathOps.parent(path))),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 167, 'className': "a8.PathOps", 'methodName': "writeText"}))
             # src/a8/PathOps.hx:168
+            a8_Logger.trace(("creating intermediate directories " + Std.string(a8_PathOps.parent(path))),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 168, 'className': "a8.PathOps", 'methodName': "writeText"}))
+            # src/a8/PathOps.hx:169
             a8_PathOps.makeDirectories(a8_PathOps.parent(path))
-        # src/a8/PathOps.hx:170
+        # src/a8/PathOps.hx:171
         sys_io_File.saveContent(path.toString(),text)
 
     @staticmethod
     def parent(path):
-        # src/a8/PathOps.hx:174
-        _g = path.dir
         # src/a8/PathOps.hx:175
+        _g = path.dir
+        # src/a8/PathOps.hx:176
         if (_g is None):
             if a8_PathOps.isAbsolute(path):
                 return None
             else:
                 return haxe_io_Path(sys_FileSystem.fullPath("."))
         else:
-            # src/a8/PathOps.hx:181
-            d = _g
             # src/a8/PathOps.hx:182
+            d = _g
+            # src/a8/PathOps.hx:183
             return haxe_io_Path(d)
 
     @staticmethod
     def entry(dir,name):
-        # src/a8/PathOps.hx:187
+        # src/a8/PathOps.hx:188
         return a8_PathOps.subpath(dir,name)
 
     @staticmethod
     def subpath(dir,name):
-        # src/a8/PathOps.hx:191
-        separator = ("" if (dir.backslash) else "/")
         # src/a8/PathOps.hx:192
+        separator = ("" if (dir.backslash) else "/")
+        # src/a8/PathOps.hx:193
         return haxe_io_Path(((HxOverrides.stringOrNull(dir.toString()) + ("null" if separator is None else separator)) + ("null" if name is None else name)))
 
     @staticmethod
     def outputStream(p):
-        # src/a8/PathOps.hx:197
+        # src/a8/PathOps.hx:198
         return a8_StreamOps.fileOutputStream(a8_PathOps.realPathStr(p))
 
     @staticmethod
     def readProperties(p,failOnNotFound = None):
-        # src/a8/PathOps.hx:201
-        rf = a8_OptionOps.getOrElse(a8_OptionOps.toOption(failOnNotFound),False)
         # src/a8/PathOps.hx:202
+        rf = a8_OptionOps.getOrElse(a8_OptionOps.toOption(failOnNotFound),False)
+        # src/a8/PathOps.hx:203
         exists = a8_PathOps.exists(p)
-        # src/a8/PathOps.hx:204
+        # src/a8/PathOps.hx:205
         if ((not exists) and (not rf)):
             return haxe_ds_StringMap()
         else:
-            # src/a8/PathOps.hx:207
+            # src/a8/PathOps.hx:208
             _g = []
             x = HxOverrides.iterator(a8_PathOps.readLines(p))
             while x.hasNext():
                 x1 = x.next()
-                # src/a8/PathOps.hx:209
+                # src/a8/PathOps.hx:210
                 a = x1.split("=")
-                # src/a8/PathOps.hx:207
+                # src/a8/PathOps.hx:208
                 x2 = None
-                # src/a8/PathOps.hx:211
+                # src/a8/PathOps.hx:212
                 if (len(a) == 2):
-                    # src/a8/PathOps.hx:212
+                    # src/a8/PathOps.hx:213
                     this1 = [(a[0] if 0 < len(a) else None), (a[1] if 1 < len(a) else None)]
-                    # src/a8/PathOps.hx:207
+                    # src/a8/PathOps.hx:208
                     x2 = [this1]
                 else:
                     x2 = []
-                # src/a8/PathOps.hx:207
+                # src/a8/PathOps.hx:208
                 _g.append(x2)
             _g1 = []
             e = HxOverrides.iterator(_g)
@@ -1667,39 +1668,39 @@ class a8_PathOps:
 
     @staticmethod
     def deleteIfExists(path):
-        # src/a8/PathOps.hx:222
+        # src/a8/PathOps.hx:223
         if a8_PathOps.exists(path):
             a8_PathOps.delete(path)
 
     @staticmethod
     def delete(path):
-        # src/a8/PathOps.hx:228
-        a8_Logger.trace((("delete(" + Std.string(path)) + ")"),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 228, 'className': "a8.PathOps", 'methodName': "delete"}))
         # src/a8/PathOps.hx:229
+        a8_Logger.trace((("delete(" + Std.string(path)) + ")"),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 229, 'className': "a8.PathOps", 'methodName': "delete"}))
+        # src/a8/PathOps.hx:230
         sys_FileSystem.deleteFile(path.toString())
 
     @staticmethod
     def deleteTree(path):
-        # src/a8/PathOps.hx:233
-        a8_Logger.trace((("deleteTree(" + Std.string(path)) + ")"),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 233, 'className': "a8.PathOps", 'methodName': "deleteTree"}))
         # src/a8/PathOps.hx:234
+        a8_Logger.trace((("deleteTree(" + Std.string(path)) + ")"),_hx_AnonObject({'fileName': "src/a8/PathOps.hx", 'lineNumber': 234, 'className': "a8.PathOps", 'methodName': "deleteTree"}))
+        # src/a8/PathOps.hx:235
         if (a8_PathOps.exists(path) and a8_PathOps.isDir(path)):
-            # src/a8/PathOps.hx:235
+            # src/a8/PathOps.hx:236
             entries = a8_PathOps.entries(path)
-            # src/a8/PathOps.hx:236
-            # src/a8/PathOps.hx:236
+            # src/a8/PathOps.hx:237
+            # src/a8/PathOps.hx:237
             _g = 0
             while (_g < len(entries)):
                 entry = (entries[_g] if _g >= 0 and _g < len(entries) else None)
                 _g = (_g + 1)
-                # src/a8/PathOps.hx:237
+                # src/a8/PathOps.hx:238
                 if (a8_PathOps.isLink(entry) or a8_PathOps.isFile(entry)):
                     sys_FileSystem.deleteFile(entry.toString())
                 elif a8_PathOps.isDir(entry):
                     a8_PathOps.deleteTree(entry)
                 else:
                     sys_FileSystem.deleteFile(entry.toString())
-            # src/a8/PathOps.hx:245
+            # src/a8/PathOps.hx:246
             sys_FileSystem.deleteDirectory(path.toString())
 a8_PathOps._hx_class = a8_PathOps
 
@@ -2830,22 +2831,32 @@ class a8_launcher_NixDependencyDownloader:
             x = a8_PathOps.realPathStr(p)
             _g.append(x)
         classath = _g
-        # src/a8/launcher/DependencyDownloader.hx:101
-        a8_PathOps.deleteTree(workDir)
-        # src/a8/launcher/DependencyDownloader.hx:103
+        # src/a8/launcher/DependencyDownloader.hx:100
         inventory = _hx_AnonObject({'classpath': classath, 'appInstallerConfig': _hx_AnonObject({'groupId': jvmlauncher.organization, 'artifactId': jvmlauncher.artifact, 'version': Reflect.field(jvmlauncher,"version"), 'libDirKind': "nix", 'webappExplode': Reflect.field(jvmlauncher,"webappExplode")})})
+        # src/a8/launcher/DependencyDownloader.hx:112
+        a8_PathOps.writeText(installInventoryFile,haxe_format_JsonPrinter.print(inventory,None,"    "))
+        # src/a8/launcher/DependencyDownloader.hx:114
+        installInventoryFileNixDrv = a8_PathOps.path((HxOverrides.stringOrNull(installInventoryFile.toString()) + ".drv"))
         # src/a8/launcher/DependencyDownloader.hx:115
-        a8_PathOps.writeText(installInventoryFile,haxe_format_JsonPrinter.print(inventory,None,None))
-        # src/a8/launcher/DependencyDownloader.hx:117
-        login = python_lib_Os.environ.get("USER")
+        nixDrvPath = a8_PathOps.realPath(a8_PathOps.subpath(workDir,"build"))
         # src/a8/launcher/DependencyDownloader.hx:118
-        gcRootName = ((((((("/nix/var/nix/gcroots/per-user/" + ("null" if login is None else login)) + "/") + HxOverrides.stringOrNull(jvmlauncher.organization)) + "-") + HxOverrides.stringOrNull(jvmlauncher.artifact)) + "-") + HxOverrides.stringOrNull(a8_PathOps.basename(installInventoryFile)))
+        login = python_lib_Os.environ.get("USER")
         # src/a8/launcher/DependencyDownloader.hx:120
+        gcRootName = ((((((("/nix/var/nix/gcroots/per-user/" + ("null" if login is None else login)) + "/") + HxOverrides.stringOrNull(jvmlauncher.organization)) + "-") + HxOverrides.stringOrNull(jvmlauncher.artifact)) + "-") + HxOverrides.stringOrNull(a8_PathOps.basename(installInventoryFile)))
+        # src/a8/launcher/DependencyDownloader.hx:124
+        a8_Logger.trace(((("creating link from inventory file to nix derivation " + Std.string(installInventoryFileNixDrv)) + " --> ") + Std.string(nixDrvPath)),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 124, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
+        # src/a8/launcher/DependencyDownloader.hx:125
+        a8_PathOps.deleteIfExists(installInventoryFileNixDrv)
+        # src/a8/launcher/DependencyDownloader.hx:126
+        a8_PyOs2.symlink(nixDrvPath.toString(),installInventoryFileNixDrv.toString())
+        # src/a8/launcher/DependencyDownloader.hx:128
+        a8_Logger.trace(((("creating nix gc root " + ("null" if gcRootName is None else gcRootName)) + " --> ") + Std.string(installInventoryFileNixDrv)),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 128, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
+        # src/a8/launcher/DependencyDownloader.hx:129
         a8_PathOps.deleteIfExists(a8_PathOps.path(gcRootName))
-        # src/a8/launcher/DependencyDownloader.hx:121
-        a8_Logger.trace(((("creating nix gc root " + ("null" if gcRootName is None else gcRootName)) + " --> ") + Std.string(installInventoryFile)),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 121, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
-        # src/a8/launcher/DependencyDownloader.hx:122
-        a8_PyOs2.symlink(installInventoryFile.toString(),gcRootName)
+        # src/a8/launcher/DependencyDownloader.hx:130
+        a8_PyOs2.symlink(installInventoryFileNixDrv.toString(),gcRootName)
+        # src/a8/launcher/DependencyDownloader.hx:133
+        a8_PathOps.deleteTree(workDir)
 
 a8_launcher_NixDependencyDownloader._hx_class = a8_launcher_NixDependencyDownloader
 
