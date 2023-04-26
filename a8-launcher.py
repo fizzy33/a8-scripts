@@ -3046,7 +3046,7 @@ class a8_launcher_Launcher:
             # src/a8/launcher/Launcher.hx:177
             dependencyDownloader = self.resolveDependencyDownloader(Reflect.field(jvmlauncher,"dependencyDownloader"))
             # src/a8/launcher/Launcher.hx:178
-            self.logTrace("using {dependencyDownloader.name()} dependency downloader",_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 178, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmCliLaunchArgs"}))
+            self.logTrace((("using " + HxOverrides.stringOrNull(dependencyDownloader.name())) + " dependency downloader"),_hx_AnonObject({'fileName': "src/a8/launcher/Launcher.hx", 'lineNumber': 178, 'className': "a8.launcher.Launcher", 'methodName': "resolveJvmCliLaunchArgs"}))
             # src/a8/launcher/Launcher.hx:179
             dependencyDownloader.download(self,jvmlauncher,inventoryFile)
         # src/a8/launcher/Launcher.hx:181
