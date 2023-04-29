@@ -3,5 +3,6 @@
   "mainClass": "a8.honeybadger.Main",
   "organization": "a8",
   "artifact": "a8-honeybadger_2.12",
-  "branch": "master"
+  "branch": "master",
+  "repo": "locus"  
 }
