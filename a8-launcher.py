@@ -10,6 +10,7 @@ import sys as python_lib_Sys
 from threading import Thread as python_lib_threading_Thread
 import time as python_lib_Time
 import urllib.request as a8_PyUrllibRequest
+import urllib.parse as a8_PyUrllibParse
 import shutil as a8_PyShutil2
 import os as a8_PyOs2
 import os.path as a8_PyPath
@@ -1068,27 +1069,27 @@ class a8_PyOps:
 
     @staticmethod
     def toDict(_hx_map):
-        # src/a8/PyOps.hx:86
+        # src/a8/PyOps.hx:92
         _hx_dict = dict()
-        # src/a8/PyOps.hx:87
-        # src/a8/PyOps.hx:87
+        # src/a8/PyOps.hx:93
+        # src/a8/PyOps.hx:93
         k = _hx_map.keys()
         while k.hasNext():
             k1 = k.next()
-            # src/a8/PyOps.hx:88
+            # src/a8/PyOps.hx:94
             _hx_dict[k1] = _hx_map.get(k1)
-        # src/a8/PyOps.hx:90
+        # src/a8/PyOps.hx:96
         return _hx_dict
 
     @staticmethod
     def spawn(fn):
-        # src/a8/PyOps.hx:95
+        # src/a8/PyOps.hx:101
         th = python_lib_threading_Thread(**python__KwArgs_KwArgs_Impl_.fromT(_hx_AnonObject({'target': fn})))
-        # src/a8/PyOps.hx:96
+        # src/a8/PyOps.hx:102
         th.daemon = True
-        # src/a8/PyOps.hx:97
+        # src/a8/PyOps.hx:103
         th.start()
-        # src/a8/PyOps.hx:99
+        # src/a8/PyOps.hx:105
         return th
 a8_PyOps._hx_class = a8_PyOps
 
@@ -2782,7 +2783,7 @@ class a8_launcher_NixDependencyDownloader:
     _hx_class_name = "a8.launcher.NixDependencyDownloader"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_methods = ["name", "download"]
+    _hx_methods = ["name", "download", "fetchNixBuildDescription"]
     _hx_interfaces = [a8_launcher_DependencyDownloader]
 
     def __init__(self):
@@ -2793,35 +2794,31 @@ class a8_launcher_NixDependencyDownloader:
         return "nix"
 
     def download(self,launcher,jvmlauncher,installInventoryFile):
-        # src/a8/launcher/DependencyDownloader.hx:77
-        requestBody = jvmlauncher
-        # src/a8/launcher/DependencyDownloader.hx:79
-        launcher.logTrace(("javaLauncherInstallerDotNix -- " + HxOverrides.stringOrNull(haxe_format_JsonPrinter.print(requestBody,None,None))),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 79, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
-        # src/a8/launcher/DependencyDownloader.hx:81
-        javaLauncherInstallerDotNixContent = a8_PyHttpAssist.httpPost("https://locus.accur8.io/api/javaLauncherInstallerDotNix",requestBody)
-        # src/a8/launcher/DependencyDownloader.hx:83
+        # src/a8/launcher/DependencyDownloader.hx:76
         workDir = a8_PathOps.realPath(a8_PathOps.subpath(a8_PathOps.parent(installInventoryFile),(HxOverrides.stringOrNull(a8_PathOps.basename(installInventoryFile)) + "-work")))
-        # src/a8/launcher/DependencyDownloader.hx:84
+        # src/a8/launcher/DependencyDownloader.hx:77
         launcherDir = a8_PathOps.subpath(workDir,"launcher")
-        # src/a8/launcher/DependencyDownloader.hx:85
+        # src/a8/launcher/DependencyDownloader.hx:78
         a8_PathOps.makeDirectories(launcherDir)
-        # src/a8/launcher/DependencyDownloader.hx:87
+        # src/a8/launcher/DependencyDownloader.hx:80
+        nixBuildDescription = self.fetchNixBuildDescription(launcher,jvmlauncher)
+        # src/a8/launcher/DependencyDownloader.hx:82
         defaultDotNixPath = a8_PathOps.subpath(launcherDir,"default.nix")
-        # src/a8/launcher/DependencyDownloader.hx:88
-        a8_PathOps.writeText(defaultDotNixPath,javaLauncherInstallerDotNixContent)
-        # src/a8/launcher/DependencyDownloader.hx:90
+        # src/a8/launcher/DependencyDownloader.hx:83
+        a8_PathOps.writeText(defaultDotNixPath,nixBuildDescription.defaultDotNixContents)
+        # src/a8/launcher/DependencyDownloader.hx:85
         javaLauncherTemplatePath = a8_PathOps.subpath(launcherDir,"java-launcher-template")
-        # src/a8/launcher/DependencyDownloader.hx:91
+        # src/a8/launcher/DependencyDownloader.hx:86
         a8_PathOps.writeText(javaLauncherTemplatePath,"#!/bin/bash\n\nexec _out_/bin/_name_j -cp _out_/lib/*:. _args_ \"$@\"\n")
-        # src/a8/launcher/DependencyDownloader.hx:93
+        # src/a8/launcher/DependencyDownloader.hx:88
         _hx_exec = a8_Exec()
-        # src/a8/launcher/DependencyDownloader.hx:94
+        # src/a8/launcher/DependencyDownloader.hx:89
         _hx_exec.args = ["/nix/var/nix/profiles/default/bin/nix-build", "--out-link", "build", "-E", "with import <nixpkgs> {}; (callPackage ./launcher {})"]
-        # src/a8/launcher/DependencyDownloader.hx:95
+        # src/a8/launcher/DependencyDownloader.hx:90
         _hx_exec.cwd = haxe_ds_Option.Some(workDir.toString())
-        # src/a8/launcher/DependencyDownloader.hx:96
+        # src/a8/launcher/DependencyDownloader.hx:91
         _hx_exec.execInline()
-        # src/a8/launcher/DependencyDownloader.hx:98
+        # src/a8/launcher/DependencyDownloader.hx:93
         _g = []
         _g1 = 0
         _g2 = a8_PathOps.entries(a8_PathOps.subpath(workDir,"build/lib"))
@@ -2831,32 +2828,85 @@ class a8_launcher_NixDependencyDownloader:
             x = a8_PathOps.realPathStr(p)
             _g.append(x)
         classath = _g
-        # src/a8/launcher/DependencyDownloader.hx:100
-        inventory = _hx_AnonObject({'classpath': classath, 'appInstallerConfig': _hx_AnonObject({'groupId': jvmlauncher.organization, 'artifactId': jvmlauncher.artifact, 'version': Reflect.field(jvmlauncher,"version"), 'libDirKind': "nix", 'webappExplode': Reflect.field(jvmlauncher,"webappExplode")})})
-        # src/a8/launcher/DependencyDownloader.hx:112
+        # src/a8/launcher/DependencyDownloader.hx:95
+        inventory = _hx_AnonObject({'classpath': classath, 'appInstallerConfig': _hx_AnonObject({'groupId': jvmlauncher.organization, 'artifactId': jvmlauncher.artifact, 'version': nixBuildDescription.version, 'libDirKind': "nix", 'webappExplode': Reflect.field(jvmlauncher,"webappExplode")})})
+        # src/a8/launcher/DependencyDownloader.hx:107
         a8_PathOps.writeText(installInventoryFile,haxe_format_JsonPrinter.print(inventory,None,"    "))
-        # src/a8/launcher/DependencyDownloader.hx:114
+        # src/a8/launcher/DependencyDownloader.hx:109
         installInventoryFileNixDrv = a8_PathOps.path((HxOverrides.stringOrNull(installInventoryFile.toString()) + ".drv"))
-        # src/a8/launcher/DependencyDownloader.hx:115
+        # src/a8/launcher/DependencyDownloader.hx:110
         nixDrvPath = a8_PathOps.realPath(a8_PathOps.subpath(workDir,"build"))
-        # src/a8/launcher/DependencyDownloader.hx:118
+        # src/a8/launcher/DependencyDownloader.hx:113
         login = python_lib_Os.environ.get("USER")
-        # src/a8/launcher/DependencyDownloader.hx:120
+        # src/a8/launcher/DependencyDownloader.hx:115
         gcRootName = ((((((("/nix/var/nix/gcroots/per-user/" + ("null" if login is None else login)) + "/") + HxOverrides.stringOrNull(jvmlauncher.organization)) + "-") + HxOverrides.stringOrNull(jvmlauncher.artifact)) + "-") + HxOverrides.stringOrNull(a8_PathOps.basename(installInventoryFile)))
-        # src/a8/launcher/DependencyDownloader.hx:124
-        a8_Logger.trace(((("creating link from inventory file to nix derivation " + Std.string(installInventoryFileNixDrv)) + " --> ") + Std.string(nixDrvPath)),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 124, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
-        # src/a8/launcher/DependencyDownloader.hx:125
+        # src/a8/launcher/DependencyDownloader.hx:118
+        a8_Logger.trace(("resolvedVersion is " + HxOverrides.stringOrNull(nixBuildDescription.version)),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 118, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
+        # src/a8/launcher/DependencyDownloader.hx:120
+        a8_Logger.trace(((("creating link from inventory file to nix derivation " + Std.string(installInventoryFileNixDrv)) + " --> ") + Std.string(nixDrvPath)),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 120, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
+        # src/a8/launcher/DependencyDownloader.hx:121
         a8_PathOps.deleteIfExists(installInventoryFileNixDrv)
-        # src/a8/launcher/DependencyDownloader.hx:126
+        # src/a8/launcher/DependencyDownloader.hx:122
         a8_PyOs2.symlink(nixDrvPath.toString(),installInventoryFileNixDrv.toString())
-        # src/a8/launcher/DependencyDownloader.hx:128
-        a8_Logger.trace(((("creating nix gc root " + ("null" if gcRootName is None else gcRootName)) + " --> ") + Std.string(installInventoryFileNixDrv)),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 128, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
-        # src/a8/launcher/DependencyDownloader.hx:129
+        # src/a8/launcher/DependencyDownloader.hx:124
+        a8_Logger.trace(((("creating nix gc root " + ("null" if gcRootName is None else gcRootName)) + " --> ") + Std.string(installInventoryFileNixDrv)),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 124, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "download"}))
+        # src/a8/launcher/DependencyDownloader.hx:125
         a8_PathOps.deleteIfExists(a8_PathOps.path(gcRootName))
-        # src/a8/launcher/DependencyDownloader.hx:130
+        # src/a8/launcher/DependencyDownloader.hx:126
         a8_PyOs2.symlink(installInventoryFileNixDrv.toString(),gcRootName)
-        # src/a8/launcher/DependencyDownloader.hx:133
+        # src/a8/launcher/DependencyDownloader.hx:129
         a8_PathOps.deleteTree(workDir)
+
+    def fetchNixBuildDescription(self,launcher,jvmlauncher):
+        # src/a8/launcher/DependencyDownloader.hx:136
+        url = a8_UserConfig.repo_url("repo")
+        # src/a8/launcher/DependencyDownloader.hx:137
+        p = a8_PyUrllibParse.urlparse(url)
+        # src/a8/launcher/DependencyDownloader.hx:138
+        result = ((HxOverrides.stringOrNull(p.scheme) + "://") + HxOverrides.stringOrNull(p.netloc))
+        # src/a8/launcher/DependencyDownloader.hx:139
+        launcher.logTrace(("repoApiUrl is " + ("null" if result is None else result)),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 139, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "fetchNixBuildDescription"}))
+        # src/a8/launcher/DependencyDownloader.hx:135
+        repoUrl = result
+        # src/a8/launcher/DependencyDownloader.hx:143
+        def _hx_local_1():
+            # src/a8/launcher/DependencyDownloader.hx:145
+            requestBody = jvmlauncher
+            # src/a8/launcher/DependencyDownloader.hx:147
+            launcher.logTrace(("nixBuildDescription -- " + HxOverrides.stringOrNull(haxe_format_JsonPrinter.print(requestBody,None,None))),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 147, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "fetchNixBuildDescription"}))
+            # src/a8/launcher/DependencyDownloader.hx:149
+            nixBuildDescriptionResponseStr = a8_PyHttpAssist.httpPost("https://locus2.accur8.io/api/nixBuildDescription",requestBody)
+            # src/a8/launcher/DependencyDownloader.hx:150
+            nixBuildDescription = python_lib_Json.loads(nixBuildDescriptionResponseStr,**python__KwArgs_KwArgs_Impl_.fromT(_hx_AnonObject({'object_hook': python_Lib.dictToAnon})))
+            # src/a8/launcher/DependencyDownloader.hx:153
+            def _hx_local_0(f):
+                # src/a8/launcher/DependencyDownloader.hx:153
+                return (f.filename == "default.nix")
+            _this = list(filter(_hx_local_0,nixBuildDescription.files))
+            # src/a8/launcher/DependencyDownloader.hx:152
+            defaultDotNixContents = ((None if ((len(_this) == 0)) else _this.pop(0))).contents
+            # src/a8/launcher/DependencyDownloader.hx:155
+            return _hx_AnonObject({'version': nixBuildDescription.resolvedVersion, 'defaultDotNixContents': defaultDotNixContents})
+        fetchNixBuildDescriptionNew = _hx_local_1
+        # src/a8/launcher/DependencyDownloader.hx:162
+        def _hx_local_2():
+            # src/a8/launcher/DependencyDownloader.hx:164
+            requestBody = jvmlauncher
+            # src/a8/launcher/DependencyDownloader.hx:166
+            launcher.logTrace(("javaLauncherInstallerDotNix -- " + HxOverrides.stringOrNull(haxe_format_JsonPrinter.print(requestBody,None,None))),_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 166, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "fetchNixBuildDescription"}))
+            # src/a8/launcher/DependencyDownloader.hx:168
+            defaultDotNixContents = a8_PyHttpAssist.httpPost("https://locus2.accur8.io/api/javaLauncherInstallerDotNix",requestBody)
+            # src/a8/launcher/DependencyDownloader.hx:170
+            return _hx_AnonObject({'version': "", 'defaultDotNixContents': defaultDotNixContents})
+        fetchNixBuildDescriptionLegacy = _hx_local_2
+        # src/a8/launcher/DependencyDownloader.hx:177
+        try:
+            return fetchNixBuildDescriptionNew()
+        except BaseException as _g:
+            # src/a8/launcher/DependencyDownloader.hx:180
+            a8_Logger.trace("/api/nixBuildDescription failed will use legacy api",_hx_AnonObject({'fileName': "src/a8/launcher/DependencyDownloader.hx", 'lineNumber': 180, 'className': "a8.launcher.NixDependencyDownloader", 'methodName': "fetchNixBuildDescription"}))
+            # src/a8/launcher/DependencyDownloader.hx:181
+            return fetchNixBuildDescriptionLegacy()
 
 a8_launcher_NixDependencyDownloader._hx_class = a8_launcher_NixDependencyDownloader
 
