@@ -24,7 +24,7 @@ are needed system wide outside of users.
 currently the following are linked {tools_to_link_str}
 also a java11 link is made that points to java
 
-Since this script makes changes to /usr/bin/ it must be run as root.
+Since this script makes changes to /usr/local/bin/ it must be run as root.
 
 """
 
