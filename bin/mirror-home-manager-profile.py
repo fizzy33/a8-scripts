@@ -54,9 +54,13 @@ def run(args) -> None:
     homeManagerRoot = homeManagerProfileInNixStore(args.source)
     targetHome = args.target
 
-    def createSymlink(service: PathService, target: Path, link: Path) -> None:
+    pathService = PathService()
+    if dry_run:
+        pathService = DryRunPathService()
+
+    def createSymlink(target: Path, link: Path) -> None:
         link_exists = link.exists()
-        service.makeDirectoriesIfNeeded(link.parent)
+        pathService.makeDirectoriesIfNeeded(link.parent)
         link_is_already_correct = False
         if link_exists:
             link_contents = link.readlink()
@@ -65,19 +69,15 @@ def run(args) -> None:
                 link_is_already_correct = True
 
         if overwrite or not link_exists:
-            service.unlinkIfExists(link)
+            pathService.unlinkIfExists(link)
             if not target.exists():
                 logWarning(f"target path does not exist @ {target}")
             else:
                 if not link_is_already_correct:
-                    service.symlink(target, link)
+                    pathService.symlink(target, link)
         else:
             if not link_is_already_correct:
                 print(f"leaving {link} in place")
-
-    pathService = PathService()
-    if dry_run:
-        pathService = DryRunPathService()
 
     def walkHomeManagerProfile(d: Path) -> None:
         # print(f"walking {d}")
@@ -92,6 +92,8 @@ def run(args) -> None:
                 logWarning(f"there should only be symlink's and directories in the home manager profile -- {ch}")
 
     walkHomeManagerProfile(homeManagerRoot)
+
+    pathService.createSymlink(Path(targetHome, ".nix-profile") Path(sourceHome, ".nix-profile").realpath())
 
 
 
