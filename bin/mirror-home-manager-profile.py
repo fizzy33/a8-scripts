@@ -12,6 +12,8 @@ is because you cannot use home manager on the root user (it changes the default 
 """
 
 
+nix_path = Path("/nix")
+
 class PathService:
     def makeDirectoriesIfNeeded(self, p: Path) -> None:
         if not p.exists():
@@ -21,6 +23,8 @@ class PathService:
             p.unlink()
     def symlink(self, target: Path, link: Path) -> None:
         print(f"creating symlink target={target}  link={link}")
+        if not target.is_relative_to(nix_path):
+            raise Exception(f"{target} is not relative to /nix/ will not do this since it is a security risk")
         link.symlink_to(target)
 
 class DryRunPathService:
@@ -52,6 +56,7 @@ def run(args) -> None:
     overwrite = args.force
     dry_run = args.dry_run
     homeManagerRoot = homeManagerProfileInNixStore(args.source)
+    sourceHome = args.source
     targetHome = args.target
 
     pathService = PathService()
@@ -85,7 +90,7 @@ def run(args) -> None:
             if ch.is_symlink():
                 target = ch
                 link = Path(targetHome, ch.relative_to(homeManagerRoot))
-                createSymlink(pathService, target, link)
+                createSymlink(target, link)
             elif ch.is_dir:
                 walkHomeManagerProfile(ch)
             else:
@@ -93,7 +98,7 @@ def run(args) -> None:
 
     walkHomeManagerProfile(homeManagerRoot)
 
-    pathService.createSymlink(Path(targetHome, ".nix-profile") Path(sourceHome, ".nix-profile").realpath())
+    pathService.symlink(Path(sourceHome, ".nix-profile").resolve(), Path(targetHome, ".nix-profile"))
 
 
 
