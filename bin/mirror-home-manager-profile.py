@@ -110,15 +110,16 @@ def main() -> None:
         prog = 'mirror-home-manager-profile',
         description = docs,
     )
-    parser.add_argument("--force", "-f", action='store_true', help='force the link creation i.e. overwrite existing links', default=False)
-    parser.add_argument("--source", "-s", help='home directory to source', required=True)
-    parser.add_argument("--target", "-t", help='home directory to target', required=True)
-
     subparsers = parser.add_subparsers(dest="command", help='sub-commands')
+    def subparser(name: str, help: str):
+        subParser = subparsers.add_parser(name, help=help)
+        subParser.add_argument("--force", "-f", action='store_true', help='force the link creation i.e. overwrite existing links', default=False)
+        subParser.add_argument("--source", "-s", help='home directory to source', required=True)
+        subParser.add_argument("--target", "-t", help='home directory to target', required=True)
+        return subParser
 
-    runParser = subparsers.add_parser("run", help='do the actual work and change the system')
-
-    dryRunParser = subparsers.add_parser("dryrun", help='show the actual work that would be done (default)')
+    runParser = subparser("run", "do the actual work")
+    dryRunParser = subparser("dryrun", 'show the actual work that would be done')
 
     subparsers.add_parser("help", help='print this help')
 
@@ -127,7 +128,7 @@ def main() -> None:
     if args.command == "run":
         args.dry_run = False
         run(args)
-    elif args.command == "dryrun" or args.command is None:
+    elif args.command == "dryrun":
         args.dry_run = True
         run(args)
     elif args.command == "help":
