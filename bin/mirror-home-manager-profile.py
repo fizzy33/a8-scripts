@@ -98,7 +98,7 @@ def run(args) -> None:
 
     walkHomeManagerProfile(homeManagerRoot)
 
-    pathService.symlink(Path(sourceHome, ".nix-profile").resolve(), Path(targetHome, ".nix-profile"))
+    createSymlink(Path(sourceHome, ".nix-profile").resolve(), Path(targetHome, ".nix-profile"))
 
 
 
