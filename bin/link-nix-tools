@@ -53,7 +53,7 @@ def createSymlink(target: Path, link: Path) -> None:
 def linkNixTool(name: str, target_name: Optional[str] = None) -> None:
     if not target_name:
         target_name = name
-    dev_home = Path("~dev").expanduser()
+    dev_home = Path("~homemanager").expanduser()
     createSymlink(dev_home.joinpath(f".nix-profile/bin/{name}").resolve(), Path(f"/usr/local/bin/{target_name}"))
 
 def run(overwrite0: bool) -> None:

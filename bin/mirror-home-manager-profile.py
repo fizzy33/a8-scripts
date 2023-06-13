@@ -21,6 +21,8 @@ class PathService:
     def unlinkIfExists(self, p: Path) -> None:
         if p.is_symlink():
             p.unlink()
+        elif p.is_file():
+            p.unlink()
     def symlink(self, target: Path, link: Path) -> None:
         print(f"creating symlink target={target}  link={link}")
         if not target.is_relative_to(nix_path):
