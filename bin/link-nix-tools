@@ -4,18 +4,21 @@ from pathlib import Path
 import sys
 from typing import Optional
 
-tools_to_link: [str] = [
+homemanager_profile_tools_to_link: [str] = [
     "a8-versions",
     "chezmoi",
     "java",
-    "nix",
-    "nix-build",
     "pgbackrest",
     "runitor",
     "wkhtmltopdf",
 ]
 
-tools_to_link_str = " ".join(tools_to_link)
+default_profile_tools_to_link: [str] = [
+    "nix",
+    "nix-build",
+]
+
+tools_to_link_str = " ".join(homemanager_profile_tools_to_link + default_profile_tools_to_link)
 
 docs = f"""
 this script sets up symlinks in /usr/local/bin for the various tools that we install via nix but
@@ -50,21 +53,25 @@ def createSymlink(target: Path, link: Path) -> None:
     else:
         print(f"leaving {link} in place")
 
-def linkNixTool(name: str, target_name: Optional[str] = None) -> None:
+def linkNixTool(profile: Path, name: str, target_name: Optional[str] = None) -> None:
     if not target_name:
         target_name = name
-    dev_home = Path("~homemanager").expanduser()
-    createSymlink(dev_home.joinpath(f".nix-profile/bin/{name}").resolve(), Path(f"/usr/local/bin/{target_name}"))
+    createSymlink(profile.joinpath(f"bin/{name}").resolve(), Path(f"/usr/local/bin/{target_name}"))
 
 def run(overwrite0: bool) -> None:
 
     global overwrite
     overwrite = overwrite0
 
-    for tool in tools_to_link:
-        linkNixTool(tool)
+    homemanager_profile = Path("~homemanager").expanduser().joinpath(".nix-profile")
+    for tool in homemanager_profile_tools_to_link:
+        linkNixTool(homemanager_profile, tool)
 
-    linkNixTool("java", "java11")
+    linkNixTool(homemanager_profile, "java", "java11")
+
+    default_profile = Path("/nix/var/nix/profiles/default")
+    for tool in default_profile_tools_to_link:
+        linkNixTool(default_profile, tool)
 
 
 def run_test(overwrite0: bool) -> None:
