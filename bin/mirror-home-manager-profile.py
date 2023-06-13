@@ -66,16 +66,17 @@ def run(args) -> None:
         pathService = DryRunPathService()
 
     def createSymlink(target: Path, link: Path) -> None:
-        link_exists = link.exists()
+        link_file_exists = link.exists()
         pathService.makeDirectoriesIfNeeded(link.parent)
         link_is_already_correct = False
-        if link_exists:
-            link_contents = link.readlink()
-            if link_contents == target:
-                print(f"no action needed link is correct {link}")
-                link_is_already_correct = True
+        if link_file_exists:
+            if link.is_symlink():
+                link_contents = link.readlink()
+                if link_contents == target:
+                    print(f"no action needed link is correct {link}")
+                    link_is_already_correct = True
 
-        if overwrite or not link_exists:
+        if overwrite or not link_file_exists:
             pathService.unlinkIfExists(link)
             if not target.exists():
                 logWarning(f"target path does not exist @ {target}")
