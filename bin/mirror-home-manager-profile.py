@@ -79,7 +79,7 @@ def run(args) -> None:
 
         if link_is_already_correct:
             print(f"no action needed link is correct {link}")
-        if overwrite or not link_file_exists:
+        elif overwrite or not link_file_exists:
             pathService.unlinkIfExists(link)
             if not target.exists():
                 logWarning(f"target path does not exist @ {target}")
