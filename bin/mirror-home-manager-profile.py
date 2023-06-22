@@ -20,8 +20,10 @@ class PathService:
             p.mkdir(parents = True)
     def unlinkIfExists(self, p: Path) -> None:
         if p.is_symlink():
+            print(f"removing symlink {p}")
             p.unlink()
         elif p.is_file():
+            print(f"removing file {p}")
             p.unlink()
     def symlink(self, target: Path, link: Path) -> None:
         print(f"creating symlink target={target}  link={link}")
@@ -73,20 +75,19 @@ def run(args) -> None:
             if link.is_symlink():
                 link_contents = link.readlink()
                 if link_contents == target:
-                    print(f"no action needed link is correct {link}")
                     link_is_already_correct = True
 
+        if link_is_already_correct:
+            print(f"no action needed link is correct {link}")
         if overwrite or not link_file_exists:
-            if not link_is_already_correct:
-                pathService.unlinkIfExists(link):
-                if not target.exists():
-                    logWarning(f"target path does not exist @ {target}")
-                else:
-                    if not link_is_already_correct:
-                        pathService.symlink(target, link)
+            pathService.unlinkIfExists(link):
+            if not target.exists():
+                logWarning(f"target path does not exist @ {target}")
+            else:
+                if not link_is_already_correct:
+                    pathService.symlink(target, link)
         else:
-            if not link_is_already_correct:
-                print(f"leaving {link} in place")
+            print(f"leaving {link} in place")
 
     def walkHomeManagerProfile(d: Path) -> None:
         # print(f"walking {d}")
