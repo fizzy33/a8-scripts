@@ -77,12 +77,13 @@ def run(args) -> None:
                     link_is_already_correct = True
 
         if overwrite or not link_file_exists:
-            pathService.unlinkIfExists(link)
-            if not target.exists():
-                logWarning(f"target path does not exist @ {target}")
-            else:
-                if not link_is_already_correct:
-                    pathService.symlink(target, link)
+            if not link_is_already_correct:
+                pathService.unlinkIfExists(link):
+                if not target.exists():
+                    logWarning(f"target path does not exist @ {target}")
+                else:
+                    if not link_is_already_correct:
+                        pathService.symlink(target, link)
         else:
             if not link_is_already_correct:
                 print(f"leaving {link} in place")
