@@ -21,12 +21,22 @@ slug = f"rsnapshot-{stanza}"
 # 0 3  * * * /usr/bin/runitor -ping-key=XYZPDQ-AAAAAAAAAAA -slug=superbee-rsnapshot -- /usr/bin/rsnapshot -c /root/backups/rsnapshot-superbee.conf daily
 # 0 4  * * * /usr/bin/runitor -ping-key=XYZPDQ-AAAAAAAAAAA -slug=connectria-rsnapshot -- /usr/bin/rsnapshot -c /root/backups/rsnapshot-connectria.conf daily
 
-command = f"/usr/bin/runitor -ping-key={healthchecks.ping_key} -slug={slug} -- /usr/bin/rsnapshot -c {rsnapshot_config_file} daily"
+#command = f"~/.nix-profile/bin/runitor -ping-key={healthchecks.ping_key} -slug={slug} -- ~/.nix-profile/bin/run-rsnapshot/rsnapshot -c {rsnapshot_config_file} daily"
+command = [
+    "runitor",
+    f"-ping-key={healthchecks.ping_key}", 
+    f"-slug={slug}",
+    "--",
+    "rsnapshot",
+    "-c",
+    rsnapshot_config_file,
+    "hourly"
+]
 
 
 print(f"running -- {command}")
 
-subprocess.check_output(
+subprocess.call(
     command,
     cwd = rsnapshot_config_file.parent,
 )

@@ -47,8 +47,8 @@ print(f"last full backup is {last_fullbackup}")
 print(f"backup type {backup_type}")
 
 command = [
-    "/usr/bin/runitor",
-    "-ping-key=" + healthchecks.pink_key,
+    "runitor",
+    "-ping-key=" + healthchecks.ping_key,
     f"-slug={slug}",
     "--",
     "pgbackrest",
