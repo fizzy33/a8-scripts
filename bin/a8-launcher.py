@@ -15,10 +15,10 @@ import shutil as a8_PyShutil2
 import os as a8_PyOs2
 import os.path as a8_PyPath
 import builtins as python_lib_Builtins
-import os as python_lib_Os
 import functools as python_lib_Functools
 import io as python_lib_Io
 import json as python_lib_Json
+import os as python_lib_Os
 import random as python_lib_Random
 import re as python_lib_Re
 import socket as python_lib_Socket
@@ -1169,7 +1169,7 @@ class a8_HaxeOps:
     _hx_class_name = "a8.HaxeOps"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_statics = ["asString", "toMap", "isDigit", "isAlpha", "isWhitespace", "isHaxeIdentifierFirstChar", "isHaxeIdentifierSecondChar"]
+    _hx_statics = ["asString", "toMap", "isDigit", "isAlpha", "isWhitespace", "isHaxeIdentifierFirstChar", "isHaxeIdentifierSecondChar", "mapMerge"]
 
     @staticmethod
     def asString(_hx_bytes):
@@ -1239,6 +1239,26 @@ class a8_HaxeOps:
             return a8_HaxeOps.isDigit(ch)
         else:
             return True
+
+    @staticmethod
+    def mapMerge(a,b):
+        # src/a8/HaxeOps.hx:60
+        newMap = a
+        # src/a8/HaxeOps.hx:62
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/sugar/ExtendedLoops.hx:124
+        _hx___tink_tmp0 = b
+        # src/a8/HaxeOps.hx:62
+        # src/a8/HaxeOps.hx:62
+        iterator_key = _hx___tink_tmp0.keys()
+        while iterator_key.hasNext():
+            key = iterator_key.next()
+            # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/sugar/ExtendedLoops.hx:173
+            # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/sugar/ExtendedLoops.hx:173
+            value = _hx___tink_tmp0.get(key)
+            # src/a8/HaxeOps.hx:63
+            newMap.set(key,value)
+        # src/a8/HaxeOps.hx:66
+        return newMap
 a8_HaxeOps._hx_class = a8_HaxeOps
 
 
@@ -1250,31 +1270,31 @@ class a8_HaxeOps2:
 
     @staticmethod
     def asString(stack,indent = None):
-        # src/a8/HaxeOps.hx:67
+        # src/a8/HaxeOps.hx:77
         if (indent is None):
             indent = ""
-        # src/a8/HaxeOps.hx:71
+        # src/a8/HaxeOps.hx:81
         def _hx_local_0(si):
-            # src/a8/HaxeOps.hx:71
+            # src/a8/HaxeOps.hx:81
             return (("null" if indent is None else indent) + Std.string(si))
-        # src/a8/HaxeOps.hx:70
+        # src/a8/HaxeOps.hx:80
         _this = list(map(_hx_local_0,stack))
         s = "\n".join([python_Boot.toString1(x1,'') for x1 in _this])
-        # src/a8/HaxeOps.hx:73
+        # src/a8/HaxeOps.hx:83
         return s
 
     @staticmethod
     def toMap(iterable):
-        # src/a8/HaxeOps.hx:77
+        # src/a8/HaxeOps.hx:87
         _hx_map = haxe_ds_StringMap()
-        # src/a8/HaxeOps.hx:78
-        # src/a8/HaxeOps.hx:78
+        # src/a8/HaxeOps.hx:88
+        # src/a8/HaxeOps.hx:88
         t = HxOverrides.iterator(iterable)
         while t.hasNext():
             t1 = t.next()
-            # src/a8/HaxeOps.hx:79
+            # src/a8/HaxeOps.hx:89
             _hx_map.h[python_internal_ArrayImpl._get(t1, 0)] = python_internal_ArrayImpl._get(t1, 1)
-        # src/a8/HaxeOps.hx:81
+        # src/a8/HaxeOps.hx:91
         return _hx_map
 a8_HaxeOps2._hx_class = a8_HaxeOps2
 
@@ -2115,462 +2135,81 @@ class a8__Tuple2_Tuple2_Impl_:
         return haxe_format_JsonPrinter.print(this1,None,None)
 a8__Tuple2_Tuple2_Impl_._hx_class = a8__Tuple2_Tuple2_Impl_
 
-class haxe_ds_Option(Enum):
-    __slots__ = ()
-    _hx_class_name = "haxe.ds.Option"
-    _hx_constructs = ["Some", "None"]
-
-    @staticmethod
-    def Some(v):
-        return haxe_ds_Option("Some", 0, (v,))
-haxe_ds_Option._hx_None = haxe_ds_Option("None", 1, ())
-haxe_ds_Option._hx_class = haxe_ds_Option
-
-
-class haxe_IMap:
-    _hx_class_name = "haxe.IMap"
-    _hx_is_interface = "True"
-    __slots__ = ()
-    _hx_methods = ["get", "keys"]
-haxe_IMap._hx_class = haxe_IMap
-
-
-class haxe_ds_StringMap:
-    _hx_class_name = "haxe.ds.StringMap"
-    _hx_is_interface = "False"
-    __slots__ = ("h",)
-    _hx_fields = ["h"]
-    _hx_methods = ["get", "keys"]
-    _hx_interfaces = [haxe_IMap]
-
-    def __init__(self):
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/haxe/ds/StringMap.hx:32
-        self.h = dict()
-
-    def get(self,key):
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/haxe/ds/StringMap.hx:40
-        return self.h.get(key,None)
-
-    def keys(self):
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/haxe/ds/StringMap.hx:55
-        return python_HaxeIterator(iter(self.h.keys()))
-
-haxe_ds_StringMap._hx_class = haxe_ds_StringMap
-
-
-class sys_io_File:
-    _hx_class_name = "sys.io.File"
-    _hx_is_interface = "False"
-    __slots__ = ()
-    _hx_statics = ["getContent", "saveContent", "getBytes", "saveBytes"]
-
-    @staticmethod
-    def getContent(path):
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:31
-        f = python_lib_Builtins.open(path,"r",-1,"utf-8",None,"")
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:32
-        content = f.read(-1)
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:33
-        f.close()
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:34
-        return content
-
-    @staticmethod
-    def saveContent(path,content):
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:38
-        f = python_lib_Builtins.open(path,"w",-1,"utf-8",None,"")
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:39
-        f.write(content)
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:40
-        f.close()
-
-    @staticmethod
-    def getBytes(path):
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:44
-        f = python_lib_Builtins.open(path,"rb",-1)
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:45
-        size = f.read(-1)
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:46
-        b = haxe_io_Bytes.ofData(size)
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:47
-        f.close()
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:48
-        return b
-
-    @staticmethod
-    def saveBytes(path,_hx_bytes):
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:52
-        f = python_lib_Builtins.open(path,"wb",-1)
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:53
-        f.write(_hx_bytes.b)
-        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:54
-        f.close()
-sys_io_File._hx_class = sys_io_File
-
-
-class haxe_io_Path:
-    _hx_class_name = "haxe.io.Path"
-    _hx_is_interface = "False"
-    __slots__ = ("dir", "file", "ext", "backslash")
-    _hx_fields = ["dir", "file", "ext", "backslash"]
-    _hx_methods = ["toString"]
-    _hx_statics = ["isAbsolute"]
-
-    def __init__(self,path):
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:68
-        self.backslash = None
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:63
-        self.ext = None
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:53
-        self.file = None
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:43
-        self.dir = None
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:77
-        path1 = path
-        _hx_local_0 = len(path1)
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:78
-        if (_hx_local_0 == 1):
-            if (path1 == "."):
-                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:79
-                self.dir = path
-                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:80
-                self.file = ""
-                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:81
-                return
-        elif (_hx_local_0 == 2):
-            if (path1 == ".."):
-                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:79
-                self.dir = path
-                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:80
-                self.file = ""
-                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:81
-                return
-        else:
-            pass
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:83
-        startIndex = None
-        c1 = None
-        if (startIndex is None):
-            c1 = path.rfind("/", 0, len(path))
-        else:
-            i = path.rfind("/", 0, (startIndex + 1))
-            startLeft = (max(0,((startIndex + 1) - len("/"))) if ((i == -1)) else (i + 1))
-            check = path.find("/", startLeft, len(path))
-            c1 = (check if (((check > i) and ((check <= startIndex)))) else i)
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:84
-        startIndex = None
-        c2 = None
-        if (startIndex is None):
-            c2 = path.rfind("\\", 0, len(path))
-        else:
-            i = path.rfind("\\", 0, (startIndex + 1))
-            startLeft = (max(0,((startIndex + 1) - len("\\"))) if ((i == -1)) else (i + 1))
-            check = path.find("\\", startLeft, len(path))
-            c2 = (check if (((check > i) and ((check <= startIndex)))) else i)
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:85
-        if (c1 < c2):
-            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:86
-            self.dir = HxString.substr(path,0,c2)
-            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:87
-            path = HxString.substr(path,(c2 + 1),None)
-            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:88
-            self.backslash = True
-        elif (c2 < c1):
-            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:90
-            self.dir = HxString.substr(path,0,c1)
-            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:91
-            path = HxString.substr(path,(c1 + 1),None)
-        else:
-            self.dir = None
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:94
-        startIndex = None
-        cp = None
-        if (startIndex is None):
-            cp = path.rfind(".", 0, len(path))
-        else:
-            i = path.rfind(".", 0, (startIndex + 1))
-            startLeft = (max(0,((startIndex + 1) - len("."))) if ((i == -1)) else (i + 1))
-            check = path.find(".", startLeft, len(path))
-            cp = (check if (((check > i) and ((check <= startIndex)))) else i)
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:95
-        if (cp != -1):
-            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:96
-            self.ext = HxString.substr(path,(cp + 1),None)
-            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:97
-            self.file = HxString.substr(path,0,cp)
-        else:
-            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:99
-            self.ext = None
-            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:100
-            self.file = path
-
-    def toString(self):
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:115
-        return ((HxOverrides.stringOrNull((("" if ((self.dir is None)) else (HxOverrides.stringOrNull(self.dir) + HxOverrides.stringOrNull((("\\" if (self.backslash) else "/"))))))) + HxOverrides.stringOrNull(self.file)) + HxOverrides.stringOrNull((("" if ((self.ext is None)) else ("." + HxOverrides.stringOrNull(self.ext))))))
-
-    @staticmethod
-    def isAbsolute(path):
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:315
-        if path.startswith("/"):
-            return True
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:317
-        if ((("" if ((1 >= len(path))) else path[1])) == ":"):
-            return True
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:319
-        if path.startswith("\\\\"):
-            return True
-        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:321
-        return False
-
-haxe_io_Path._hx_class = haxe_io_Path
-
-
-class HxString:
-    _hx_class_name = "HxString"
-    _hx_is_interface = "False"
-    __slots__ = ()
-    _hx_statics = ["split", "charCodeAt", "charAt", "lastIndexOf", "toUpperCase", "toLowerCase", "indexOf", "indexOfImpl", "toString", "substring", "substr"]
-
-    @staticmethod
-    def split(s,d):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:31
-        if (d == ""):
-            return list(s)
-        else:
-            return s.split(d)
-
-    @staticmethod
-    def charCodeAt(s,index):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:36
-        if ((((s is None) or ((len(s) == 0))) or ((index < 0))) or ((index >= len(s)))):
-            return None
-        else:
-            return ord(s[index])
-
-    @staticmethod
-    def charAt(s,index):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:41
-        if ((index < 0) or ((index >= len(s)))):
-            return ""
-        else:
-            return s[index]
-
-    @staticmethod
-    def lastIndexOf(s,_hx_str,startIndex = None):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:46
-        if (startIndex is None):
-            return s.rfind(_hx_str, 0, len(s))
-        elif (_hx_str == ""):
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:49
-            length = len(s)
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:50
-            if (startIndex < 0):
-                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:51
-                startIndex = (length + startIndex)
-                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:52
-                if (startIndex < 0):
-                    startIndex = 0
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:54
-            if (startIndex > length):
-                return length
-            else:
-                return startIndex
-        else:
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:56
-            i = s.rfind(_hx_str, 0, (startIndex + 1))
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:57
-            startLeft = (max(0,((startIndex + 1) - len(_hx_str))) if ((i == -1)) else (i + 1))
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:58
-            check = s.find(_hx_str, startLeft, len(s))
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:59
-            if ((check > i) and ((check <= startIndex))):
-                return check
-            else:
-                return i
-
-    @staticmethod
-    def toUpperCase(s):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:69
-        return s.upper()
-
-    @staticmethod
-    def toLowerCase(s):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:74
-        return s.lower()
-
-    @staticmethod
-    def indexOf(s,_hx_str,startIndex = None):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:79
-        if (startIndex is None):
-            return s.find(_hx_str)
-        else:
-            return HxString.indexOfImpl(s,_hx_str,startIndex)
-
-    @staticmethod
-    def indexOfImpl(s,_hx_str,startIndex):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:86
-        if (_hx_str == ""):
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:87
-            length = len(s)
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:88
-            if (startIndex < 0):
-                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:89
-                startIndex = (length + startIndex)
-                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:90
-                if (startIndex < 0):
-                    startIndex = 0
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:92
-            if (startIndex > length):
-                return length
-            else:
-                return startIndex
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:94
-        return s.find(_hx_str, startIndex)
-
-    @staticmethod
-    def toString(s):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:99
-        return s
-
-    @staticmethod
-    def substring(s,startIndex,endIndex = None):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:118
-        if (startIndex < 0):
-            startIndex = 0
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:120
-        if (endIndex is None):
-            return s[startIndex:]
-        else:
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:123
-            if (endIndex < 0):
-                endIndex = 0
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:125
-            if (endIndex < startIndex):
-                return s[endIndex:startIndex]
-            else:
-                return s[startIndex:endIndex]
-
-    @staticmethod
-    def substr(s,startIndex,_hx_len = None):
-        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:135
-        if (_hx_len is None):
-            return s[startIndex:]
-        else:
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:138
-            if (_hx_len == 0):
-                return ""
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:140
-            if (startIndex < 0):
-                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:141
-                startIndex = (len(s) + startIndex)
-                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:142
-                if (startIndex < 0):
-                    startIndex = 0
-            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:145
-            return s[startIndex:(startIndex + _hx_len)]
-HxString._hx_class = HxString
-
-
-class python_HaxeIterator:
-    _hx_class_name = "python.HaxeIterator"
-    _hx_is_interface = "False"
-    __slots__ = ("it", "x", "has", "checked")
-    _hx_fields = ["it", "x", "has", "checked"]
-    _hx_methods = ["next", "hasNext"]
-
-    def __init__(self,it):
-        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:32
-        self.checked = False
-        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:31
-        self.has = False
-        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:30
-        self.x = None
-        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:35
-        self.it = it
-
-    def next(self):
-        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:39
-        if (not self.checked):
-            self.hasNext()
-        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:41
-        self.checked = False
-        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:42
-        return self.x
-
-    def hasNext(self):
-        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:46
-        if (not self.checked):
-            # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:47
-            try:
-                # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:48
-                self.x = self.it.__next__()
-                # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:49
-                self.has = True
-            except BaseException as _g:
-                # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:50
-                None
-                # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:47
-                if Std.isOfType(haxe_Exception.caught(_g).unwrap(),StopIteration):
-                    # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:51
-                    self.has = False
-                    # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:52
-                    self.x = None
-                else:
-                    raise _g
-            # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:54
-            self.checked = True
-        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:56
-        return self.has
-
-python_HaxeIterator._hx_class = python_HaxeIterator
-
 
 class a8_UserConfig:
     _hx_class_name = "a8.UserConfig"
     _hx_is_interface = "False"
     __slots__ = ()
-    _hx_statics = ["repoConfig", "getRepoProp", "hasRepoProp", "repo_url", "versionsVersion", "versionsVersionFromRepo"]
+    _hx_statics = ["_repoConfig", "loadRepoConfig", "getRepoConfig", "getRepoProp", "hasRepoProp", "repo_url", "versionsVersion", "versionsVersionFromRepo"]
+    _repoConfig = None
+
+    @staticmethod
+    def loadRepoConfig():
+        # /usr/local/lib/haxe/lib/tink_syntaxhub/0,5,0/src/tink/SyntaxHub.hx:35
+        _g = haxe_ds_StringMap()
+        _g.h["repo_url"] = "https://locus.accur8.net/repos/all"
+        _g.h["maven_url"] = "https://repo.maven.apache.org/maven2/"
+        # src/a8/UserConfig.hx:21
+        defaults = _g
+        # src/a8/UserConfig.hx:26
+        userProps = a8_PathOps.readProperties(a8_PathOps.entry(a8_PathOps.userHome(),".a8/repo.properties"))
+        # src/a8/UserConfig.hx:31
+        etcProps = a8_PathOps.readProperties(a8_PathOps.entry(a8_PathOps.userHome(),"/etc/a8-repo.properties"))
+        # src/a8/UserConfig.hx:36
+        m1 = a8_HaxeOps.mapMerge(defaults,etcProps)
+        # src/a8/UserConfig.hx:37
+        m2 = a8_HaxeOps.mapMerge(m1,userProps)
+        # src/a8/UserConfig.hx:40
+        return m2
+
+    @staticmethod
+    def getRepoConfig():
+        # src/a8/UserConfig.hx:44
+        if (a8_UserConfig._repoConfig is None):
+            a8_UserConfig._repoConfig = a8_UserConfig.loadRepoConfig()
+        # src/a8/UserConfig.hx:47
+        return a8_UserConfig._repoConfig
 
     @staticmethod
     def getRepoProp(repoPrefix,suffix):
-        # src/a8/UserConfig.hx:26
+        # src/a8/UserConfig.hx:51
         name = ((("null" if repoPrefix is None else repoPrefix) + "_") + ("null" if suffix is None else suffix))
-        # src/a8/UserConfig.hx:27
-        v = a8_UserConfig.repoConfig.h.get(name,None)
-        # src/a8/UserConfig.hx:28
+        # src/a8/UserConfig.hx:52
+        v = a8_UserConfig.getRepoConfig().h.get(name,None)
+        # src/a8/UserConfig.hx:53
         if (v is None):
             raise haxe_Exception.thrown((("no " + ("null" if name is None else name)) + " defined in ~/.a8/repo.properties"))
-        # src/a8/UserConfig.hx:31
+        # src/a8/UserConfig.hx:56
         return v
 
     @staticmethod
     def hasRepoProp(repoPrefix,suffix):
-        # src/a8/UserConfig.hx:35
+        # src/a8/UserConfig.hx:60
         name = ((("null" if repoPrefix is None else repoPrefix) + "_") + ("null" if suffix is None else suffix))
-        # src/a8/UserConfig.hx:36
-        v = a8_UserConfig.repoConfig.h.get(name,None)
-        # src/a8/UserConfig.hx:37
+        # src/a8/UserConfig.hx:61
+        v = a8_UserConfig.getRepoConfig().h.get(name,None)
+        # src/a8/UserConfig.hx:62
         return (v is not None)
 
     @staticmethod
     def repo_url(repoPrefix):
-        # src/a8/UserConfig.hx:41
+        # src/a8/UserConfig.hx:66
         if a8_UserConfig.hasRepoProp(repoPrefix,"url"):
-            # src/a8/UserConfig.hx:43
+            # src/a8/UserConfig.hx:68
             url = a8_UserConfig.getRepoProp(repoPrefix,"url")
-            # src/a8/UserConfig.hx:45
+            # src/a8/UserConfig.hx:70
             if (a8_UserConfig.hasRepoProp(repoPrefix,"user") and a8_UserConfig.hasRepoProp(repoPrefix,"password")):
-                # src/a8/UserConfig.hx:46
+                # src/a8/UserConfig.hx:71
                 u = a8_UserConfig.getRepoProp(repoPrefix,"user")
-                # src/a8/UserConfig.hx:47
+                # src/a8/UserConfig.hx:72
                 p = a8_UserConfig.getRepoProp(repoPrefix,"password")
-                # src/a8/UserConfig.hx:49
+                # src/a8/UserConfig.hx:74
                 separator = "://"
-                # src/a8/UserConfig.hx:50
+                # src/a8/UserConfig.hx:75
                 split = (list(url) if ((separator == "")) else url.split(separator))
-                # src/a8/UserConfig.hx:51
+                # src/a8/UserConfig.hx:76
                 url = ((((((HxOverrides.stringOrNull((split[0] if 0 < len(split) else None)) + ("null" if separator is None else separator)) + ("null" if u is None else u)) + ":") + ("null" if p is None else p)) + "@") + HxOverrides.stringOrNull((split[1] if 1 < len(split) else None)))
-            # src/a8/UserConfig.hx:54
+            # src/a8/UserConfig.hx:79
             return url
         elif (repoPrefix == "maven"):
             return "https://repo.maven.apache.org/maven2/"
@@ -2579,23 +2218,23 @@ class a8_UserConfig:
 
     @staticmethod
     def versionsVersion(repoPrefix):
-        # src/a8/UserConfig.hx:64
-        version = a8_UserConfig.repoConfig.h.get("versions_version",None)
-        # src/a8/UserConfig.hx:65
+        # src/a8/UserConfig.hx:89
+        version = a8_UserConfig.getRepoConfig().h.get("versions_version",None)
+        # src/a8/UserConfig.hx:90
         if (version is None):
             version = a8_UserConfig.versionsVersionFromRepo(repoPrefix)
-        # src/a8/UserConfig.hx:68
+        # src/a8/UserConfig.hx:93
         return version
 
     @staticmethod
     def versionsVersionFromRepo(repoPrefix):
-        # src/a8/UserConfig.hx:72
+        # src/a8/UserConfig.hx:97
         v = a8_UserConfig.getRepoProp(repoPrefix,"url")
-        # src/a8/UserConfig.hx:73
+        # src/a8/UserConfig.hx:98
         startIndex = None
         startIndex1 = (((v.find("://") if ((startIndex is None)) else HxString.indexOfImpl(v,"://",startIndex))) + 1)
         url = (HxOverrides.stringOrNull(HxString.substring(v,0,(v.find("/") if ((startIndex1 is None)) else HxString.indexOfImpl(v,"/",startIndex1)))) + "/versionsVersion")
-        # src/a8/UserConfig.hx:74
+        # src/a8/UserConfig.hx:99
         return sys_Http.requestUrl(url)
 a8_UserConfig._hx_class = a8_UserConfig
 
@@ -2729,7 +2368,7 @@ class a8_launcher_CoursierDependencyDownloader:
         # src/a8/launcher/DependencyDownloader.hx:31
         _hx_exec = a8_Exec()
         # src/a8/launcher/DependencyDownloader.hx:37
-        version = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.repoConfig.h.get("versions_version",None)),a8_Constants.a8VersionsVersion)
+        version = a8_OptionOps.getOrElse(a8_OptionOps.toOption(a8_UserConfig.getRepoConfig().h.get("versions_version",None)),a8_Constants.a8VersionsVersion)
         # src/a8/launcher/DependencyDownloader.hx:39
         repoPrefix = "repo"
         # src/a8/launcher/DependencyDownloader.hx:40
@@ -3924,6 +3563,14 @@ class haxe__CallStack_CallStack_Impl_:
 haxe__CallStack_CallStack_Impl_._hx_class = haxe__CallStack_CallStack_Impl_
 
 
+class haxe_IMap:
+    _hx_class_name = "haxe.IMap"
+    _hx_is_interface = "True"
+    __slots__ = ()
+    _hx_methods = ["get", "set", "keys"]
+haxe_IMap._hx_class = haxe_IMap
+
+
 class haxe_Exception(Exception):
     _hx_class_name = "haxe.Exception"
     _hx_is_interface = "False"
@@ -4211,6 +3858,44 @@ class haxe_ds_ObjectMap:
         return python_HaxeIterator(iter(self.h.keys()))
 
 haxe_ds_ObjectMap._hx_class = haxe_ds_ObjectMap
+
+class haxe_ds_Option(Enum):
+    __slots__ = ()
+    _hx_class_name = "haxe.ds.Option"
+    _hx_constructs = ["Some", "None"]
+
+    @staticmethod
+    def Some(v):
+        return haxe_ds_Option("Some", 0, (v,))
+haxe_ds_Option._hx_None = haxe_ds_Option("None", 1, ())
+haxe_ds_Option._hx_class = haxe_ds_Option
+
+
+class haxe_ds_StringMap:
+    _hx_class_name = "haxe.ds.StringMap"
+    _hx_is_interface = "False"
+    __slots__ = ("h",)
+    _hx_fields = ["h"]
+    _hx_methods = ["set", "get", "keys"]
+    _hx_interfaces = [haxe_IMap]
+
+    def __init__(self):
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/haxe/ds/StringMap.hx:32
+        self.h = dict()
+
+    def set(self,key,value):
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/haxe/ds/StringMap.hx:36
+        self.h[key] = value
+
+    def get(self,key):
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/haxe/ds/StringMap.hx:40
+        return self.h.get(key,None)
+
+    def keys(self):
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/haxe/ds/StringMap.hx:55
+        return python_HaxeIterator(iter(self.h.keys()))
+
+haxe_ds_StringMap._hx_class = haxe_ds_StringMap
 
 
 class haxe_exceptions_PosException(haxe_Exception):
@@ -4905,6 +4590,123 @@ class haxe_io_Input:
 haxe_io_Input._hx_class = haxe_io_Input
 
 
+class haxe_io_Path:
+    _hx_class_name = "haxe.io.Path"
+    _hx_is_interface = "False"
+    __slots__ = ("dir", "file", "ext", "backslash")
+    _hx_fields = ["dir", "file", "ext", "backslash"]
+    _hx_methods = ["toString"]
+    _hx_statics = ["isAbsolute"]
+
+    def __init__(self,path):
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:68
+        self.backslash = None
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:63
+        self.ext = None
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:53
+        self.file = None
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:43
+        self.dir = None
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:77
+        path1 = path
+        _hx_local_0 = len(path1)
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:78
+        if (_hx_local_0 == 1):
+            if (path1 == "."):
+                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:79
+                self.dir = path
+                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:80
+                self.file = ""
+                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:81
+                return
+        elif (_hx_local_0 == 2):
+            if (path1 == ".."):
+                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:79
+                self.dir = path
+                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:80
+                self.file = ""
+                # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:81
+                return
+        else:
+            pass
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:83
+        startIndex = None
+        c1 = None
+        if (startIndex is None):
+            c1 = path.rfind("/", 0, len(path))
+        else:
+            i = path.rfind("/", 0, (startIndex + 1))
+            startLeft = (max(0,((startIndex + 1) - len("/"))) if ((i == -1)) else (i + 1))
+            check = path.find("/", startLeft, len(path))
+            c1 = (check if (((check > i) and ((check <= startIndex)))) else i)
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:84
+        startIndex = None
+        c2 = None
+        if (startIndex is None):
+            c2 = path.rfind("\\", 0, len(path))
+        else:
+            i = path.rfind("\\", 0, (startIndex + 1))
+            startLeft = (max(0,((startIndex + 1) - len("\\"))) if ((i == -1)) else (i + 1))
+            check = path.find("\\", startLeft, len(path))
+            c2 = (check if (((check > i) and ((check <= startIndex)))) else i)
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:85
+        if (c1 < c2):
+            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:86
+            self.dir = HxString.substr(path,0,c2)
+            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:87
+            path = HxString.substr(path,(c2 + 1),None)
+            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:88
+            self.backslash = True
+        elif (c2 < c1):
+            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:90
+            self.dir = HxString.substr(path,0,c1)
+            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:91
+            path = HxString.substr(path,(c1 + 1),None)
+        else:
+            self.dir = None
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:94
+        startIndex = None
+        cp = None
+        if (startIndex is None):
+            cp = path.rfind(".", 0, len(path))
+        else:
+            i = path.rfind(".", 0, (startIndex + 1))
+            startLeft = (max(0,((startIndex + 1) - len("."))) if ((i == -1)) else (i + 1))
+            check = path.find(".", startLeft, len(path))
+            cp = (check if (((check > i) and ((check <= startIndex)))) else i)
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:95
+        if (cp != -1):
+            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:96
+            self.ext = HxString.substr(path,(cp + 1),None)
+            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:97
+            self.file = HxString.substr(path,0,cp)
+        else:
+            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:99
+            self.ext = None
+            # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:100
+            self.file = path
+
+    def toString(self):
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:115
+        return ((HxOverrides.stringOrNull((("" if ((self.dir is None)) else (HxOverrides.stringOrNull(self.dir) + HxOverrides.stringOrNull((("\\" if (self.backslash) else "/"))))))) + HxOverrides.stringOrNull(self.file)) + HxOverrides.stringOrNull((("" if ((self.ext is None)) else ("." + HxOverrides.stringOrNull(self.ext))))))
+
+    @staticmethod
+    def isAbsolute(path):
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:315
+        if path.startswith("/"):
+            return True
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:317
+        if ((("" if ((1 >= len(path))) else path[1])) == ":"):
+            return True
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:319
+        if path.startswith("\\\\"):
+            return True
+        # /Users/glen/bin/haxe-4.2.5/std/haxe/io/Path.hx:321
+        return False
+
+haxe_io_Path._hx_class = haxe_io_Path
+
+
 class haxe_iterators_ArrayIterator:
     _hx_class_name = "haxe.iterators.ArrayIterator"
     _hx_is_interface = "False"
@@ -5507,6 +5309,60 @@ class python_Boot:
 python_Boot._hx_class = python_Boot
 
 
+class python_HaxeIterator:
+    _hx_class_name = "python.HaxeIterator"
+    _hx_is_interface = "False"
+    __slots__ = ("it", "x", "has", "checked")
+    _hx_fields = ["it", "x", "has", "checked"]
+    _hx_methods = ["next", "hasNext"]
+
+    def __init__(self,it):
+        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:32
+        self.checked = False
+        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:31
+        self.has = False
+        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:30
+        self.x = None
+        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:35
+        self.it = it
+
+    def next(self):
+        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:39
+        if (not self.checked):
+            self.hasNext()
+        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:41
+        self.checked = False
+        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:42
+        return self.x
+
+    def hasNext(self):
+        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:46
+        if (not self.checked):
+            # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:47
+            try:
+                # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:48
+                self.x = self.it.__next__()
+                # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:49
+                self.has = True
+            except BaseException as _g:
+                # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:50
+                None
+                # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:47
+                if Std.isOfType(haxe_Exception.caught(_g).unwrap(),StopIteration):
+                    # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:51
+                    self.has = False
+                    # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:52
+                    self.x = None
+                else:
+                    raise _g
+            # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:54
+            self.checked = True
+        # /Users/glen/bin/haxe-4.2.5/std/python/HaxeIterator.hx:56
+        return self.has
+
+python_HaxeIterator._hx_class = python_HaxeIterator
+
+
 class python_internal_ArrayImpl:
     _hx_class_name = "python.internal.ArrayImpl"
     _hx_is_interface = "False"
@@ -5779,6 +5635,152 @@ class python_internal_MethodClosure:
         return self.func(self.obj,*args)
 
 python_internal_MethodClosure._hx_class = python_internal_MethodClosure
+
+
+class HxString:
+    _hx_class_name = "HxString"
+    _hx_is_interface = "False"
+    __slots__ = ()
+    _hx_statics = ["split", "charCodeAt", "charAt", "lastIndexOf", "toUpperCase", "toLowerCase", "indexOf", "indexOfImpl", "toString", "substring", "substr"]
+
+    @staticmethod
+    def split(s,d):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:31
+        if (d == ""):
+            return list(s)
+        else:
+            return s.split(d)
+
+    @staticmethod
+    def charCodeAt(s,index):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:36
+        if ((((s is None) or ((len(s) == 0))) or ((index < 0))) or ((index >= len(s)))):
+            return None
+        else:
+            return ord(s[index])
+
+    @staticmethod
+    def charAt(s,index):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:41
+        if ((index < 0) or ((index >= len(s)))):
+            return ""
+        else:
+            return s[index]
+
+    @staticmethod
+    def lastIndexOf(s,_hx_str,startIndex = None):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:46
+        if (startIndex is None):
+            return s.rfind(_hx_str, 0, len(s))
+        elif (_hx_str == ""):
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:49
+            length = len(s)
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:50
+            if (startIndex < 0):
+                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:51
+                startIndex = (length + startIndex)
+                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:52
+                if (startIndex < 0):
+                    startIndex = 0
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:54
+            if (startIndex > length):
+                return length
+            else:
+                return startIndex
+        else:
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:56
+            i = s.rfind(_hx_str, 0, (startIndex + 1))
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:57
+            startLeft = (max(0,((startIndex + 1) - len(_hx_str))) if ((i == -1)) else (i + 1))
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:58
+            check = s.find(_hx_str, startLeft, len(s))
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:59
+            if ((check > i) and ((check <= startIndex))):
+                return check
+            else:
+                return i
+
+    @staticmethod
+    def toUpperCase(s):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:69
+        return s.upper()
+
+    @staticmethod
+    def toLowerCase(s):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:74
+        return s.lower()
+
+    @staticmethod
+    def indexOf(s,_hx_str,startIndex = None):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:79
+        if (startIndex is None):
+            return s.find(_hx_str)
+        else:
+            return HxString.indexOfImpl(s,_hx_str,startIndex)
+
+    @staticmethod
+    def indexOfImpl(s,_hx_str,startIndex):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:86
+        if (_hx_str == ""):
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:87
+            length = len(s)
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:88
+            if (startIndex < 0):
+                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:89
+                startIndex = (length + startIndex)
+                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:90
+                if (startIndex < 0):
+                    startIndex = 0
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:92
+            if (startIndex > length):
+                return length
+            else:
+                return startIndex
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:94
+        return s.find(_hx_str, startIndex)
+
+    @staticmethod
+    def toString(s):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:99
+        return s
+
+    @staticmethod
+    def substring(s,startIndex,endIndex = None):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:118
+        if (startIndex < 0):
+            startIndex = 0
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:120
+        if (endIndex is None):
+            return s[startIndex:]
+        else:
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:123
+            if (endIndex < 0):
+                endIndex = 0
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:125
+            if (endIndex < startIndex):
+                return s[endIndex:startIndex]
+            else:
+                return s[startIndex:endIndex]
+
+    @staticmethod
+    def substr(s,startIndex,_hx_len = None):
+        # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:135
+        if (_hx_len is None):
+            return s[startIndex:]
+        else:
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:138
+            if (_hx_len == 0):
+                return ""
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:140
+            if (startIndex < 0):
+                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:141
+                startIndex = (len(s) + startIndex)
+                # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:142
+                if (startIndex < 0):
+                    startIndex = 0
+            # /Users/glen/bin/haxe-4.2.5/std/python/internal/StringImpl.hx:145
+            return s[startIndex:(startIndex + _hx_len)]
+HxString._hx_class = HxString
 
 
 class sys_net_Socket:
@@ -6552,6 +6554,56 @@ class sys_Http(haxe_http_HttpBase):
         return r
 
 sys_Http._hx_class = sys_Http
+
+
+class sys_io_File:
+    _hx_class_name = "sys.io.File"
+    _hx_is_interface = "False"
+    __slots__ = ()
+    _hx_statics = ["getContent", "saveContent", "getBytes", "saveBytes"]
+
+    @staticmethod
+    def getContent(path):
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:31
+        f = python_lib_Builtins.open(path,"r",-1,"utf-8",None,"")
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:32
+        content = f.read(-1)
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:33
+        f.close()
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:34
+        return content
+
+    @staticmethod
+    def saveContent(path,content):
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:38
+        f = python_lib_Builtins.open(path,"w",-1,"utf-8",None,"")
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:39
+        f.write(content)
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:40
+        f.close()
+
+    @staticmethod
+    def getBytes(path):
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:44
+        f = python_lib_Builtins.open(path,"rb",-1)
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:45
+        size = f.read(-1)
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:46
+        b = haxe_io_Bytes.ofData(size)
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:47
+        f.close()
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:48
+        return b
+
+    @staticmethod
+    def saveBytes(path,_hx_bytes):
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:52
+        f = python_lib_Builtins.open(path,"wb",-1)
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:53
+        f.write(_hx_bytes.b)
+        # /Users/glen/bin/haxe-4.2.5/std/python/_std/sys/io/File.hx:54
+        f.close()
+sys_io_File._hx_class = sys_io_File
 
 
 class sys_net_Host:
@@ -8371,8 +8423,8 @@ class tink_core__Future_Future_Impl_:
                 # /usr/local/lib/haxe/lib/tink_core/2,0,2/src/tink/core/Future.hx:228
                 def _hx_local_10():
                     # /usr/local/lib/haxe/lib/tink_core/2,0,2/src/tink/core/Future.hx:228
-                    nonlocal index
                     nonlocal pending
+                    nonlocal index
                     if ((not done) and (not fireWhenReady())):
                         while (index < len(ret)):
                             # /usr/local/lib/haxe/lib/tink_core/2,0,2/src/tink/core/Future.hx:231
@@ -11228,6 +11280,92 @@ class tink_core_SignalTrigger:
 
 tink_core_SignalTrigger._hx_class = tink_core_SignalTrigger
 
+
+class tink_lang_Iterate:
+    _hx_class_name = "tink.lang.Iterate"
+    _hx_is_interface = "False"
+    __slots__ = ()
+    _hx_statics = ["upto", "downto"]
+
+    @staticmethod
+    def upto(step,start,end):
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:12
+        return tink_lang_IterUpto(step,start,end)
+
+    @staticmethod
+    def downto(step,start,end):
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:15
+        return tink_lang_IterDownto(step,start,end)
+tink_lang_Iterate._hx_class = tink_lang_Iterate
+
+
+class tink_lang_IterUpto:
+    _hx_class_name = "tink.lang.IterUpto"
+    _hx_is_interface = "False"
+    __slots__ = ("cur", "max", "step", "offset")
+    _hx_fields = ["cur", "max", "step", "offset"]
+    _hx_methods = ["hasNext", "next"]
+
+    def __init__(self,step,start,end):
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:73
+        self.step = step
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:74
+        self.offset = start
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:75
+        self.cur = 0
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:76
+        self.max = Math.ceil((((end - start)) / step))
+
+    def hasNext(self):
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:80
+        return (self.cur < self.max)
+
+    def next(self):
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:83
+        def _hx_local_2():
+            # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:83
+            _hx_local_0 = self
+            _hx_local_1 = _hx_local_0.cur
+            _hx_local_0.cur = (_hx_local_1 + 1)
+            return _hx_local_1
+        tmp = (_hx_local_2() * self.step)
+        return (self.offset + tmp)
+
+tink_lang_IterUpto._hx_class = tink_lang_IterUpto
+
+
+class tink_lang_IterDownto:
+    _hx_class_name = "tink.lang.IterDownto"
+    _hx_is_interface = "False"
+    __slots__ = ("cur", "step", "offset")
+    _hx_fields = ["cur", "step", "offset"]
+    _hx_methods = ["hasNext", "next"]
+
+    def __init__(self,step,start,end):
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:92
+        self.step = step
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:93
+        self.offset = end
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:94
+        self.cur = Math.ceil((((start - end)) / step))
+
+    def hasNext(self):
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:98
+        return (self.cur > 0)
+
+    def next(self):
+        # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:101
+        def _hx_local_2():
+            # /usr/local/lib/haxe/lib/tink_lang/0,7,0/src/tink/lang/Iterate.hx:101
+            _hx_local_0 = self
+            _hx_local_1 = _hx_local_0.cur
+            _hx_local_0.cur = (_hx_local_1 - 1)
+            return _hx_local_0.cur
+        tmp = (_hx_local_2() * self.step)
+        return (self.offset + tmp)
+
+tink_lang_IterDownto._hx_class = tink_lang_IterDownto
+
 # /Users/glen/bin/haxe-4.2.5/std/python/_std/Math.hx:126
 Math.NEGATIVE_INFINITY = float("-inf")
 # /Users/glen/bin/haxe-4.2.5/std/python/_std/Math.hx:127
@@ -11269,7 +11407,6 @@ def _hx_init_a8_GlobalScheduler_scheduler():
 a8_GlobalScheduler.scheduler = _hx_init_a8_GlobalScheduler_scheduler()
 a8_Logger.traceEnabled = False
 a8_PlatformOps.instance = a8_PythonPlatform()
-a8_UserConfig.repoConfig = a8_PathOps.readProperties(a8_PathOps.entry(a8_PathOps.userHome(),".a8/repo.properties"))
 python_Boot.keywords = set(["and", "del", "from", "not", "with", "as", "elif", "global", "or", "yield", "assert", "else", "if", "pass", "None", "break", "except", "import", "raise", "True", "class", "exec", "in", "return", "False", "continue", "finally", "is", "try", "def", "for", "lambda", "while"])
 python_Boot.prefixLength = len("_hx_")
 sys_Http.PROXY = None
