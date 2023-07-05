@@ -30,7 +30,7 @@ command = [
     "rsnapshot",
     "-c",
     rsnapshot_config_file,
-    "hourly"
+    "hourly`"
 ]
 
 
