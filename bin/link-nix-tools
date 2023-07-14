@@ -7,10 +7,10 @@ from typing import Optional
 homemanager_profile_tools_to_link: [str] = [
     "a8-versions",
     "chezmoi",
+    "fish",
     "java",
     "pgbackrest",
     "runitor",
-    "wkhtmltopdf",
 ]
 
 default_profile_tools_to_link: [str] = [
