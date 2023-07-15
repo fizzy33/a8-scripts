@@ -40,5 +40,8 @@ class LazyView:
     def __getitem__(self, index: int):
         return self.to_list()[index]
 
+    def __contains__(self, item) -> bool:
+        return item in self.to_list()
+
 def from_iter(iterable) -> list:
     return LazyView(lambda: iterable)
