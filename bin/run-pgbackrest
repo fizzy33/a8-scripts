@@ -19,7 +19,7 @@ server_name = sys.argv[2]
 slug = f"pgbackrest-{server_name}"
 
 
-last_fullbackup_file = Path(f"~/.cache/rsnapshot-runs/last-fullbackup-{stanza_name}").expanduser()
+last_fullbackup_file = Path(f"~/.state/pgbackrest-runs/last-fullbackup-{stanza_name}").expanduser()
 
 last_fullbackup: Optional[datetime.datetime] = None
 

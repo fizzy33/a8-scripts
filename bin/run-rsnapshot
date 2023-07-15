@@ -9,7 +9,7 @@ import sys
 import subprocess
 import shutil
 import healthchecks
-
+import rotation
 
 # detect if we are sunday (full backup) or another day (diff)
 
@@ -18,25 +18,41 @@ stanza = sys.argv[2]
 slug = f"rsnapshot-{stanza}"
 
 
+script_dir = Path(__file__).resolve().parent.absolute()
+
+
+rotations = rotation.load_rsnapshot_rotations(stanza)
+
 # 0 3  * * * /usr/bin/runitor -ping-key=XYZPDQ-AAAAAAAAAAA -slug=superbee-rsnapshot -- /usr/bin/rsnapshot -c /root/backups/rsnapshot-superbee.conf daily
 # 0 4  * * * /usr/bin/runitor -ping-key=XYZPDQ-AAAAAAAAAAA -slug=connectria-rsnapshot -- /usr/bin/rsnapshot -c /root/backups/rsnapshot-connectria.conf daily
 
-#command = f"~/.nix-profile/bin/runitor -ping-key={healthchecks.ping_key} -slug={slug} -- ~/.nix-profile/bin/run-rsnapshot/rsnapshot -c {rsnapshot_config_file} daily"
-command = [
-    "runitor",
-    f"-ping-key={healthchecks.ping_key}", 
-    f"-slug={slug}",
-    "--",
-    "rsnapshot",
-    "-c",
-    rsnapshot_config_file,
-    "hourly`"
-]
+neededRotations = rotation.load_needed_rsnapshot_rotations(stanza)
 
+if neededRotations.is_empty():
+    print("no rotations needed")
 
-print(f"running -- {command}")
+else:
 
-subprocess.call(
-    command,
-    cwd = rsnapshot_config_file.parent,
-)
+    #command = f"~/.nix-profile/bin/runitor -ping-key={healthchecks.ping_key} -slug={slug} -- ~/.nix-profile/bin/run-rsnapshot/rsnapshot -c {rsnapshot_config_file} daily"
+    command = [
+        "runitor",
+        f"-ping-key={healthchecks.ping_key}", 
+        f"-slug={slug}",
+        "--",
+        f"{script_dir}/run-rsnapshot-subproc",
+        rsnapshot_config_file,
+        stanza,
+    ]
+
+    print(f"running -- {command}")
+
+    retcode = subprocess.call(
+       command,
+       cwd = script_dir,
+    )
+
+    if retcode > 0:
+        print(f"process failed retcode = {retcode}")
+        sys.exit(retcode)
+    else:
+        print("process completed successfully")

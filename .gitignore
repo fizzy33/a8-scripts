@@ -1,3 +1,4 @@
 .idea
 .direnv
 result
+__pycache__
