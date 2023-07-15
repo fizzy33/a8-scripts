@@ -34,5 +34,11 @@ class LazyView:
     def mk_str(self, sep) -> str:
         return sep.join(self.map(str).to_list())
 
+    def __len__(self) -> int:
+        return len(self.to_list())
+
+    def __getitem__(self, index: int):
+        return self.to_list()[index]
+
 def from_iter(iterable) -> list:
     return LazyView(lambda: iterable)

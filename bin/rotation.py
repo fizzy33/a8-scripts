@@ -44,7 +44,7 @@ def load_rsnapshot_rotations(stanzaName: str) -> lazyview.LazyView:
         Rotation("rsnapshot", stanzaName, "daily", datetime.timedelta(days=1)),
         Rotation("rsnapshot", stanzaName, "weekly", datetime.timedelta(days=7)),
         Rotation("rsnapshot", stanzaName, "monthly", datetime.timedelta(days=30)),
-        Rotation("rsnapshot", stanzaName, "yearly", datetime.timedelta(days=365)),
+        # Rotation("rsnapshot", stanzaName, "yearly", datetime.timedelta(days=365)),
     ])
 
 

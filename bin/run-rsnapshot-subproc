@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 
-
 import os
 import datetime
 from pathlib import Path
@@ -11,22 +10,22 @@ import shutil
 import healthchecks
 import rotation
 
-# detect if we are sunday (full backup) or another day (diff)
+
+def logit(msg: str) -> None:
+    print(msg)
+    sys.stdout.flush()
+
 
 rsnapshot_config_file = Path(sys.argv[1])
 stanza = sys.argv[2]
 
-# 0 3  * * * /usr/bin/runitor -ping-key=XYZPDQ-AAAAAAAAAAA -slug=superbee-rsnapshot -- /usr/bin/rsnapshot -c /root/backups/rsnapshot-superbee.conf daily
-# 0 4  * * * /usr/bin/runitor -ping-key=XYZPDQ-AAAAAAAAAAA -slug=connectria-rsnapshot -- /usr/bin/rsnapshot -c /root/backups/rsnapshot-connectria.conf daily
-
-
 neededRotations = rotation.load_needed_rsnapshot_rotations(stanza)
 
 rotationNames = neededRotations.map(lambda r: r.rotationName).mk_str(" ")
-print(f"rotationNames -- {rotationNames}")
+logit(f"rotationNames -- {rotationNames}")
 
 if neededRotations.is_empty():
-    print("no rotations needed")
+    logit("no rotations needed")
 
 else:
 
@@ -38,12 +37,12 @@ else:
             action,
         ]
 
-        print(f"running -- {command}")
+        logit(f"running -- {command}")
 
         retcode = subprocess.call(command, cwd = rsnapshot_config_file.parent)
 
         if retcode != 0:
-            print(f"command failed {retcode}")
+            logit(f"command failed {retcode}")
             sys.exit(retcode)
 
     run_rsnapshot("sync")
@@ -51,6 +50,5 @@ else:
     for r in neededRotations:
         run_rsnapshot(r.rotationName)
         r.rotationCompletedSuccessfully()
-
 
 
