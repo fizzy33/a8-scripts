@@ -22,6 +22,8 @@
     installPhase = ''
       mkdir -p $out/bin
 
+      echo boom
+
       # Copy all the source into $out/bin
       cp -r bin/* $out/bin
 
