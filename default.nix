@@ -1,17 +1,20 @@
-{ system ? builtins.currentSystem
-, sources ? import ./nix/sources.nix
-, nixpkgs ? import sources.nixpkgs { inherit system; }
-, lib ? nixpkgs.lib
-, src ? lib.cleanSource ./.
+{ 
+  system,
+  python3,
+  openjdk11_headless,
+  makeWrapper,
+  lib,
+  src,
+  stdenv,
 }:
 {
 
-  a8-scripts = nixpkgs.stdenv.mkDerivation {
+  a8-scripts = stdenv.mkDerivation {
     name = "a8-scripts";
 
     inherit src;
 
-    buildInputs = [ nixpkgs.python3 nixpkgs.openjdk11_headless nixpkgs.makeWrapper ];
+    buildInputs = [ python3 openjdk11_headless makeWrapper ];
 
     buildPhase = ''
       mkdir -p $out/bin
@@ -45,12 +48,12 @@
 
       wrapProgram $out/bin/a8-launcher.py \
           --set PATH ${lib.makeBinPath [
-            nixpkgs.openjdk11_headless
+            openjdk11_headless
           ]}
 
       wrapProgram $out/bin/coursier \
           --set PATH ${lib.makeBinPath [
-            nixpkgs.openjdk11_headless
+            openjdk11_headless
           ]}
 
     '';
