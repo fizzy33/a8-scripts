@@ -5,34 +5,55 @@
 , src ? lib.cleanSource ./.
 }:
 {
-  # Encode a common pattern for those Haxe scripts.
+
   a8-scripts = nixpkgs.stdenv.mkDerivation {
     name = "a8-scripts";
 
     inherit src;
 
-    nativeBuildInputs = [
-#      nixpkgs.makeWrapper
-    ];
+    buildInputs = [ nixpkgs.python3 nixpkgs.openjdk11_headless nixpkgs.makeWrapper ];
 
-    buildInputs = [
-      nixpkgs.python3
-    ];
-
-    installPhase = ''
+    buildPhase = ''
       mkdir -p $out/bin
+      for script in $src/bin/*; do
+        cp --no-dereference $script $out/bin/$(basename $script)
+      done
 
-      echo boom
+      function fixExec() {
+        local script=$1
+        local scriptFile=$out/bin/$script
+        local launcher=$out/bin/a8-launcher.py
+        rm $scriptFile 
+        #echo creating launcher $scriptFile -- $out  
+        echo '#!/bin/sh' > $scriptFile
+        echo $launcher --l-launcherJson $scriptFile.json >> $scriptFile
+        chmod +x $scriptFile
+      }
 
-      # Copy all the source into $out/bin
-      cp -r bin/* $out/bin
+      fixExec a8-versions
+      fixExec a8-codegen
+      fixExec a8-zero
+      fixExec a8-zoo
+      fixExec honeybadger
 
-      # Add runtime dependency.
-      #
-      # Currently breaks the launcher internal logic
-      #wrapProgram $out/bin/a8-launcher.py \
-      #  --argv0 '$0' \
-      #  --prefix PATH : ${lib.makeBinPath [ nixpkgs.openjdk11_headless ]}
+      patchShebangs $out/bin;
+      '';
+
+    installPhase = "echo hello > /dev/null";
+
+    postFixup = ''
+
+      wrapProgram $out/bin/a8-launcher.py \
+          --set PATH ${lib.makeBinPath [
+            nixpkgs.openjdk11_headless
+          ]}
+
+      wrapProgram $out/bin/coursier \
+          --set PATH ${lib.makeBinPath [
+            nixpkgs.openjdk11_headless
+          ]}
+
     '';
   };
+
 }
