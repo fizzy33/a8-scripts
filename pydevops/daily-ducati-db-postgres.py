@@ -2,7 +2,7 @@
 
 
 import model
-from model import PostgresLogArchiver, DryRunServices, Process, CleanerUpper
+from model import ChangeTheWorldServices, PostgresLogArchiver, DryRunServices, Process, CleanerUpper
 import util
 from util import Path, logger
 from datetime import timedelta
@@ -13,6 +13,8 @@ util.requireHostname("ducati-db")
 
 
 services = DryRunServices()
+
+services = ChangeTheWorldServices()
 
 
 ducatiDbCleanups: list[CleanerUpper] = [

@@ -23,6 +23,10 @@ ducatiAppsCleanups = [
         path = Path("/home/dev/apps/.data/qubes-prod/exports/"),
         purgeAfter = timedelta(days = 10),
     ),
+    YearMonthDayNestedDirs(
+        path = Path("/home/dev/apps/.cache/syncro-prod/tmp/"),
+        purgeAfter = timedelta(days = 2),
+    ),
     YearMonthDayDirs(
         path = Path("/home/dev/apps/.cache/runner-prod/exports/"),
         purgeAfter = timedelta(days = 2),
@@ -36,16 +40,16 @@ ducatiAppsCleanups.extend(model.loadAppLogsArchiveCleanups())
 
 
 processes = [
-    # Process("deployedge-beta", forceStart=False),
-    # Process("esb", forceStart=True),
-    # Process("ocr-prod", forceStart=True),
-    # Process("qubes-api", forceStart=True),
+    Process("deployedge-beta", forceStart=False),
+    Process("esb", forceStart=False),
+    Process("ocr-prod", forceStart=False),
+    Process("qubes-api", forceStart=False),
     # Process("qubes-beta", forceStart=False),
     # Process("qubes-dev", forceStart=False),
     # Process("qubes-prod", forceStart=True),
     # Process("runner-dev", forceStart=True),
     # Process("runner-prod", forceStart=True),
-    # Process("syncro-prod", forceStart=True),
+    Process("syncro-prod", forceStart=False),
 ]
 
 
