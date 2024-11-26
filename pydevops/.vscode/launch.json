@@ -18,10 +18,10 @@
             "console": "integratedTerminal",
             "args": []
         },{
-            "name": "ducati-apps-daily",
+            "name": "ducati-db-daily",
             "type": "debugpy",
             "request": "launch",
-            "program": "ducati-apps-daily.py",
+            "program": "ducati-db-daily.py",
             "console": "integratedTerminal",
             "args": []
         },

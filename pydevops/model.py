@@ -116,7 +116,7 @@ class YearMonthDayDirs(CleanerUpper):
     def run_cleanup(self) -> None:
         for p in self.path.list_entries():
             yearMonthDayStr = p.basename().strip()
-            date = datetime.datetime.strptime(yearMonthDayStr, '%Y-%m-%d')
+            date = datetime.datetime.strptime(yearMonthDayStr, "%Y-%m-%d")
             purgeIfBefore = datetime.datetime.now() - self.purgeAfter
             if date < purgeIfBefore:
                 logger.debug(f"purging {p}")
@@ -144,7 +144,7 @@ class PostgresLogArchiver(CleanerUpper):
         match = re.match(postgresLogFilePattern, f.basename())
         if match:
             date_str = match.group(1)
-            date = datetime.datetime.strptime(date_str, '%Y-$m-%d')
+            date = datetime.datetime.strptime(date_str, "%Y-%m-%d")
             now = datetime.datetime.now()
             if now.year == date.year and now.month == date.month and now.date == date.date:
                 # 
