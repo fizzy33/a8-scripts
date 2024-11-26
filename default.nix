@@ -1,4 +1,4 @@
-{ 
+{
   system,
   python3,
   openjdk11_headless,
@@ -29,7 +29,7 @@
         rm $scriptFile 
         #echo creating launcher $scriptFile -- $out  
         echo '#!/bin/sh' > $scriptFile
-        echo $launcher --l-launcherJson $scriptFile.json >> $scriptFile
+        echo $launcher --l-launcherJson $scriptFile.json '$@' >> $scriptFile
         chmod +x $scriptFile
       }
 
@@ -40,6 +40,9 @@
       fixExec honeybadger
 
       patchShebangs $out/bin;
+
+      cp -r $src/pydevops $out/pydevops
+
       '';
 
     installPhase = "echo hello > /dev/null";
