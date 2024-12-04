@@ -20,10 +20,6 @@ services = ChangeTheWorldServices()
 
 ducatiAppsCleanups = [
     YearMonthDayNestedDirs(
-        path = Path("/home/dev/apps/.data/qubes-prod/exports/"),
-        purgeAfter = timedelta(days = 10),
-    ),
-    YearMonthDayNestedDirs(
         path = Path("/home/dev/apps/.cache/syncro-prod/tmp/"),
         purgeAfter = timedelta(days = 2),
     ),
@@ -44,11 +40,12 @@ processes = [
     Process("esb", forceStart=False),
     Process("ocr-prod", forceStart=False),
     Process("qubes-api", forceStart=False),
-    # Process("qubes-beta", forceStart=False),
-    # Process("qubes-dev", forceStart=False),
-    # Process("qubes-prod", forceStart=True),
-    # Process("runner-dev", forceStart=True),
-    # Process("runner-prod", forceStart=True),
+    Process("qubes-beta", forceStart=False),
+    Process("qubes-dev", forceStart=False),
+    Process("qubes-prod", forceStart=False),
+    Process("qubes-prod-new", forceStart=False),
+    Process("runner-dev", forceStart=False),
+    Process("runner-prod", forceStart=False),
     Process("syncro-prod", forceStart=False),
 ]
 
