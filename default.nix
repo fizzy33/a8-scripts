@@ -1,5 +1,5 @@
 {
-  system,
+  system ? builtins.currentSystem,
   python3,
   openjdk11_headless,
   makeWrapper,
