@@ -38,7 +38,6 @@
       fixExec a8-zero
       fixExec a8-zoo
       fixExec honeybadger
-      # fixExec run-pgbackrest
 
       patchShebangs $out/bin
 
@@ -49,11 +48,6 @@
     installPhase = "echo hello > /dev/null";
 
     postFixup = ''
-
-      wrapProgram $out/bin/run-pgbackrest \
-          --set PATH ${lib.makeBinPath [
-            python3
-          ]}
 
       wrapProgram $out/bin/a8-launcher.py \
           --set PATH ${lib.makeBinPath [
