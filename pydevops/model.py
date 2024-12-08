@@ -285,6 +285,8 @@ class Process:
         logger.debug(f"clearing temp directory {tmpdir}")
         tmpdir.clear_directory()
 
+        appdir.join("cache/client-data-mode").clear_directory()
+
         if running or process.forceStart:
             logger.debug(f"starting {name}")
             result = runCommand('supervisorctl', 'start', name)

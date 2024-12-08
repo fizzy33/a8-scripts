@@ -38,7 +38,10 @@ ducatiAppsCleanups.extend(model.loadAppLogsArchiveCleanups())
 processes = [
     Process("deployedge-beta", forceStart=False),
     Process("esb", forceStart=False),
+    Process("hermes", forceStart=False),
+    Process("loom-prod", forceStart=False),
     Process("ocr-prod", forceStart=False),
+    Process("patientportal-prod", forceStart=False),
     Process("qubes-api", forceStart=False),
     Process("qubes-beta", forceStart=False),
     Process("qubes-dev", forceStart=False),

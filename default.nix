@@ -38,6 +38,7 @@
       fixExec a8-zero
       fixExec a8-zoo
       fixExec honeybadger
+      fixExec run-pgbackrest
 
       patchShebangs $out/bin;
 
