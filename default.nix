@@ -40,7 +40,7 @@
       fixExec honeybadger
       # fixExec run-pgbackrest
 
-      patchShebangs $out/bin;
+      patchShebangs $out/bin
 
       cp -r $src/pydevops $out/pydevops
 
