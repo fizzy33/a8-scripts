@@ -1,8 +1,11 @@
+from pyparsing import ParseResults
 from model import ChangeTheWorldServices, LogArchiver, YearMonthDayDirs, YearMonthDayNestedDirs, PostgresLogArchiver, DryRunServices, Process, CleanerUpper
+from pydevops import model
 from util import Path, logger
 from datetime import timedelta
 import argparse
 from pyhocon import ConfigFactory
+from typing import Tuple
 
 
 services = DryRunServices()
@@ -53,11 +56,11 @@ def initialize_cleanup_task(task) -> CleanerUpper:
     cleanup_class = CLEANUP_CLASS_MAP[task_type]
     return cleanup_class(**init_args)
 
-def process_cleanup_tasks(json_obj) -> list[CleanerUpper]:
+def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[CleanerUpper], list[Process]]:
     """
     Processes the cleanUp.tasks from a JSON object and initializes the tasks.
     """
-    cleanup_tasks = json_obj.get("cleanUp", {}).get("tasks", [])
+    cleanup_tasks = hocon_config.get("cleanUp", {}).get("tasks", [])
     if not isinstance(cleanup_tasks, list):
         raise ValueError("'cleanUp.tasks' must be a list.")
     
@@ -71,7 +74,17 @@ def process_cleanup_tasks(json_obj) -> list[CleanerUpper]:
             logger.error(f"Failed to initialize task {task}: {e}. Stopping Python Process!")
             return
 
-    return initialized_tasks
+    process_to_restart = None
+
+    if (hocon_config.get("restart", False)):
+        # Fetch the app_name from the path of the application.hocon
+        split_hocon_path = hocon_path.split('/')
+        app_name = split_hocon_path[len(split_hocon_path) - 2]
+
+        force_start = hocon_config.get("forceStart", False)
+        process_to_restart = Process(app_name, force_start)
+
+    return initialized_tasks, process_to_restart
 
 
 if __name__ == "__main__":
@@ -80,10 +93,21 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
-        hocon_config = ConfigFactory.parse_file(args.hocon_path)
-        parsed_tasks = process_cleanup_tasks(hocon_config)
-        for task in parsed_tasks:
-            task.run_cleanup()
+        hocon_config: ParseResults = ConfigFactory.parse_file(args.hocon_path)
+        parsed_cleanups, parsed_process = process_cleanup_tasks(hocon_config, args.hocon_path)
+
+        process_restarts: list[Process] = []
+
+        if parsed_process == None:
+            process_restarts = []
+        else:
+            process_restarts = process_restarts.append(parsed_process)
+
+        model.run(
+            services=services,
+            cleanups=parsed_cleanups,
+            processRestarts=process_restarts,
+        )
     except Exception as e:
         logger.error(f"Error processing tasks: {e}")
 
