@@ -7,14 +7,18 @@
   src,
   stdenv,
 }:
-{
+let
+  pythonWithPackages = python3.withPackages (ps: with ps; [
+    pyhocon
+  ]);
+in {
 
   a8-scripts = stdenv.mkDerivation {
     name = "a8-scripts";
 
     inherit src;
 
-    buildInputs = [ python3 openjdk11_headless makeWrapper ];
+    buildInputs = [ pythonWithPackages openjdk11_headless makeWrapper ];
 
     buildPhase = ''
       mkdir -p $out/bin
@@ -41,9 +45,11 @@
 
       patchShebangs $out/bin
 
-      cp -r $src/pydevops $out/pydevops
+      mkdir -p $out/pydevops
+      cp $src/pydevops/* $out/pydevops/
+      patchShebangs $out/pydevops
 
-      '';
+    '';
 
     installPhase = "echo hello > /dev/null";
 

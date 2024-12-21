@@ -31,8 +31,8 @@
     # };
 
     # Example: devShell that can be entered with `nix develop`
-    devShell = nixpkgs.mkShell {
-      buildInputs = [ self.packages.a8-scripts ];
-    };
+    # devShell = mkShell {
+    #   buildInputs = [ self.packages.a8-scripts ];
+    # };
   };
 }

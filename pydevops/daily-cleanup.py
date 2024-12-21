@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from pyparsing import ParseResults
 from model import ChangeTheWorldServices, LogArchiver, YearMonthDayDirs, YearMonthDayNestedDirs, PostgresLogArchiver, DryRunServices, Process, CleanerUpper
 from pydevops import model
