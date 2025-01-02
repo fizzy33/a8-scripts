@@ -86,7 +86,7 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[
         split_hocon_path = hocon_path.split('/')
         app_name = split_hocon_path[len(split_hocon_path) - 2]
 
-        force_start = hocon_config.get("forceStart", False)
+        force_start = cleanup.get("forceStart", False)
         process_to_restart = Process(app_name, force_start)
 
     return initialized_tasks, process_to_restart
@@ -106,7 +106,7 @@ if __name__ == "__main__":
         if parsed_process == None:
             process_restarts = []
         else:
-            process_restarts = process_restarts.append(parsed_process)
+            process_restarts.append(parsed_process)
 
         model.run(
             services=services,
