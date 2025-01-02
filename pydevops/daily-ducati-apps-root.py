@@ -1,5 +1,4 @@
-
-
+#/usr/bin/env python3
 
 import model
 from model import Process, YearMonthDayNestedDirs, YearMonthDayDirs, LogArchiver, DryRunServices, ChangeTheWorldServices
@@ -21,6 +20,11 @@ services = ChangeTheWorldServices()
 ducatiAppsCleanups = [
     LogArchiver(
         sourcePathGlob = "/var/log/supervisor/*.log.[0-9]",
+        archivePath = Path("/backups/logs/supervisor"),
+        purgeAfter = timedelta(days = 5),
+    ),
+    LogArchiver(
+        sourcePathGlob = "/var/log/supervisor/*.log.1[0-9]",
         archivePath = Path("/backups/logs/supervisor"),
         purgeAfter = timedelta(days = 5),
     )

@@ -72,12 +72,13 @@ class Path:
     def join(self, relpath) -> Path:
         return Path(os.path.join(self.value, relpath))
 
-    def clear_directory(self):
-        for p in self.list_entries():
-            if p.is_link() or p.is_file():
-                p.unlink()
-            elif p.is_dir():
-                p.delete_tree()
+    def clear_directory(self, mustExist: bool = False) -> None:
+        if mustExist or self.exists():
+            for p in self.list_entries():
+                if p.is_link() or p.is_file():
+                    p.unlink()
+                elif p.is_dir():
+                    p.delete_tree()
 
     def move_and_gzip_to(self, target_dir: Path) -> None:
         target = target_dir.join(self.basename() + ".gz")

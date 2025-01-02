@@ -1,5 +1,4 @@
-
-
+#!/usr/bin/env python3
 
 import model
 from model import ChangeTheWorldServices, PostgresLogArchiver, DryRunServices, Process, CleanerUpper

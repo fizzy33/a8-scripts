@@ -1,4 +1,8 @@
+
+#!/usr/bin/env python3
+
 from pyparsing import ParseResults
+import model
 from model import ChangeTheWorldServices, LogArchiver, YearMonthDayDirs, YearMonthDayNestedDirs, PostgresLogArchiver, DryRunServices, Process, CleanerUpper
 from pydevops import model
 from util import Path, logger
@@ -60,7 +64,8 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[
     """
     Processes the cleanUp.tasks from a JSON object and initializes the tasks.
     """
-    cleanup_tasks = hocon_config.get("cleanUp", {}).get("tasks", [])
+    cleanup = hocon_config.get("cleanUp", {})
+    cleanup_tasks = cleanup.get("tasks", [])
     if not isinstance(cleanup_tasks, list):
         raise ValueError("'cleanUp.tasks' must be a list.")
     
@@ -76,7 +81,7 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[
 
     process_to_restart = None
 
-    if (hocon_config.get("restart", False)):
+    if (cleanup.get("restart", False)):
         # Fetch the app_name from the path of the application.hocon
         split_hocon_path = hocon_path.split('/')
         app_name = split_hocon_path[len(split_hocon_path) - 2]
