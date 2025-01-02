@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from pyparsing import ParseResults
+import model
 from model import ChangeTheWorldServices, LogArchiver, YearMonthDayDirs, YearMonthDayNestedDirs, PostgresLogArchiver, DryRunServices, Process, CleanerUpper
 from util import Path, logger
 from datetime import timedelta
