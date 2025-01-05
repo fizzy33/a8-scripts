@@ -49,7 +49,7 @@ def initialize_cleanup_task(task) -> CleanerUpper:
     if not task_type or task_type not in CLEANUP_CLASS_MAP:
         raise ValueError(f"Unknown or missing cleanup type: {task_type}")
     
-    # Dynamically initialize the CleanUp class
+    # Dynamically initialize the Cleanup class
     init_args = {}
     for key, value in task_args.items():
         if key != "type":
@@ -60,12 +60,12 @@ def initialize_cleanup_task(task) -> CleanerUpper:
 
 def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[CleanerUpper], list[Process]]:
     """
-    Processes the cleanUp.tasks from a JSON object and initializes the tasks.
+    Processes the cleanup.tasks from a JSON object and initializes the tasks.
     """
-    cleanup = hocon_config.get("cleanUp", {})
+    cleanup = hocon_config.get("cleanup", {})
     cleanup_tasks = cleanup.get("tasks", [])
     if not isinstance(cleanup_tasks, list):
-        raise ValueError("'cleanUp.tasks' must be a list.")
+        raise ValueError("'cleanup.tasks' must be a list.")
     
 
     initialized_tasks = []
