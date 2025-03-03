@@ -58,7 +58,7 @@ def initialize_cleanup_task(task) -> CleanerUpper:
     cleanup_class = CLEANUP_CLASS_MAP[task_type]
     return cleanup_class(**init_args)
 
-def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[CleanerUpper], list[Process]]:
+def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restart: bool) -> Tuple[list[CleanerUpper], list[Process]]:
     """
     Processes the cleanUp.tasks from a JSON object and initializes the tasks.
     """
@@ -78,7 +78,7 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[
 
     process_to_restart = None
 
-    if (hocon_config.get("restart", False)):
+    if not no_restart and hocon_config.get("restart", False):
         # Fetch the app_name from the path of the application.hocon
         split_hocon_path = hocon_path.split('/')
         app_name = split_hocon_path[len(split_hocon_path) - 2]
@@ -86,24 +86,19 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[
         force_start = hocon_config.get("forceStart", False)
         process_to_restart = Process(app_name, force_start)
 
-    return initialized_tasks, process_to_restart
+    return initialized_tasks, [process_to_restart] if process_to_restart else []
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process cleanup tasks from a HOCON file.")
     parser.add_argument("hocon_path", help="Path to the HOCON file containing cleanup tasks.")
+    parser.add_argument("--no-restart", action="store_true", help="Default cleanup restart behaviour to 'None'")
+    
     args = parser.parse_args()
 
     try:
         hocon_config: ParseResults = ConfigFactory.parse_file(args.hocon_path)
-        parsed_cleanups, parsed_process = process_cleanup_tasks(hocon_config, args.hocon_path)
-
-        process_restarts: list[Process] = []
-
-        if parsed_process == None:
-            process_restarts = []
-        else:
-            process_restarts = process_restarts.append(parsed_process)
+        parsed_cleanups, process_restarts = process_cleanup_tasks(hocon_config, args.hocon_path, args.no_restart)
 
         model.run(
             services=services,
