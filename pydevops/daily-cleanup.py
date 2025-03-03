@@ -58,7 +58,7 @@ def initialize_cleanup_task(task) -> CleanerUpper:
     cleanup_class = CLEANUP_CLASS_MAP[task_type]
     return cleanup_class(**init_args)
 
-def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restart: bool) -> Tuple[list[CleanerUpper], list[Process]]:
+def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restart: bool, no_cleanup: bool) -> Tuple[list[CleanerUpper], list[Process]]:
     """
     Processes the cleanup.tasks from a JSON object and initializes the tasks.
     """
@@ -69,13 +69,14 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restar
     
 
     initialized_tasks = []
-    for task in cleanup_tasks:
-        try:
-            initialized_task = initialize_cleanup_task(task)
-            initialized_tasks.append(initialized_task)
-        except Exception as e:
-            logger.error(f"Failed to initialize task {task}: {e}. Stopping Python Process!")
-            return
+    if not no_cleanup:
+        for task in cleanup_tasks:
+            try:
+                initialized_task = initialize_cleanup_task(task)
+                initialized_tasks.append(initialized_task)
+            except Exception as e:
+                logger.error(f"Failed to initialize task {task}: {e}. Stopping Python Process!")
+                return
 
     process_to_restart = None
 
@@ -93,13 +94,14 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restar
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process cleanup tasks from a HOCON file.")
     parser.add_argument("hocon_path", help="Path to the HOCON file containing cleanup tasks.")
-    parser.add_argument("--no-restart", action="store_true", help="Default cleanup restart behaviour to 'None'")
+    parser.add_argument("--no-restart", action="store_true", help="Defaults cleanup restart behaviour to 'None'")
+    parser.add_argument("--no-cleanup", action="store_true", help="Defaults cleanup task behaviour to 'None'")
     
     args = parser.parse_args()
 
     try:
         hocon_config: ParseResults = ConfigFactory.parse_file(args.hocon_path)
-        parsed_cleanups, process_restarts = process_cleanup_tasks(hocon_config, args.hocon_path, args.no_restart)
+        parsed_cleanups, process_restarts = process_cleanup_tasks(hocon_config, args.hocon_path, args.no_restart, args.no_cleanup)
 
         model.run(
             services=services,
