@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 from pyparsing import ParseResults
+import model
 from model import ChangeTheWorldServices, LogArchiver, YearMonthDayDirs, YearMonthDayNestedDirs, PostgresLogArchiver, DryRunServices, Process, CleanerUpper
-from pydevops import model
 from util import Path, logger
 from datetime import timedelta
 import argparse
@@ -49,7 +49,7 @@ def initialize_cleanup_task(task) -> CleanerUpper:
     if not task_type or task_type not in CLEANUP_CLASS_MAP:
         raise ValueError(f"Unknown or missing cleanup type: {task_type}")
     
-    # Dynamically initialize the CleanUp class
+    # Dynamically initialize the Cleanup class
     init_args = {}
     for key, value in task_args.items():
         if key != "type":
@@ -60,11 +60,12 @@ def initialize_cleanup_task(task) -> CleanerUpper:
 
 def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restart: bool) -> Tuple[list[CleanerUpper], list[Process]]:
     """
-    Processes the cleanUp.tasks from a JSON object and initializes the tasks.
+    Processes the cleanup.tasks from a JSON object and initializes the tasks.
     """
-    cleanup_tasks = hocon_config.get("cleanUp", {}).get("tasks", [])
+    cleanup = hocon_config.get("cleanup", {})
+    cleanup_tasks = cleanup.get("tasks", [])
     if not isinstance(cleanup_tasks, list):
-        raise ValueError("'cleanUp.tasks' must be a list.")
+        raise ValueError("'cleanup.tasks' must be a list.")
     
 
     initialized_tasks = []
@@ -78,12 +79,12 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restar
 
     process_to_restart = None
 
-    if not no_restart and hocon_config.get("restart", False):
+    if not no_restart and cleanup.get("restart", "false").lower() == "true":
         # Fetch the app_name from the path of the application.hocon
         split_hocon_path = hocon_path.split('/')
         app_name = split_hocon_path[len(split_hocon_path) - 2]
 
-        force_start = hocon_config.get("forceStart", False)
+        force_start = cleanup.get("forceStart", "false").lower() == "true"
         process_to_restart = Process(app_name, force_start)
 
     return initialized_tasks, [process_to_restart] if process_to_restart else []

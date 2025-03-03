@@ -47,6 +47,7 @@ in {
 
       mkdir -p $out/pydevops
       cp $src/pydevops/* $out/pydevops/
+      echo patching shebangs
       patchShebangs $out/pydevops
 
     '';
