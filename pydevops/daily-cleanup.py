@@ -58,7 +58,7 @@ def initialize_cleanup_task(task) -> CleanerUpper:
     cleanup_class = CLEANUP_CLASS_MAP[task_type]
     return cleanup_class(**init_args)
 
-def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[CleanerUpper], list[Process]]:
+def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restart: bool, no_cleanup: bool) -> Tuple[list[CleanerUpper], list[Process]]:
     """
     Processes the cleanup.tasks from a JSON object and initializes the tasks.
     """
@@ -69,17 +69,18 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[
     
 
     initialized_tasks = []
-    for task in cleanup_tasks:
-        try:
-            initialized_task = initialize_cleanup_task(task)
-            initialized_tasks.append(initialized_task)
-        except Exception as e:
-            logger.error(f"Failed to initialize task {task}: {e}. Stopping Python Process!")
-            return
+    if not no_cleanup:
+        for task in cleanup_tasks:
+            try:
+                initialized_task = initialize_cleanup_task(task)
+                initialized_tasks.append(initialized_task)
+            except Exception as e:
+                logger.error(f"Failed to initialize task {task}: {e}. Stopping Python Process!")
+                return
 
     process_to_restart = None
 
-    if (cleanup.get("restart", "false").lower() == "true"):
+    if not no_restart and cleanup.get("restart", "false").lower() == "true":
         # Fetch the app_name from the path of the application.hocon
         split_hocon_path = hocon_path.split('/')
         app_name = split_hocon_path[len(split_hocon_path) - 2]
@@ -87,24 +88,20 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path) -> Tuple[list[
         force_start = cleanup.get("forceStart", "false").lower() == "true"
         process_to_restart = Process(app_name, force_start)
 
-    return initialized_tasks, process_to_restart
+    return initialized_tasks, [process_to_restart] if process_to_restart else []
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process cleanup tasks from a HOCON file.")
     parser.add_argument("hocon_path", help="Path to the HOCON file containing cleanup tasks.")
+    parser.add_argument("--no-restart", action="store_true", help="Defaults cleanup restart behaviour to 'None'")
+    parser.add_argument("--no-cleanup", action="store_true", help="Defaults cleanup task behaviour to 'None'")
+    
     args = parser.parse_args()
 
     try:
         hocon_config: ParseResults = ConfigFactory.parse_file(args.hocon_path)
-        parsed_cleanups, parsed_process = process_cleanup_tasks(hocon_config, args.hocon_path)
-
-        process_restarts: list[Process] = []
-
-        if parsed_process == None:
-            process_restarts = []
-        else:
-            process_restarts.append(parsed_process)
+        parsed_cleanups, process_restarts = process_cleanup_tasks(hocon_config, args.hocon_path, args.no_restart, args.no_cleanup)
 
         model.run(
             services=services,
