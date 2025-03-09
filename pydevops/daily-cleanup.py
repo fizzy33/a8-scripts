@@ -58,7 +58,7 @@ def initialize_cleanup_task(task) -> CleanerUpper:
     cleanup_class = CLEANUP_CLASS_MAP[task_type]
     return cleanup_class(**init_args)
 
-def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restart: bool, no_cleanup: bool) -> Tuple[list[CleanerUpper], list[Process]]:
+def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restart: bool, daily_cleanup: bool) -> Tuple[list[CleanerUpper], list[Process]]:
     """
     Processes the cleanup.tasks from a JSON object and initializes the tasks.
     """
@@ -67,9 +67,15 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restar
     if not isinstance(cleanup_tasks, list):
         raise ValueError("'cleanup.tasks' must be a list.")
     
+    startupCleanup = cleanup.get("startupCleanup", False)
+
+    run_cleanup = True
+    if daily_cleanup:
+        if startupCleanup:
+            run_cleanup = False
 
     initialized_tasks = []
-    if not no_cleanup:
+    if run_cleanup:
         for task in cleanup_tasks:
             try:
                 initialized_task = initialize_cleanup_task(task)
@@ -79,8 +85,13 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restar
                 return
 
     process_to_restart = None
+    restart_on_cleanup = cleanup.get("restart", "false").lower() == "true"
 
-    if not no_restart and cleanup.get("restart", "false").lower() == "true":
+    run_restart = True
+    if no_restart:
+        run_restart = False
+
+    if run_restart:
         # Fetch the app_name from the path of the application.hocon
         split_hocon_path = hocon_path.split('/')
         app_name = split_hocon_path[len(split_hocon_path) - 2]
@@ -95,13 +106,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process cleanup tasks from a HOCON file.")
     parser.add_argument("hocon_path", help="Path to the HOCON file containing cleanup tasks.")
     parser.add_argument("--no-restart", action="store_true", help="Defaults cleanup restart behaviour to 'None'")
-    parser.add_argument("--no-cleanup", action="store_true", help="Defaults cleanup task behaviour to 'None'")
+    parser.add_argument("--daily-cleanup", action="store_true", help="Run daily cleanup tasks defaults to 'None'")
     
     args = parser.parse_args()
 
     try:
         hocon_config: ParseResults = ConfigFactory.parse_file(args.hocon_path)
-        parsed_cleanups, process_restarts = process_cleanup_tasks(hocon_config, args.hocon_path, args.no_restart, args.no_cleanup)
+        parsed_cleanups, process_restarts = process_cleanup_tasks(hocon_config, args.hocon_path, args.no_restart, args.daily_cleanup)
 
         model.run(
             services=services,
