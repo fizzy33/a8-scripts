@@ -69,6 +69,7 @@ def process_cleanup_tasks(hocon_config: ParseResults, hocon_path: str, no_restar
     
     startupCleanup = cleanup.get("startupCleanup", False)
 
+    # avoid double cleanup on a restart
     run_cleanup = True
     if daily_cleanup:
         if startupCleanup:
