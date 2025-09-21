@@ -1,38 +1,65 @@
 {
-  description = "a8-scripts flake";
+  description = "a8-scripts - Accur8 build and deployment scripts";
 
-  # Define the inputs of the flake (e.g., nixpkgs)
   inputs = {
-    # Reference the Nixpkgs version to use for building
-    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  # Define the outputs, including packages, apps, etc.
-  outputs = { self, nixpkgs }: {
+  outputs = { self, nixpkgs, flake-utils }:
+    let
+      # Define supported systems
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
 
-    # Packages can be built with `nix build .#myPackage`
-    packages = (nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" "x86_64-darwin" ] (system: 
-      {
-        a8-scripts = (nixpkgs.legacyPackages.${system}.callPackage ./default.nix {
-          inherit system;
-          src = ./.; # Use the current directory as the source (Git repo root)
-        }).a8-scripts;
-      }
-    ));
+      # Create outputs for each system
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-    # You can also define apps to run with `nix run .#myApp`
-    # apps = {
-    #   myApp = {
-    #     # Wrap the package into an app
-    #     # This assumes that `default.nix` defines a package with a "bin"
-    #     # or a shell script that should be run.
-    #     pkg = self.packages.myPackage;
-    #   };
-    # };
+      # Package builder function
+      mkPackage = system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          a8-scripts-drv = pkgs.callPackage ./default.nix {
+            inherit system;
+            src = self;
+          };
+        in
+          a8-scripts-drv.a8-scripts;
+    in
+    {
+      # Packages output
+      packages = forAllSystems (system: {
+        default = mkPackage system;
+        a8-scripts = mkPackage system;
+      });
 
-    # Example: devShell that can be entered with `nix develop`
-    # devShell = mkShell {
-    #   buildInputs = [ self.packages.a8-scripts ];
-    # };
-  };
+      # Overlay output
+      overlays.default = final: prev: {
+        a8-scripts = mkPackage prev.system;
+      };
+
+      # Dev shell for development
+      devShells = forAllSystems (system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in {
+          default = pkgs.mkShell {
+            buildInputs = [ self.packages.${system}.default ];
+          };
+        });
+
+      # Legacy support - expose the function for backward compatibility
+      lib.mkA8Scripts = { system, nixpkgs }:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+          pkgs.callPackage ./default.nix {
+            inherit system;
+            src = self;
+          };
+    };
 }
