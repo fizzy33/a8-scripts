@@ -7,59 +7,53 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    let
-      # Define supported systems
-      supportedSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        a8-scripts-drv = pkgs.callPackage ./default.nix {
+          inherit system;
+          src = self;
+        };
+        a8-scripts-pkg = a8-scripts-drv.a8-scripts;
+      in
+      {
+        # Packages output - properly exposed when used as flake input
+        packages = {
+          default = a8-scripts-pkg;
+          a8-scripts = a8-scripts-pkg;
+        };
 
-      # Create outputs for each system
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+        # Dev shell for development
+        devShells.default = pkgs.mkShell {
+          buildInputs = [ a8-scripts-pkg ];
+        };
 
-      # Package builder function
-      mkPackage = system:
+        # Apps if needed
+        apps.default = flake-utils.lib.mkApp {
+          drv = a8-scripts-pkg;
+        };
+      }
+    ) // {
+      # System-independent outputs
+      # Overlay for those who prefer overlay approach
+      overlays.default = final: prev:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          a8-scripts-drv = final.callPackage ./default.nix {
+            system = prev.system;
+            src = self;
+          };
+        in {
+          a8-scripts = a8-scripts-drv.a8-scripts;
+        };
+
+      # Keep backward compatibility lib function if needed
+      lib.mkA8Scripts = { pkgs, system ? pkgs.system }:
+        let
           a8-scripts-drv = pkgs.callPackage ./default.nix {
             inherit system;
             src = self;
           };
         in
           a8-scripts-drv.a8-scripts;
-    in
-    {
-      # Packages output
-      packages = forAllSystems (system: {
-        default = mkPackage system;
-        a8-scripts = mkPackage system;
-      });
-
-      # Overlay output
-      overlays.default = final: prev: {
-        a8-scripts = mkPackage prev.system;
-      };
-
-      # Dev shell for development
-      devShells = forAllSystems (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in {
-          default = pkgs.mkShell {
-            buildInputs = [ self.packages.${system}.default ];
-          };
-        });
-
-      # Legacy support - expose the function for backward compatibility
-      lib.mkA8Scripts = { system, nixpkgs }:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-          pkgs.callPackage ./default.nix {
-            inherit system;
-            src = self;
-          };
     };
 }
